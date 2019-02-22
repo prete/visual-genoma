@@ -1,0 +1,191 @@
+{% set title = 'Bienvenido | Visual Genoma' %}
+{% set header = 'Bienvenido a Visual Genoma' %}
+{% set header_opt = 'Para poder comenzar su viaje primero debemos preparar algunas cosas' %}
+{% set active_menu = 'novcf' %}
+{% set hide_sidebar = true %}
+{% set breadcrumbs = ['Visual Genoma','Inicio'] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <div class="box box-warning">
+      <div class="box-header with-border">
+        <h3 class="box-title text-warning"><i class="fa fa-info-circle"></i> Parece que no has cargado tu <strong>Archivo VCF</strong> todavía</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+          <p style="font-size: 18px;">
+            No hay problema, pero para poder usar todas las funcionalidades de <strong>Visual Genoma</strong> deberás cargar tu archivo genómico desde la pantalla de <a href="/file/upload">Carga de Archivo</a>.
+          </p>
+          <p>
+            Para más información acerca del formato y versiones de los archivos VCF admitidos puede consultar nuestra <a href="/faq">página de preguntas frecuentes</a>.
+          </p>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+{#
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+    <div class="box box-warning">
+      <div class="box-header with-border">
+        <h3 class="box-title text-warning"><i class="fa fa-info-circle"></i> Parece que no has cargado tu <strong>Archivo VCF</strong> todavía</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+          <p style="font-size: 18px;">
+            No hay problema, pero para poder usar todas las funcionalidades de <strong>Visual Genoma</strong> deberás cargar tu archivo genómico siguiendo estos simples pasos.
+          </p>
+          <p style="font-size: 18px;">
+            <ul class="list-group">
+              <li class="list-group-item" style="font-size: 16px;"><span class="label label-primary" style="font-size: 18px;">1</span><span style="padding-left:1em">Debe tener su archivo en este dispositivo.</span></li>
+              <li class="list-group-item" style="font-size: 16px;"><span class="label label-primary" style="font-size: 18px;">2</span><span style="padding-left:1em">Asegurese de tener una conexion a internet veloz para evitar probelmas.</span></li>
+              <li class="list-group-item" style="font-size: 16px;"><span class="label label-primary" style="font-size: 18px;">3</span><span style="padding-left:1em">Usa el boton <a href="#formulario" class="btn btn-xs btn-primary">Buscar archivo</a> para identificar el archivo en su computadora.</span></li>
+              <li class="list-group-item" style="font-size: 16px;"><span class="label label-primary" style="font-size: 18px;">4</span><span style="padding-left:1em">Usa el boton <a href="#formulario" class="btn btn-xs btn-danger">Subir!</a> para cargar el archivo en <strong>Visual Genoma</strong>.</span></li>
+              <li class="list-group-item" style="font-size: 16px;"><span class="label label-primary" style="font-size: 18px;">5</span><span style="padding-left:1em">Su archivo sera procesado en unos minutos y podra comenzar a disfrutar de todas las funcionalidades!</span></li>
+            </ul>
+          </p>
+          <p>
+            Para más información acerca del formato y versiones de los archivos VCF admitidos puede consultar nuestra <a href="/faq">página de preguntas frecuentes</a>.
+          </p>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+#}
+
+{#
+<div class="row">
+  <div class="col-md-offset-2 col-md-8">
+     <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title text-primary"><i class="fa fa-fw fa-cloud-upload" aria-hidden="true"></i> Carga de archivo <strong>VCF</strong> con su información genómica</h3>
+          </div>
+          <div class="box-body">
+              <form id="formulario">
+                  <div class="input-group col-md-6">
+                      <span class="input-group-btn">
+                        <span class="btn btn-primary" onclick="$('#hiddenFileInput').click();">Buscar archivo</span>
+                        <input id="hiddenFileInput" name="uploaded_file"  accept=".vcf" onchange="$('#fake-path').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+                      </span>
+                      <span id="fake-path" class="form-control"></span>
+                      <span class="input-group-btn">
+                          <span class="btn btn-danger" onclick="startFakeUpload()">Subir!</span>
+                      </span>
+                    </div>
+             </form>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+#}
+
+<!-- Processing Modal -->
+<div class="modal modal-static fade" id="fake-processing-modal" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center">
+                    <i id="bigIcon" class="fa fa-cog fa-spin fa-4x fa-fw" aria-hidden="true"></i>
+                    <h4 id="tituloModal">Procesando archivo...</h4>
+                     <div class="progress">
+                      <div id="fake-progress-bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0%"><span id="fake-progress-bar-number"><span></div>
+                    </div>
+                    <div id="fake-motivation" style="display:none;">
+                        <p class="fake1" style="display:none;">Esto puede llevar unos minutos...</p>
+                        <p class="fake2" style="display:none;">Comprobando referncias en nuestra base de datos...</p>
+                        <p class="fake3" style="display:none;">Ya falta poco!</p>
+                    </div>
+                    <div id="fake-success"style="display:none;">
+                        <p>Su archivo ha sido cargado con exito. Haga click en el siguiente boton poder comenzar a disfrutar de todas las funcionalidades de <strong>Visual Genoma</strong>.</p>
+                        <h3><button type="button"  class="btn btn-success" onclick="hideFakeModal()">Carga Exitosa! <i class="fa fa-fw fa-chevron-right"></i></button></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript">
+
+var __IDVCF = 4;
+
+var progress = 0;
+
+
+function increment(){
+    progress+=(Math.random()+1)*(Math.random()*10);
+    fakeUpload();
+}
+function startFakeUpload(){
+    progress = 0;
+    $("#fake-motivation").show();
+    $("#fake-motivation .fake1").hide();
+    $("#fake-motivation .fake2").hide();
+    $("#fake-motivation .fake2").hide();
+    $("#bigIcon").removeClass();
+    $("#bigIcon").addClass("fa fa-cog fa-spin fa-4x fa-fw");
+    $("#tituloModal").text("Procesando archivo...");
+    $("#fake-success").hide();
+    $("#fake-processing-modal").modal("show");
+    fakeUpload();
+    
+    //asignar al usuario logueado el id de archivo que dice aca
+    
+}
+function fakeUpload(){
+    if(progress>=100){
+        progress=100;
+    }
+    
+    $("#fake-progress-bar").css('width',progress+'%');
+    $("#fake-progress-bar-number").text(parseInt(progress)+'%');
+    
+    if(progress<40){
+        $("#fake-motivation .fake1").show();
+        $("#fake-motivation .fake2").hide();
+        $("#fake-motivation .fake3").hide();
+    } else if(progress<80){
+        $("#fake-motivation .fake1").hide();
+        $("#fake-motivation .fake2").show();
+        $("#fake-motivation .fake3").hide();
+    } else {
+        $("#fake-motivation .fake1").hide();
+        $("#fake-motivation .fake2").hide();
+        $("#fake-motivation .fake3").show();
+    }
+    
+    if(progress<100){
+        setTimeout(increment, 1000+Math.random()*3000);
+    }else{
+        $("#fake-motivation").hide();
+        $("#tituloModal").text("Archivo Cargado!");
+        $("#bigIcon").removeClass();
+        $("#bigIcon").addClass("fa fa-check fa-4x fa-fw text-success");
+        $("#fake-success").show();
+    }
+}
+function hideFakeModal(){
+    $.post('/user/setfile/'+__IDVCF, function(){
+        window.location.href="/dashboard";    
+    });
+}
+</script>
+{% endblock %}

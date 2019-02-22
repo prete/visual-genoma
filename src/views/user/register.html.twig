@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Registro | Visual Genoma</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  
+  <link rel="icon" href="/resources/images/favicon.ico" type="image/gif" sizes="16x16">
+    
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="/resources/css/AdminLTE.css">
+  <link rel="stylesheet" href="/resources/css/skin-blue.css">
+  <link rel="stylesheet" href="/resources/css/bootstrap-custom.css">
+  {% block stylesheets %}{% endblock %}
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <style>
+    .icheckbox_square-blue,
+    .iradio_square-blue {
+        display: inline-block;
+        *display: inline;
+        vertical-align: middle;
+        margin: 0;
+        padding: 0;
+        width: 22px;
+        height: 22px;
+        background: url(blue.png) no-repeat;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .icheckbox_square-blue {
+        background-position: 0 0;
+    }
+        .icheckbox_square-blue.hover {
+            background-position: -24px 0;
+        }
+        .icheckbox_square-blue.checked {
+            background-position: -48px 0;
+        }
+        .icheckbox_square-blue.disabled {
+            background-position: -72px 0;
+            cursor: default;
+        }
+        .icheckbox_square-blue.checked.disabled {
+            background-position: -96px 0;
+        }
+    
+    .iradio_square-blue {
+        background-position: -120px 0;
+    }
+        .iradio_square-blue.hover {
+            background-position: -144px 0;
+        }
+        .iradio_square-blue.checked {
+            background-position: -168px 0;
+        }
+        .iradio_square-blue.disabled {
+            background-position: -192px 0;
+            cursor: default;
+        }
+        .iradio_square-blue.checked.disabled {
+            background-position: -216px 0;
+        }
+    
+    /* Retina support */
+    @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
+           only screen and (-moz-min-device-pixel-ratio: 1.5),
+           only screen and (-o-min-device-pixel-ratio: 3/2),
+           only screen and (min-device-pixel-ratio: 1.5) {
+        .icheckbox_square-blue,
+        .iradio_square-blue {
+            background-image: url(blue@2x.png);
+            -webkit-background-size: 240px 24px;
+            background-size: 240px 24px;
+        }
+    }  
+  </style>
+</head>
+
+<body class="hold-transition register-page">
+<div class="register-box">
+  <div class="register-logo">
+    <a href="/"><img src="/resources/images/logo.png" height=64><b>VISUAL GENOMA</b></a>
+  </div>
+
+  <div class="register-box-body">
+    
+    <div class="row">
+      <div class="col-sm-12">
+        {% if message is defined and message is not empty %}
+          <div class="alert alert-danger">{{message}}</div>
+        {% endif %}
+        
+        {% if success is defined and success is not empty %}
+          <div class="alert alert-success">{{success}}</div>
+        {% endif %}
+      </div>
+    </div>
+    
+    <p class="login-box-msg">Registre su cuenta</p>
+
+    <form method="post" action="/user/register">
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" name="name" value="{{name}}" placeholder="Nombre completo">
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="email" class="form-control" name="email" class="form-control" value="{{email}}"  placeholder="Email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" name="password" placeholder="Contraseña">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" name="password2" placeholder="Confirme contraseña">
+        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          {#<div class="checkbox icheck">#}
+            <label>
+              <input type="checkbox" name="terms" value="true"> Acepto los <a href="#" data-toggle="modal" data-target="#terminosCondicionesModal">terminos y condiciones</a>
+            </label>
+          {#</div>#}
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+      <div class="row">
+        <div class="col-xs-12">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Registrarme</button><br/>
+            <a href="/user/login" class="text-center">Ya tengo una cuenta</a>
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+      </div>
+    </form>
+        
+  </div>
+  <!-- /.form-box -->
+</div>
+<!-- /.register-box -->    
+
+
+<div id="terminosCondicionesModal" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Términos y Condiciones</h4>
+      </div>
+      <div class="modal-body">
+        <h3>Términos y condiciones de uso</h3>
+        <p>Este sitio está diseñado para residentes en Argentina y sus contenidos se han configurado para cumplir las regulaciones y leyes vigentes.</p>
+        <p>1. Quiénes somos</p>
+        <p>Al utilizar este sitio Web, usted acepta los términos y condiciones de Uso. Por favor, lea y revise atentamente el acuerdo sobre los Términos y Condiciones de uso antes de utilizar este sitio Web.</p>
+        <p>De acuerdo con lo dispuesto en el artículo 10 de la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y de Comercio Electrónico (en adelante, "LSSI"), ponemos en su conocimiento que esta página Web (en adelante, el "Sitio Web" o el "Portal") es propiedad y es operada por:</p>
+        <p>Este sitio está diseñado para residentes en Argentina y sus contenidos se han configurado para cumplir las regulaciones y leyes vigentes en Argentina.<p>
+        <h3>2. Contenido de los Términos y Condiciones de Uso</h3>
+        <h4>2.1 Aceptación</h4>
+        <p>El presente aviso legal regula la utilización por los usuarios de los servicios de la sociedad de la información que Visual Genoma pone a disposición a través de Internet en el Sitio Web. Al utilizar este Sitio Web, usted (en adelante, el Usuario) acepta en su totalidad y se obliga a cumplir por completo los Términos y Condiciones de Uso así como la Política de Privacidad del Portal. Haga clic si desea acceder a la citada Política de Privacidad. Visual Genoma se reserva el derecho a modificar estos los Términos y Condiciones de Uso cuando lo estime necesario. Por lo tanto, el Usuario debe leer atentamente los Términos y Condiciones de Uso en cada una de las ocasiones en que se proponga utilizar el Portal, ya que estos pueden sufrir modificaciones. Puede ver la versión vigente de estos términos en cualquier momento a través del hipervínculo en el pie de cada página en este Sitio Web. Estos Términos y Condiciones de Uso serán aplicables, exclusivamente, al uso de este Sitio Web. Visual Genoma opera otros sitios Web que están regidos por sus propios términos y condiciones.</p>
+        <h4>2.2 Condiciones de uso del Sitio Web</h4>
+        <p>El acceso al sitio web es para usuarios registrados a través de la red de telecomunicaciones suministrada por el proveedor de acceso que hubiere contratado el Usuario.</p>
+        <p>El Usuario se compromete a no usar el Sitio Web con fines fraudulentos así como a no llevar a cabo conducta alguna que pudiera dañar la imagen, los intereses y los derechos de Visual Genoma o de terceros. Asimismo, el Usuario se compromete a no realizar acto alguno con objeto de dañar, inutilizar o sobrecargar el Sitio Web, o que impidiera, de cualquier forma, la normal utilización y funcionamiento del mismo.</p>
+        <p>Se informa al Usuario de que en el caso de que incumpla el contenido del presente Aviso Legal, de la Política de Privacidad o de cualesquiera otros términos o condiciones particulares recogidos en el Sitio Web, Visual Genoma se reserva el derecho a limitar, suspender o terminar su acceso al Sitio Web, adoptando cualquier medida técnica que sea necesaria con ese fin. Asimismo, Visual Genoma se reserva la posibilidad de ejercer tales medidas en el supuesto de que sospeche razonablemente que el Usuario está vulnerando cualquiera de los términos y condiciones recogidos en los instrumentos antes citados. Finalmente, ponemos en conocimiento del Usuario que Visual Genoma se reserva, en todo momento, la facultad de decidir sobre la continuidad de los servicios de la sociedad de la información que presta a través del Sitio Web.</p>
+        <h4>2.3 Propiedad Intelectual e Industrial</h4>
+        <p>Los derechos de propiedad intelectual sobre la disposición de los contenidos del Sitio Web (derecho sui generis sobre la base de datos), su diseño gráfico (look & feel), los programas de ordenador subyacentes (incluidos los códigos fuente), y los distintos elementos que integran el Sitio Web -textos, gráficos, fotografías, videos, grabaciones sonoras, etc.- (en adelante, los "Contenidos"), corresponden a Visual Genoma o a sus licenciantes. Los derechos de propiedad industrial y los signos distintivos incluidos en el Portal (marcas y nombres comerciales) son propiedad de Visual Genoma o de sus licenciantes. El uso del Portal por el Usuario no supone la cesión de derecho alguno de propiedad intelectual y/o industrial sobre el Portal, los Contenidos y/o los signos distintivos de Visual Genoma. A tal efecto, mediante el presente Aviso Legal, salvo en aquellos supuestos en los que esté legalmente permitido o medie previa autorización de Visual Genoma, queda expresamente prohibido al Usuario la reproducción, transformación, distribución, comunicación pública, puesta a disposición, extracción y/o reutilización del Portal, sus Contenidos y/o los signos distintivos de Visual Genoma.</p>
+        <h3>3. Servicios del Portal</h3>
+        <p>El contenido de este Sitio Web ha sido diseñado para audiencias concretas, principalmente público general, Dentro de los diversos servicios contenidos en el Sitio Web se encuentra el proporcionar una herramienta de información sobre salud para el publico en general, productos, información sobre salud y el ámbito sanitario. En aquellos casos en los que el Usuario así lo haya autorizado, podrá el Usuario recibir información y noticias de Visual Genoma o relacionados con la salud y el ámbito sanitario mediante correo electrónico, SMS u otros medios de comunicación electrónica (consulte nuestra "Política de Privacidad"). A pesar de que podría existir información en el Sitio Web relacionada con ciertos procesos médicos, si padeciera un proceso médico, acuda a su médico.</p>
+        <p>Este Sitio Web no ofrece diagnóstico o consejo médico, en caso de que necesite consejo médico le recomendamos que acuda a su centro de salud habitual.</p>
+        <h3>4. Información facilitada por el Usuario</h3>
+        El Usuario es responsable de la veracidad y exactitud de la información que nos proporcione así como de la que introduzca en las herramientas del portal que usted utilice. Los datos que introduzca y de su uso del portal serán tratados de forma confidencial. No obstante, cuando usted participe en sección en secciones o servicios de carácter social los datos que usted proporcione serán visibles por otros usuarios.
+        En este sentido, si el Usuario participara en las secciones del Sitio Web que lo permitiesen – por ejemplo mediante la inclusión de opiniones o datos como blog, preguntas, comentarios, sugerencias o similares relativos al contenido de este sitio Web - esta información será pública para todos los usuarios del Portal y, en consecuencia, será tratada como no-confidencial y Visual Genoma, no tendrá obligación de ningún tipo con respecto a dicha información y es libre de reproducir, utilizar, desvelar y distribuir la citada información a terceros sin limitaciones. Visual Genoma, es libre de utilizar cualquier idea, conceptos, conocimientos o técnicas contenidas en la citada información para cualquier propósito incluyendo, pero no limitado al desarrollo, fabricación y comercialización de productos incorporando la información. En caso de no estar de acuerdo con estas consideraciones, el Usuario no deberá introducir ningún tipo de información durante su navegación por el Sitio Web.
+        <h3>5. Política de enlaces ("Links")</h3>
+        <h4>5.1 Links a otros sitios Web</h4>
+        <p>A fin de ayudarle a encontrar información adicional, hemos incluido diversos dispositivos técnicos de enlaces que permiten al Usuario acceder a otras webs (en adelante, los "Sitios Enlazados"). En estos casos, Visual Genoma actúa como un prestador de servicios de intermediación, según lo dispuesto en el artículo 17 de la LSSI. De acuerdo con lo previsto en la citada legislación, Visual Genoma no será responsable de los servicios y contenidos facilitados a través de los Sitios Enlazados, salvo que tenga conocimiento efectivo de la ilicitud y no haya desactivado el enlace con la debida diligencia. En ningún caso la existencia de Sitios Enlazados comporta recomendación, promoción, identificación o conformidad de Visual Genoma con las manifestaciones, contenidos o servicios proporcionados a través de los Sitios Enlazados. En consecuencia, Visual Genoma no se hace responsable del contenido de los Sitios Enlazados, ni de sus condiciones de uso y políticas de privacidad, siendo el Usuario el único responsable de comprobarlos y aceptarlos cada vez que acceda y use los mismos. En particular, Visual Genoma informa al Usuario de lo siguiente: (i) Visual Genoma ofrece única y exclusivamente información facilitada por los titulares de los Sitios Enlazados y, (ii) Visual Genoma no se hace responsable de la exactitud o veracidad de la información facilitada en los Sitios Enlazados.</p>
+        <p>En el supuesto de que el Usuario considere que existen en los Sitios Enlazados contenidos ilícitos, nocivos, denigrantes, violentos o inadecuados, podrá ponerlo en conocimiento de Visual Genoma a través de la siguiente dirección de correo electrónico: info@visualgenoma.com. No obstante, dicha comunicación en ningún caso conllevará la obligación de Visual Genoma de retirar el correspondiente enlace, ni supone necesariamente el conocimiento efectivo de Visual Genoma de la ilicitud de los contenidos del Sitio Enlazado, a los efectos de lo previsto en la normativa vigente.</p>
+        <h4>5.2. Links desde otros sitios Web</h4>
+        <p>El Usuario que quiera introducir enlaces desde sus propias páginas Web al Sitio Web deberá cumplir con las condiciones que se detallan a continuación:</p>
+            El enlace únicamente vinculará con la página principal del Sitio Web, pero no podrá reproducirla de ninguna forma (online links, copia de los textos, gráficos, etc.)
+            Quedará en todo caso prohibido establecer frames o marcos de cualquier tipo que envuelvan al sitio Sitio Web o permitan la visualización de los Contenidos a través de direcciones de Internet distintas a las del Sitio Web y, en cualquier caso, cuando se visualicen conjuntamente con contenidos ajenos al Sitio Web de forma que:
+            (i) produzca, o pueda producir, error, confusión o engaño en los usuarios sobre la verdadera procedencia del servicio o Contenidos;
+            (ii) suponga un acto de comparación o imitación desleal;
+            (iii) sirva para aprovechar la reputación de la marca y prestigio de Visual Genoma; o
+            (iv) de cualquier otra forma resulte prohibido por la legislación vigente.
+            No se realizará desde la página que introduce el enlace ningún tipo de manifestación falsa, inexacta o incorrecta sobre Visual Genoma, sus socios, empleados, clientes o sobre la calidad de los servicios que presta.
+            En ningún caso, se expresará en la página donde se ubique el enlace que Visual Genoma ha prestado su consentimiento para la inserción del enlace o que de otra forma patrocina, colabora, verifica o supervisa los servicios del remitente sin la correspondiente autorización de Visual Genoma.
+            Está prohibida la utilización de cualquier marca denominativa, gráfica o mixta o cualquier otro signo distintivo de Visual Genoma dentro de la página del remitente salvo en los casos permitidos por la ley o expresamente autorizados por Visual Genoma y siempre que se permita, en estos casos, un enlace directo con el sitio Web de Visual Genoma en la forma establecida en esta cláusula.
+            La página que establezca el enlace deberá cumplir fielmente con la ley y no podrá en ningún caso disponer o enlazar con contenidos propios o de terceros que:
+            (I) sean ilícitos, nocivos o contrarios a la moral y a las buenas costumbres (pornográficos, violentos, racistas, etc.);
+            (II) induzcan o puedan inducir en el Usuario la falsa concepción de que Visual Genoma suscribe, respalda, se adhiere o de cualquier manera apoya, las ideas, manifestaciones o expresiones, lícitas o ilícitas, del remitente;
+            (III) resulten inapropiados o no pertinentes con la actividad de Visual Genoma en atención al lugar, contenidos y temática de la página Web del remitente.
+        <h3>6. Comunicación de actividades de carácter ilícito e inadecuado</h3>
+        <p>En el caso de que el Usuario o cualquier otro usuario de Internet tuvieran conocimiento de que cualquier clase de información o contenido del Portal o facilitado a través del mismo son ilícitos, lesivos de derechos de terceros, contrarios a lo establecido en las presentes Condiciones y Términos de Uso o, de cualquier otro modo, nocivos o contrarios a la moral, usos y costumbres, podrá ponerse en contacto con Visual Genoma en la dirección info@visualgenoma.com indicando los siguientes extremos:</p>
+            Datos personales del Usuario denunciante: nombre, dirección, número de teléfono y dirección de correo electrónico.
+            Descripción de los hechos que revelan el carácter ilícito o inadecuado del contenido o información así como la dirección concreta en la que se encuentra disponible.
+            En el supuesto de violación de derechos de terceros, tales como propiedad intelectual e industrial, habrá de facilitarse los datos del titular del derecho infringido cuando sea persona distinta del denunciante.
+        <p>Asimismo deberá aportar el título que acredite la titularidad de los derechos conculcados y, en su caso, la representación para actuar por cuenta del titular cuando sea persona distinta del denunciante.</p>
+        <p>La recepción por parte de Visual Genoma de la comunicación prevista en esta cláusula no supondrá, según lo dispuesto en la LSSI, el conocimiento efectivo de las actividades y/o contenidos indicados por el comunicante cuando ello no resulte notorio o evidente. En todo caso, Visual Genoma se reserva el derecho de suspender o retirar los contenidos que aun no siendo ilícitos resulten contrarios a las normas establecidas en los Condiciones y Términos de Uso, sopesando en cada caso los bienes jurídicos en conflicto.</p>
+        <h3>7. Disclaimer de garantías</h3>
+        <p>Visual Genoma ha adoptado las medidas razonables para asegurar que la información contenida en este sitio Web es fiable, sin embargo, al utilizar este sitio Web, usted acepta la información, productos, y servicios proporcionados "como tales". Visual Genoma no realiza ninguna garantía expresa o implícita en relación con la precisión, el contenido, la exactitud, la fiabilidad, la operabilidad o legalidad de la información contenida en este sitio Web, incluidas, entre otras, las garantías de comercialización, adecuación para propósitos particulares, y respeto de los derechos de propiedad.</p>
+        <h3>8. Responsabilidad de Visual Genoma</h3>
+        <p>El Usuario debe saber que las comunicaciones a través de redes abiertas están expuestas a una pluralidad de amenazas que hacen que no sean seguras. Es responsabilidad del Usuario adoptar todas las medidas técnicas adecuadas para controlar razonablemente estas amenazas y, entre ellas, el disponer de sistemas actualizados de detección de software malicioso, tales como virus, troyanos, etc., así como de parches de seguridad actualizados en los correspondientes navegadores. Para más información puede acudir a su proveedor de servicios de acceso a Internet que podrá facilitarle soluciones adecuadas a sus necesidades. La Visual Genoma no se responsabiliza de los daños y perjuicios causados al Usuario como consecuencia de riesgos inherentes al medio empleado, ni de los ocasionados por las vulnerabilidades en sus sistemas y herramientas. La Visual Genoma no garantiza tampoco la total seguridad de sus sistemas y aunque tiene adoptadas medidas de seguridad adecuadas, no puede descartarse totalmente la existencia de vulnerabilidades y, en consecuencia, el Usuario debe ser precavido en la interactuación con el Portal. La Visual Genoma únicamente será responsable de los daños causados por el uso del Portal, cuando dichos daños sean directamente causados por dolo o negligencia grave de Visual Genoma y no hubiera mediado negligencia por parte del Usuario. En particular, Visual Genoma no será responsable de:</p>
+            Los daños y perjuicios de cualquier tipo causados en los equipos informáticos del Usuario por virus, gusanos, troyanos o cualquier otro elemento dañino.
+            Los daños y perjuicios de cualquier tipo producidos en el Usuario que traigan causa en fallos o desconexiones en las redes de telecomunicaciones que produzcan la suspensión, cancelación o interrupción del servicio del Portal durante la prestación del mismo. A este respecto, el Usuario reconoce que el acceso al Portal requiere de servicios suministrados por terceros ajenos al control de Visual Genoma (a modo de ejemplo: operadores de redes de telecomunicaciones, proveedores de acceso, etc.) cuya fiabilidad, calidad, continuidad y funcionamiento no corresponde a Visual Genoma, ni forma parte de su responsabilidad garantizar la disponibilidad del servicio.
+            De la información de terceros en los casos en los que actúe como prestador de servicios de intermediación en el sentido dado por la LSSI, salvo cuando concurra conocimiento efectivo y no se haya retirado la información correspondiente.
+        <h3>9. Protección de datos</h3>
+        <p>Los aspectos relativos al tratamiento de los datos personales de los Usuarios con motivo del uso del Portal se hallan regulados en la Política de Privacidad, así como en los textos legales adjuntos a los diversos formularios de recogida de datos incluidos en el Portal, los cuales forman parte integrante de Condiciones y Términos de Uso.</p>
+        <h3>10. Farmacovigilancia</h3>
+        <p>En caso de detección de cualquier acontecimiento adverso asociado con el uso de algún producto de Merck Sharp & Dohme de Argentina S.A. o su utilización en el embarazo o lactancia, y que no se hubiera comunicado previamente, se deberá comunicar por teléfono (91 321 05 14) en un plazo de dos días laborables, desde su conocimiento, a los responsables de Farmacovigilancia de Visual Genoma. La notificación de acontecimientos adversos a Visual Genoma no debe interferir en ningún momento con la notificación al Centro Autonómico de Farmacovigilancia a través del Sistema de Tarjeta Amarilla.</p>
+        <h3>11. Miscelánea</h3>
+        <p>De conformidad con el artículo 3 de la LSSI, las leyes aplicables a los servicios de la sociedad de la información que Visual Genoma presta a través del Portal serán las del Reino de Argentina. En caso de que alguna de las disposiciones contenidas en las presentes Condiciones y Términos de Uso sea declarada nula, se procederá a la retirada o sustitución de la misma. En cualquier caso, dicha declaración de nulidad no afectará a la validez del resto de disposiciones recogidas en estos Condiciones y Términos de Uso.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- REQUIRED JS SCRIPTS -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>        
+<!-- AdminLTE App -->
+<script src="/resources/js/app.js"></script>
+
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. -->
+{% block scripts %}{% endblock %}
+</body>
+</html>

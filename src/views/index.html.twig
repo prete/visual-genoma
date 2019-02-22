@@ -1,0 +1,43 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<h2>something something bioinformatica</h1>
+
+<h4>PAGES</h4>
+<ul>
+    <li><a href="/dashboard">dashboard</a></li>
+    <li><a href="/user/login">login</a></li>
+    <li><a href="/user/logout">logout</a></li>
+</ul>
+
+
+<h4>D3</h4>
+<ul>
+    <li><a href="/d3">sandbox</a></li>
+</ul>
+
+<h4>API</h4>
+<ul>
+    <li><a href="/api/">API reference</a></li>
+    <li><a href="/api/chrom">cantidad de variantes por cromosoma</a></li>
+    <li><a href="/api/size">cantidad de variantes</a></li>
+    <li>listado de variantes por cromosoma
+        <select onChange="window.open(location.href+'api/chrom/'+this.value)" >
+          <option value="1">Chr1</option><option value="2">Chr2</option><option value="3">Chr3</option><option value="4">Chr4</option><option value="5">Chr5</option>
+          <option value="6">Chr6</option><option value="7">Chr7</option><option value="8">Chr8</option><option value="9">Chr9</option><option value="10">Chr10</option>
+          <option value="20">Chr20</option><option value="21">Chr21</option><option value="22">Chr22</option><option value="X">ChrX</option><option value="Y">ChrY</option>
+        </select>
+    </li>
+    <li>snp por posicion (ej: 84205995, 154523405, 21203893)<input type="text" id="position"/><input type="button" onclick="window.open(location.href+'api/pos/'+document.getElementById('position').value)" value="go"/></li>
+    <li>snp por filtro (ej: FSFilter200, QDFilter2, MQFilter40)<input type="text" id="filter"/><input type="button" onclick="window.open(location.href+'api/filter/'+document.getElementById('filter').value)" value="go"/></li>
+</ul>
+
+<h4>FILES</h4>
+<ul>
+    <li><a href="/file/upload">subir archivo</a></li>
+    <li><a href="/file/download">bajar archivo</a></li>
+</ul>
+
+
+{% endblock %}

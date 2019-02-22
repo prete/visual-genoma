@@ -1,0 +1,58 @@
+  <div id="inner-sidebar-content-div">
+      <ul class="sidebar-menu">
+        <li class="header">MENÚ</li>
+            {% if admin is defined or active_menu=="admin" %}
+                <li {% if active_menu=="admin" %}class="active"{% endif %}>
+                    <a href="/admin"><i class="fa fa-fw fa-cog" aria-hidden="true"></i> <span>Administraci&oacute;n</span></a>
+                </li>
+            {% endif %}
+
+            <li {% if active_menu=="intro" %}class="active"{% endif %}>
+                <a href="/intro"><i class="fa fa-fw fa-book" aria-hidden="true"></i> <span>Introducción</span></a>
+            </li>
+        
+            {%if app.user.has_vcf %}
+            <li {% if active_menu=="dashboard" %}class="active"{% endif %}>
+                <a href="/dashboard"><i class="fa fa-fw fa-home" aria-hidden="true"></i> <span>Menú de Inicio</span></a>
+            </li>
+            <li {% if active_menu=="clinical" %}class="active"{% endif %}>
+                <a href="/variants/clinical"><i class="fa fa-fw fa-medkit" aria-hidden="true"></i> <span>Informe Clínico</span></a>
+            </li>
+            <li {% if active_menu=="anatogram" %}class="active"{% endif %}>
+                <a href="/anatogram/body"><i class="fa fa-fw fa-universal-access" aria-hidden="true"></i> <span>Anatograma</span></a>
+            </li>
+            <li {% if active_menu=="ancestry" %}class="active"{% endif %}>
+                <a href="/ancestry/intro"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> <span>Informe de Ancestría</span></a>
+            </li>
+            <li {% if active_menu=="variants" %}class="active"{% endif %}>
+                <a href="/variants/"><i class="fa fa-fw fa-braille" aria-hidden="true"></i> <span>Listado de Variantes</span></a>
+            </li>
+            <li {% if active_menu=="browser" %}class="active"{% endif %}>
+                <a href="/genome_browser?r=1:1-6298499"><i class="fa fa-fw fa-search" aria-hidden="true"></i> <span>Navegador del Genoma</span></a>
+            </li>
+            <li {% if active_menu=="vcf_summary" %}class="active"{% endif %}>
+                <a href="/vcf/summary"><i class="fa fa-fw fa-bar-chart" aria-hidden="true"></i> <span>Estadísticas</span></a>
+            </li>
+            <li {% if active_menu=="reports" %}class="active"{% endif %}>
+                <a href="/reports"><i class="fa fa-fw fa-file-text" aria-hidden="true"></i> <span>Reportes</span></a>
+            </li>
+            <li {% if active_menu=="files" %}class="active"{% endif %}>
+                <a href="#"><i class="fa fa-fw fa-folder-open-o"></i> <span>Administrador de Archivos</span> <i class="fa fa-angle-left pull-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a href="/file/upload"><i class="fa fa-fw fa-cloud-upload"></i> Subir archivo</a></li>
+                    <li><a href="/file/download"><i class="fa fa-fw fa-cloud-download"></i> Descargar archivo</a></li>
+                </ul>
+            </li>
+        {%else%}
+            <li {% if active_menu=="novcf" %}class="active"{% endif %}>
+                <a href="/file/upload"><i class="fa fa-fw fa-folder-open-o" aria-hidden="true"></i> <span>Cargar Archivo</span></a>
+            </li>
+        {%endif%}
+        <li {% if active_menu=="faq" %}class="active"{% endif %}>
+            <a href="/faq"><i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i> <span>Preguntas Frecuentes</span></a>
+        </li>
+        <li {% if active_menu=="about" %}class="active"{% endif %}>
+            <a href="/about"><i class="fa fa-fw fa-cube" aria-hidden="true"></i> <span>Acerca de Visual Genoma</span></a>
+        </li>
+      </ul>
+    </div>

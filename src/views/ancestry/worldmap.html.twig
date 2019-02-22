@@ -1,0 +1,134 @@
+{% set title = 'Informe de Ancestría | Visual Genoma' %}
+{% set header = 'Informe de Ancestría ' %}
+{% set header_opt = 'Línea de descendencia y la pertenencia a haplogrupos' %}
+{% set active_menu = 'ancestry' %}
+{% set breadcrumbs = ['Visual Genoma','Informe de Ancestría','Globo'] %}
+
+{% extends 'layout.html.twig' %}
+
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="/resources/cesium/Widgets/widgets.css">
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-solid"  style="display: flex;flex-flow: column;height: 100%;">
+      <div class="box-header with-border">
+        <h3 class="box-title">Grupo poblacional de pertenencia</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div id="cesiumContainer" style="height: 100%;"></div>
+        <div id="loading-cesium" class="overlay">
+            <i class="fa fa-refresh fa-spin"></i>
+        </div>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->
+</div>
+<!-- /. row -->
+
+{% endblock %}
+
+{% block scripts %}
+
+<script src="/resources/cesium/Cesium.js"></script>
+
+<script type="text/javascript">
+  //BingMaps KEY
+  Cesium.BingMapsApi.defaultKey = 'Ak2_-cCQiyRYHdmGycLdPcTh9KxmTkXTSsXQqD2ZOmgVvHIs7zUotZTpCcl7Ni9T';
+  var worldCountries = '/resources/ancestry/countries.geo.json';
+  //start cesium
+  var viewer;
+
+  var poblaciones;
+  var poblacionesFeatures = [];
+  var popColor = {'America':'#e41a1c','Africa':'#377eb8','Europa':'#4daf4a','Asia':'#984ea3','Oceania':'#ff7f00'};
+  
+  $.get('/resources/ancestry/ancestry.json', function(data){
+      poblaciones = data;
+      afterInit();
+  });
+
+function afterInit(){
+  viewer = new Cesium.Viewer('cesiumContainer', {timeline:false, animation:false});
+  poblaciones.forEach(function(p){
+    
+    var description = '<table style="border: 1px solid white;">';
+    description += '<tr><th style="vertical-align:top;text-align:left;">Similitud</th><td>'+(p.rawfreq*100).toFixed(2)+'%</td></tr>'; 
+    description += '<tr><th style="vertical-align:top;text-align:left;">Etnia</th><td>'+p.pop.etnia+'</td></tr>'; 
+    description += '<tr><th style="vertical-align:top;text-align:left;">Descripción</th><td>'+p.pop.desc+'</td></tr>'; 
+    description += '<tr><td colspan="2">Fuente: <a href="'+p.pop.wiki+'" target="_blank">Wikipedia</a></td></tr>'; 
+    description += '</table>';
+    
+    viewer.entities.add({
+      position: Cesium.Cartesian3.fromDegrees(p.pos[0], p.pos[1], 100000.0),
+      name : p.pop.etnia + ' / ' + p.pop.super,
+      description: description,
+        //'Super grupo': p.pop.super,
+        //'Similitud': (p.pop.rawfreq*100).toFixed(2)+'%'
+      //},
+      ellipse : {
+          semiMinorAxis : 300000.0,
+          semiMajorAxis : 300000.0,
+          extrudedHeight : 200000.0+(5000000.0 * p.rawfreq),
+          material : Cesium.Color.fromCssColorString(popColor[p.pop.super]),//.withAlpha(Math.max([0.3, 1-p.rawfreq])),
+          outline : true
+      }
+    });
+  });
+  $('#loading-cesium').hide();  
+
+  var promise = Cesium.GeoJsonDataSource.load(worldCountries);
+  promise.then(function(dataSource) {
+    viewer.dataSources.add(dataSource);
+    var entities = dataSource.entities.values;
+    for (var i = 0; i < entities.length; i++) {
+        var entity = entities[i];
+        entity.name = entity.properties.name;
+        entity.polygon.material = Cesium.Color.fromRandom({alpha : 0.10});;
+        entity.polygon.outline = true;
+    }
+  }).otherwise(function(error){
+    window.alert(error);
+  });
+
+  
+  
+}
+/*
+//after page ready
+$(document).ready(function(){
+  //get world data from json
+  var promise = Cesium.GeoJsonDataSource.load(worldCountries);
+  promise.then(function(dataSource) {
+    $('#loading-cesium').hide();
+    viewer.dataSources.add(dataSource);
+    var entities = dataSource.entities.values;
+    var colorHash = {};
+    for (var i = 0; i < entities.length; i++) {
+        var entity = entities[i];
+        var color = colorHash[entity.properties.name];
+        if (!color) {
+            color = Cesium.Color.fromRandom({alpha : 1.00});
+            colorHash[entity.properties.name] = color;
+        }
+        entity.properties.Referencia = '<div style="width:32px;height:32px;background-color:'+color.toCssColorString()+'"><div>';
+        entity.polygon.material = color;
+        entity.polygon.outline = false;
+        entity.polygon.extrudedHeight = Math.random() * 500000 + 150000;
+    }
+  }).otherwise(function(error){
+    window.alert(error);
+  });
+});
+*/
+</script>
+
+{% endblock %}

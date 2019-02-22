@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ingresar | Visual Genoma</title>
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  
+  <link rel="icon" href="/resources/images/favicon.ico" type="image/gif" sizes="16x16">
+    
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="/resources/css/AdminLTE.css">
+  <link rel="stylesheet" href="/resources/css/skin-blue.css">
+  <link rel="stylesheet" href="/resources/css/bootstrap-custom.css">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body class="hold-transition login-page">
+    
+<div class="login-box">
+  <div class="login-logo">
+    <a href="/"><img src="/resources/images/logo.png" height=64><b>VISUAL GENOMA</b></a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    
+    <div class="row">
+      <div class="col-sm-12">
+        {% if message is defined and message is not empty %}
+          <div class="alert alert-danger">El usuario o la contraseña es incorrecta</div>
+        {% endif %}
+      </div>
+    </div>
+    
+    <p class="login-box-msg">Ingrese los datos de su cuenta</p>
+    <form  method="post" action="/let/me/in">
+      <div class="form-group has-feedback">
+        <input type="email" class="form-control" id="email" name="_email" value="{{username}}" placeholder="Email">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" class="form-control" id="password" name="_password" placeholder="Contraseña">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-offset-xs-12 col-xs-12">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Ingresar</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+    <hr />
+    
+    <div class="row">
+        <div class="col-offset-xs-12 col-xs-12">
+          <a href="/user/forgot">Olvidé mi contraseña</a><br>
+          <a href="/user/register">No tiene una cuenta? Regístrese!</a>
+        </div>
+        <!-- /.col -->
+    </div>
+    
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<!-- REQUIRED JS SCRIPTS -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>        
+<!-- AdminLTE App -->
+<script src="/resources/js/app.js"></script>
+
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. -->
+{% block scripts %}{% endblock %}
+</body>
+</html>
+
+
+{#
+<form class="form-signin" method="post" action="/let/me/in">
+    <h2 class="form-signin-heading">Ingresar</h2> 
+    {% if message is defined %}
+    <div class="alert alert-danger" role="alert">
+        <strong>Ups!</strong> {{message}}
+    </div>
+    {% endif %}
+    <label for="email" class="sr-only">Correo Electrónico</label>
+    <input type="email" id="email" name="_email" class="form-control" value="{{username}}" placeholder="Correo Electrónico" required autofocus>
+    <label for="password" class="sr-only">Contraseña</label>
+    <input type="password" id="password" name="_password" class="form-control" placeholder="Contraseña" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+    <div class="form-group">
+        <div class="col-md-6 control">
+            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                <a href="/user/forgot">Olvidó su contraseña?</a>
+            </div>
+        </div>
+        <div class="col-md-6 control">
+            <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                <a href="/user/register">No tiene una cuenta? Regístrese!</a>
+            </div>
+        </div>
+    </div>
+</form>
+#}

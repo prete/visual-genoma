@@ -1,0 +1,19 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">×</span></button>
+      <h4 class="modal-title"><i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i> Locus</h4>
+    </div>
+    <div class="modal-body">
+      <p>Un <strong>locus</strong> <small>(en latín, lugar)</small> es una posición fija en un cromosoma, como la posición de un gen o de un marcador genético. Se le usa para identificar posiciones de interés sobre determinadas secuencias.</p>
+      <p>Una variante de la secuencia del ADN en un determinado locus se llama alelo.</p>
+      <p>La lista ordenada de locus conocidos para un genoma particular se denomina mapa genético, mientras que se denomina cartografía genética al proceso de determinación del locus de un determinado carácter biológico.</p>
+      <p>Las células cuyos cromosomas tienen el mismo alelo en algún locus se llaman homocigotos, mientras que los que tienen diferentes alelos en un locus, heterocigotos.</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cerrar</button>
+    </div>
+  </div>
+  <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->

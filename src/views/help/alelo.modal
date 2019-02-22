@@ -1,0 +1,17 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">×</span></button>
+      <h4 class="modal-title"><i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i> Alelo</h4>
+    </div>
+    <div class="modal-body">
+      <p>Un <strong>alelo</strong> o <strong>aleloide</strong> es cada una de las formas alternativas que puede tener un mismo gen que se diferencian en su secuencia y que se puede manifestar en modificaciones concretas de la función de ese gen <small>(producen variaciones en características heredadas como, por ejemplo, el color de ojos o el grupo sanguíneo)</small>.</p>
+      <p>Dado que los humanos poseemos dos juegos de cromosomas, uno de ellos procedente del padre y el otro de la madre. Cada par de alelos se ubica en igual locus o lugar del cromosoma.</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cerrar</button>
+    </div>
+  </div>
+  <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->

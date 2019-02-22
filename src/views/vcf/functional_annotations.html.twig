@@ -1,0 +1,62 @@
+{% set title = 'Funcionalidad anotada | proyecto' %}
+{% set header = 'Funcionalidades' %}
+{% set header_opt = 'Función asignada al producto del gen.'  %}
+{% set active_menu = 'functional_annotations' %}
+{% set breadcrumbs = ['VCF','Functionalidad anotada',] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h4>Se encontraron {{total_records}} variaciones en su archivo.</h4>
+    
+    {% if table_records is defined %}
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-condensed table-hover">
+            <tr>
+              <th>Allele</th>
+              <th>Annotation</th>
+              <th>Annotation_Impact</th>
+              <th>Gene_Name</th>
+              <th>Gene_ID</th>
+              <th>Feature_Type</th>
+              <th>Feature_ID</th>
+              <th>Transcript_BioType</th>
+              <th>Rank</th>
+              <th>HGVS_c</th>
+              <th>HGVS_p</th>
+              <th>cDNA</th>
+              <th>CDS</th>
+              <th>AA</th>
+              <th>Distance</th>              
+            </tr>
+            {% for record in table_records %}
+                <tr>
+                    <td>{{ record['Allele'] }}</td>
+                    <td>{{ record['Annotation'] | split('&') | join('<br/>') | raw }}</td>
+                    <td>{{ record['Annotation_Impact'] }}</td>
+                    <td>{{ record['Gene_Name'] }}</td>
+                    <td>{{ record['Gene_ID'] }}</td>
+                    <td>{{ record['Feature_Type'] }}</td>
+                    <td><a href="http://www.ncbi.nlm.nih.gov/nuccore/{{ record['Feature_ID'] }}" target="_blank" class="btn btn-primary btn-xs">{{ record['Feature_ID'] }}</a></td>
+                    <td>{{ record['Transcript_BioType'] }}</td>
+                    <td>{{ record['Rank'] }}</td>
+                    <td>{{ record['HGVS_c'] }}</td>
+                    <td>{{ record['HGVS_p'] }}</td>
+                    <td>{{ record['cDNA'] }}</td>
+                    <td>{{ record['CDS'] }}</td>
+                    <td>{{ record['AA'] }}</td>
+                    <td>{{ record['Distance'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+      </div>
+        <div class="text-center">
+          <ul class="pagination"style="display:inline-block">
+              {% for p in table_paginig %}
+                  <li><a href="/vcf/functional_annotations?id={{ app.request.get('id') }}&page_number={{p}}">{{p}}</a></li>
+              {% endfor %}
+          </ul>
+        </div>
+    {% endif %}
+  
+{% endblock %}

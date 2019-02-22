@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Listado de Variantes - Visual Genoma</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link href="{{ app.request.getSchemeAndHttpHost() }}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<style>
+table { page-break-inside:auto !important }
+tr    { page-break-inside:avoid !important; page-break-after:auto !important }
+</style>
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="row">
+        
+        <div class="col-xs-6">
+          <span class="logo-lg">
+            <p><img src="{{ app.request.getSchemeAndHttpHost() }}/resources/images/logo-50px.png"> <b style="font-size:150%">Visual Genoma</b></p>
+          </span>
+        </div>
+        
+        <div class="col-xs-6 aling-rigth">
+          <p class="text-right">Informe Clínico</p>
+        </div>
+        
+      </div>
+      <!-- /.row -->
+      
+      <br />
+      
+      <div class="row" style="font-size:70%">
+        <div class="col-md-12">
+                <table class="table table-hover table-striped">
+                  
+                    <tr>
+                      <th>Impacto</th>
+                      <th>Enfermedad</th>
+                      <th>Gen</th>
+                      <th style="width:10px;">Crom</th>
+                      <th>Posición</th>
+                      <th>Tipo</th>
+                      <th>Referencia</th>
+                      <th>Alteración</th>
+                      <th>RS</th>
+                      <th>Calidad</th>
+                      <th>Registro</th>
+                      <th>Origen de datos</th>
+                    </tr>
+                    
+                     {% for record in records %}
+                      <tr class="clickable-row">
+                        <td class="clinvar-relevance">
+                          {{record['significance'] | upper}}
+                        </td>
+                        <td class="clinvar-disease-name">
+                          {{ record['disease_name'] | replace({'_':' '})}}
+                        </td>
+                        <td class="clinvar-gene">
+                          <a href="http://www.ncbi.nlm.nih.gov/gene/?term=({{record['gene']}}%5Bsym%5D)+AND+%22Homo+sapiens%22" target="_blank" data-toggle="tooltip" data-placement="top" title="Ver en NCBI Gene">{{record['gene']}} <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>
+                        </td>
+
+                        <td class="variant-chrom">{{ record['chrom'] }}</td>
+                        <td class="variant-pos">{{ record['pos'] }}</td>
+                        <td class="variant-type">
+                          {% if record['variant_type']=='SNV' %}
+                            <span class="label label-primary" data-toggle="tooltip" data-placement="left" title="Variante de un solo nucleótido">{{ record['variant_type'] }}</span>
+                          {% else %}
+                            <span class="label label-warning" data-toggle="tooltip" data-placement="left" title="Inserciones/Deleciones">{{ record['variant_type'] }}</span>
+                          {% endif %}
+                        </td>
+                        <td class="variant-ref" style="max-width:120px;overflow:hidden;text-overflow: ellipsis;">{{ record['ref'] }}</td>
+                        <td class="variant-alt" style="max-width:120px;overflow:hidden;text-overflow: ellipsis;">{{ record['alt'] }}</td>
+                        <td class="variant-rsid">
+                          {% if record['id'] is not empty %}
+                            <i class="fa fa-star text-yellow" data-toggle="tooltip" data-placement="left" title="Posee rsID: {{record['id']}}"></i>
+                          {% else %}
+                            <i class="fa fa-star-o text-yellow" data-toggle="tooltip" data-placement="left" title="No posee rsID"></i>
+                          {% endif %}
+                        </td>
+                        <td class="variant-qual">{{ record['qual'] }}</td>
+                        
+                        <td class="clinvar-accession">
+                          <a href="http://www.ncbi.nlm.nih.gov/clinvar/{{ record.accession }}/" target="_blank" data-toggle="tooltip" data-placement="top" title="Ver en NCBI ClinVar">ClinVar <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>
+                        </td>
+                        <td class="clinvar-dsdb">
+                          {% set db_names = record.disease_database_name | split(':') %}
+                          {% set db_id = record.disease_database_id | replace({'HP:': 'HP'}) | split(':') %}
+                          {% for db in db_names %}
+                            {% if db matches '/Human_Phenotype_Ontology/i' %}
+                              <a href="http://compbio.charite.de/hpoweb/showterm?id={{db_id[loop.index0] | replace({'HP': 'HP:'})}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Buscar referencia en Human Phenotype Ontology">HPO</a>
+                            {% elseif db matches '/EFO/i' %}
+                              <a href="http://www.ebi.ac.uk/efo/={{db_id[loop.index0]}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Buscar referencia en Experimental Factor Ontology">{{db}}</a>
+                            {% elseif db matches '/ORPHA/i' %}
+                              <a href="http://www.orpha.net/consor/cgi-bin/Disease_Search_Simple.php?lng=ES&Disease_Disease_Search_diseaseType=ORPHA&Disease_Disease_Search_diseaseGroup={{db_id[loop.index0]}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Buscar referencia en Orphanet">{{db}}</a>
+                            {% else %}
+                              <a href="http://www.ncbi.nlm.nih.gov/medgen/?term={{db_id[loop.index0]}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Buscar referencia en NCBI">{{db}}</a>
+                            {% endif %}
+                          {% endfor %}
+                        </td>
+
+                      </tr>
+                    {% endfor %}
+                  </table>
+                <!-- /.table -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+      
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+</div>
+<!-- ./wrapper -->
+
+<script>
+</script>
+
+</body>
+</html>

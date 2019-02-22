@@ -1,0 +1,784 @@
+[
+{
+		"alleles" : ["G", "A"],
+		"pos" : ["111", "45"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Mongol",
+			"desc" : "Los mongoles son un grupo étnico que se originó en lo que en la actualidad es Mongolia, Rusia y la República Popular China, principalmente en lo que hoy en día es la región autónoma de Mongolia Interior y las repúblicas Buriatia, Kalmukia, Tuvá y Yakutia de la Federación Rusa. Al año 2004 eran unos 8.500.000 y hablan el idioma mongol. Algunos grupos étnicos del norte de China y Rusia están estrechamente relacionados con los mongoles: los daur, los bryat, los evenki, los dorbod, los turvanes y los calmucos.",
+			"wiki" : "https://es.wikipedia.org/wiki/Mongol_(etnia)"
+		},
+		"nobs" : "22",
+		"xobs" : "3",
+		"freqscale" : 1,
+		"freq" : [0.136363636364, 0.863636363636],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.136363636364
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["70", "33.49855601"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Hazara",
+			"desc" : "Los hazara son un grupo étnico de lengua persa que reside en la región central de Afganistán (a la que se refieren como Hazarajat) y el noroeste de Pakistán. Los hazara se sitúan en el centro de Afganistán rodeados por los uzbecos al norte, los nuristaníes y los pastunes al este, los baluche al sur y los turcomanos al oeste. Los hazaras son considerados de origen mongol pero más probablemente se trata de poblaciones autóctonas mezcladas con turcos y mongoles. Su idioma es el hazara. Los hazara son predominantemente musulmanes chiíes y son el tercer gran grupo étnico de Afganistán, comprendiendo el 24% de la población. También pueden encontrarse gran número de hazaras en los estados vecinos de Irán y Pakistán, principalmente como refugiados, así como en diáspora alrededor del mundo.",
+			"wiki" : "https://es.wikipedia.org/wiki/Hazara"
+		},
+		"nobs" : "44",
+		"xobs" : "12",
+		"freqscale" : 1,
+		"freq" : [0.272727272727, 0.727272727273],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.272727272727
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["114", "32.26566812"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Han",
+			"desc" : "El grupo étnico de los han o el grupo cultural de los han es un grupo étnico de China. Constituyen casi el 92 % de la República Popular China,1 98 % en Taiwán, 75 % en Singapur y aproximadamente el 20 % de la población mundial. Constituye así el grupo étnico más numeroso del mundo. Los han se dividen en diferentes subgrupos con sus características propias. Aunque siempre han sido mayoría, a lo largo de la historia de China los han han estado sometidos en algunos períodos a otras minorías dominantes, como por ejemplo en la dinastía Qing (1644-1912) de etnia manchú que vetaba los puestos de administración a los han.",
+			"wiki" : "https://es.wikipedia.org/wiki/Etnia_han"
+		},
+		"nobs" : "68",
+		"xobs" : "20",
+		"freqscale" : 1,
+		"freq" : [0.294117647059, 0.705882352941],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.294117647059
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["74", "36.49838568"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Burusho",
+			"desc" : "El pueblo Burusho o Brusho vive en el distrito de Hunza, Nagar y Chitral, y valles de Gilgit-Baltistan en el norte de Pakistán. Son predominantemente musulmanes. Su lengua, Burushaski, no ha demostrado estar relacionada con ninguna otra.",
+			"wiki" : "https://en.wikipedia.org/wiki/Burusho_people"
+		},
+		"nobs" : "50",
+		"xobs" : "4",
+		"freqscale" : 1,
+		"freq" : [0.08, 0.92],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.08
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["81", "44"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Uygur",
+			"desc" : "Los uigures, uygures o uighures son un grupo étnico que vive en las regiones del noroeste de la República Popular China, principalmente en la Región Autónoma Uigur de Sinkiang. También se encuentran miembros de este pueblo en Uzbekistán, Kazajistán y Kirguistán. Otro grupo habita en la zona de Hunan. Son uno de los 56 grupos étnicos reconocidos oficialmente por el gobierno chino.",
+			"wiki" : "https://es.wikipedia.org/wiki/Etnia_uigur"
+		},
+		"nobs" : "20",
+		"xobs" : "4",
+		"freqscale" : 1,
+		"freq" : [0.2, 0.8],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.2
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["109", "28"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Miao",
+			"desc" : "Los Miao, son un grupo étnico internacional que viven principalmente en las zonas montañosas del sudoeste de la República Popular China. Es una de las nacionalidades reconocidas de forma oficial en este país. Otros viven en Vietnam y en Tailandia. Hay una pequeña comunidad Miao en el territorio Sudamericano de Guyana Francesa, fueron traídos de Laos a esa región por el gobierno francés en 1977 con la finalidad de poblar ese poco habitado territorio.",
+			"wiki" : "https://es.wikipedia.org/wiki/Miao"
+		},
+		"nobs" : "20",
+		"xobs" : "7",
+		"freqscale" : 1,
+		"freq" : [0.35, 0.65],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.35
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["101", "36"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Tu",
+			"desc" : "Los Tu son uno de los 56 grupos étnicos reconocidos oficialmente por el gobierno de la República Popular China. Con una población aproximada de 200.000, habitan principalmente en la provincia de Qinghai, aunque también se pueden encontrar algunos grupos en la de Sichuan.",
+			"wiki" : "https://es.wikipedia.org/wiki/Tu_(etnia)"
+		},
+		"nobs" : "20",
+		"xobs" : "4",
+		"freqscale" : 1,
+		"freq" : [0.2, 0.8],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.2
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["9", "40"],
+		"pop" : {
+      "super" : "Europa",
+			"etnia" : "Sardos",
+			"desc" : "Los sardos son un pueblo del sur de Europa, cuyo asentamiento es Cerdeña, isla del Mediterráneo occidental y región autónoma de la República Italiana.",
+			"wiki" : "https://es.wikipedia.org/wiki/Pueblo_sardo"
+		},
+		"nobs" : "56",
+		"xobs" : "0",
+		"freqscale" : 1,
+		"freq" : [0.0, 1.0],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["5", "7.995094727"],
+		"pop" : {
+      "super" : "Africa",
+			"etnia" : "Yoruba",
+			"desc" : "Los yoruba constituyen un gran grupo etnolingüístico del oeste africano. Los yoruba constituyen aproximadamente el 30% de la población total de Nigeria.",
+			"wiki" : "https://es.wikipedia.org/wiki/Yoruba"
+		},
+		"nobs" : "42",
+		"xobs" : "0",
+		"freqscale" : 1,
+		"freq" : [0.0, 1.0],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["66.5", "30.49871492"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Brahui",
+			"desc" : "El pueblo Brahui o Brahvi es un grupo étnico de alrededor de dos millones de personas, cuya mayoría se encuentra en Pakistán y Afganistán, donde son nativos, pero también se encuentran a través de su diáspora en los estados de Oriente Medio. Los Brahuis son casi totalmente musulmanes sunitas.",
+			"wiki" : "https://en.wikipedia.org/wiki/Brahui_people"
+		},
+		"nobs" : "50",
+		"xobs" : "5",
+		"freqscale" : 1,
+		"freq" : [0.1, 0.9],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.1
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["69", "25.49063551"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Sindios",
+			"desc" : "Los sindos eran un antiguo pueblo que vivían en la costa sudoeste del mar de Azov, en la península de Tamán, y en la costa adyacente del Ponto Euxino (mar Negro), en la región denominada Síndica en el Oeste Ruso.",
+			"wiki" : "https://es.wikipedia.org/wiki/Sindos"
+		},
+		"nobs" : "48",
+		"xobs" : "4",
+		"freqscale" : 1,
+		"freq" : [0.0833333333333, 0.9166666666667],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0833333333333
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["-3", "59"],
+		"pop" : {
+      "super" : "Europa",
+			"etnia" : "Orcadios",
+			"desc" : "Los orcadios son la población nativa de las Islas Orcadas. Históricamente, son descendientes de los pictos, nórdicos y escoceses.",
+			"wiki" : "https://en.wikipedia.org/wiki/Orcadians"
+		},
+		"nobs" : "30",
+		"xobs" : "0",
+		"freqscale" : 1,
+		"freq" : [0.0, 1.0],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["3", "32"],
+		"pop" : {
+      "super" : "Africa",
+			"etnia" : "Mozabitos",
+			"desc" : "Los pueblos mozabitos son un grupo étnico bereber que vive en el valle de M'zab en el norte del Sahara, en Argelia. La mayoría habla árabe. Los mozabitos son musulmanes ibadi.",
+			"wiki" : "https://es.wikipedia.org/wiki/Mozabitos"
+		},
+		"nobs" : "54",
+		"xobs" : "0",
+		"freqscale" : 1,
+		"freq" : [0.0, 1.0],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["64", "26"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : " Makrani-Siddi",
+			"desc" : "Los Makrani forman parte de los Siddhi conocidos como Sheedi o Habshi, son un grupo étnico que habita la India y Pakistán. Los miembros son descendientes de los pueblos bantúes del sudeste de África. Algunos eran comerciantes, marineros, sirvientes contratados, esclavos y mercenarios. La comunidad de Siddi se estima actualmente en alrededor de 60.000 individuos.",
+			"wiki" : "https://en.wikipedia.org/wiki/Siddi"
+		},
+		"nobs" : "50",
+		"xobs" : "1",
+		"freqscale" : 1,
+		"freq" : [0.02, 0.98],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.02
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["103", "28"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Yi",
+			"desc" : "Los Yi son una de las 56 etnias oficialmente reconocidas por el gobierno de la República Popular China. Viven básicamente en las zonas rurales de las provincias de Sichuan, Yunnan, Guizhou y Guangxi, normalmente en áreas montañosas.",
+			"wiki" : "https://es.wikipedia.org/wiki/Yi"
+		},
+		"nobs" : "20",
+		"xobs" : "8",
+		"freqscale" : 1,
+		"freq" : [0.4, 0.6],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.4
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["-12", "12"],
+		"pop" : {
+      "super" : "Africa",
+			"etnia" : "Mandinga",
+			"desc" : "Los mandinga, mandinka, malinké, mandé o manden conforman un grupo étnico de África occidental. En la actualidad existen cerca de trece millones de mandingas residiendo en diferentes países del oeste de África, en Gambia, Guinea, Guinea-Bissau, Senegal, Malí, Sierra Leona, Liberia, Burkina Faso, y Costa de Marfil.",
+			"wiki" : "https://es.wikipedia.org/wiki/Mandinga"
+		},
+		"nobs" : "44",
+		"xobs" : "1",
+		"freqscale" : 1,
+		"freq" : [0.0227272727273, 0.9772727272727],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0227272727273
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["-91", "19"],
+		"pop" : {
+      "super" : "America",
+			"etnia" : "Maya",
+			"desc" : "El pueblo maya o yucateco es un grupo indígena que está ubicado en los estados de Yucatán, Campeche y Quintana Roo en Mexico.",
+			"wiki" : "https://es.wikipedia.org/wiki/Pueblo_maya"
+		},
+		"nobs" : "42",
+		"xobs" : "1",
+		"freqscale" : 1,
+		"freq" : [0.0238095238095, 0.9761904761905],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0238095238095
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["35", "32"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Druze",
+			"desc" : "Los drusos son una minoría religiosa que habita, principalmente, en Siria, el Líbano, Jordania e Israel. Existen pequeñas comunidades de emigrantes drusos en otros países. Existe alrededor de un millón de drusos en el mundo, la gran mayoría de los cuales residen en el Oriente Próximo.",
+			"wiki" : "https://es.wikipedia.org/wiki/Drusos"
+		},
+		"nobs" : "84",
+		"xobs" : "9",
+		"freqscale" : 1,
+		"freq" : [0.107142857143, 0.892857142857],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.107142857143
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["81.5", "43.49792973"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Xibe",
+			"desc" : "Los xibe son uno de los 56 grupos étnicos oficialmente reconocidos por el gobierno de la República Popular China. Su población aproximada es de docientas mil personas que habitan principalmente en las provincias de Liaoning y Jilin.",
+			"wiki" : "https://es.wikipedia.org/wiki/Xibe"
+		},
+		"nobs" : "18",
+		"xobs" : "7",
+		"freqscale" : 1,
+		"freq" : [0.388888888889, 0.611111111111],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.388888888889
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["70.5", "33.48700562"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Pastún",
+			"desc" : "Los pastunes o pashtunes son un grupo etnolingüístico de lengua irania oriental. Hay poblaciones ubicadas básicamente en Pakistán y Afganistán.",
+			"wiki" : "https://es.wikipedia.org/wiki/Past%C3%BAn"
+		},
+		"nobs" : "44",
+		"xobs" : "5",
+		"freqscale" : 1,
+		"freq" : [0.113636363636, 0.886363636364],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.113636363636
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["39", "44"],
+		"pop" : {
+      "super" : "Europa",
+			"etnia" : "Adigués",
+			"desc" : "Los adigueses son un grupo étnico que habita en la región noroeste del Cáucaso, originario de la república rusa de Adigueya y del Krai de Krasnodar, con una diáspora que habita en Turquía, Jordania, Siria y otros países.",
+			"wiki" : "https://es.wikipedia.org/wiki/Adigu%C3%A9s"
+		},
+		"nobs" : "34",
+		"xobs" : "2",
+		"freqscale" : 1,
+		"freq" : [0.0588235294118, 0.9411764705882],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0588235294118
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["100", "21"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Dai",
+			"desc" : "Los dai son una minoría étnica, una de las 56 oficialmente reconocidas por el gobierno de la República Popular China. Habitan principalmente en la provincia de Yunnan. También se encuentran grupos dai en Laos, Birmania, Tailandia y Vietnam.",
+			"wiki" : "https://es.wikipedia.org/wiki/Dai"
+		},
+		"nobs" : "20",
+		"xobs" : "4",
+		"freqscale" : 1,
+		"freq" : [0.2, 0.8],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.2
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["2", "46"],
+		"pop" : {
+      "super" : "Europa",
+			"etnia" : "Frances",
+			"desc" : "Los Franceses son descendientes de galoromanos con algunos aportes de pueblos germánicos.",
+			"wiki" : "https://es.wikipedia.org/wiki/Pueblo_franc%C3%A9s"
+		},
+		"nobs" : "56",
+		"xobs" : "0",
+		"freqscale" : 1,
+		"freq" : [0.0, 1.0],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["-68", "3"],
+		"pop" : {
+      "super" : "America",
+			"etnia" : "Colombiano",
+			"desc" : "La etnografía de Colombia se caracteriza por ser el resultado de la mezcla de tres grupos principales: amerindios, españoles y africanos. La población colombiana está formada por el mestizaje directo de estos tres grupos.",
+			"wiki" : "https://es.wikipedia.org/wiki/Etnograf%C3%ADa_de_Colombia"
+		},
+		"nobs" : "14",
+		"xobs" : "0",
+		"freqscale" : 1,
+		"freq" : [0.0, 1.0],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["37", "-3"],
+		"pop" : {
+      "super" : "Africa",
+			"etnia" : "Bantu Keniata",
+			"desc" : "El término bantú se refiere a cualquier individuo perteneciente a los más de cuatrocientos grupos étnicos de pueblos melanoafricanos, que hablan lenguas bantúes, y que viven al sur de una línea que va desde Duala (Camerún) hasta la desembocadura del Yuba (Somalia).",
+			"wiki" : "https://es.wikipedia.org/wiki/Bant%C3%BA"
+		},
+		"nobs" : "22",
+		"xobs" : "1",
+		"freqscale" : 1,
+		"freq" : [0.0454545454545, 0.9545454545455],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0454545454545
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["29", "1"],
+		"pop" : {
+      "super" : "Africa",
+			"etnia" : "Mbuti",
+			"desc" : "Los mbuti son una de las varias etnias de cazadores recolectores que habitan el territorio de la moderna República Democrática del Congo. Los mbuti viven en la región forestal del Congo, en el corazón de África.",
+			"wiki" : "https://es.wikipedia.org/wiki/Mbuti"
+		},
+		"nobs" : "26",
+		"xobs" : "1",
+		"freqscale" : 1,
+		"freq" : [0.0384615384615, 0.9615384615385],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0384615384615
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["-62", "-11"],
+		"pop" : {
+      "super" : "America",
+			"etnia" : "Surui",
+			"desc" : "Los Suruí o Paiter son un pueblo indígena de Brasil que vive cerca de la frontera Mato Grosso-Rondônia.",
+			"wiki" : "https://en.wikipedia.org/wiki/Suru%C3%AD_do_Par%C3%A1_people"
+		},
+		"nobs" : "16",
+		"xobs" : "0",
+		"freqscale" : 1,
+		"freq" : [0.0, 1.0],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["40", "61"],
+		"pop" : {
+      "super" : "Europa",
+			"etnia" : "Rusos",
+			"desc" : "Los rusos son un grupo étnico eslavo oriental, que viven principalmente en Rusia y sus países vecinos. ",
+			"wiki" : "https://es.wikipedia.org/wiki/Pueblo_ruso"
+		},
+		"nobs" : "50",
+		"xobs" : "0",
+		"freqscale" : 1,
+		"freq" : [0.0, 1.0],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["71.5", "35.99366014"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Kalash",
+			"desc" : "Kalash es una etnia que habita los actuales límites septentrionales del Pakistán, en los valles de la cordillera del Hindukush. Se trata de un pueblo indoeuropeo al cual se le ha atribuido un origen griego o de otra rama proto-indoeuropea cercana.",
+			"wiki" : "https://es.wikipedia.org/wiki/Kalasha_(Chitral)"
+		},
+		"nobs" : "46",
+		"xobs" : "6",
+		"freqscale" : 1,
+		"freq" : [0.130434782609, 0.869565217391],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.130434782609
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["-63", "-10"],
+		"pop" : {
+      "super" : "America",
+			"etnia" : "Karitiana",
+			"desc" : "El pueblo Karitiana o Caritiana es un pueblo indígena de Brasil, cuya reserva se encuentra en el Amazonas occidental. Cuentan con trecientos veinte miembros, y el líder de su asociación tribal es Renato Caritiana. Casi no tienen contacto con el mundo exterior.",
+			"wiki" : "https://en.wikipedia.org/wiki/Karitiana_people"
+		},
+		"nobs" : "26",
+		"xobs" : "0",
+		"freqscale" : 1,
+		"freq" : [0.0, 1.0],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["100", "22"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Lahu",
+			"desc" : "Los lahu son un grupo étnico que habita principalmente en la provincia de Yunnan, en la República Popular China. También se encuentran pequeños grupos de esta etnia en Laos, Vietnam y Tailandia.",
+			"wiki" : "https://es.wikipedia.org/wiki/Lahu"
+		},
+		"nobs" : "16",
+		"xobs" : "1",
+		"freqscale" : 1,
+		"freq" : [0.0625, 0.9375],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0625
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["66.5", "30.49871492"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Baluchi",
+			"desc" : "Los baluchis son miembros de un grupo de tribus iranias que hablan el idioma baluchi. Habitan en la provincia en Pakistán, además de algunas áreas vecinas de Irán, Afganistán, Baréin e India.",
+			"wiki" : "https://es.wikipedia.org/wiki/Baluchi"
+		},
+		"nobs" : "48",
+		"xobs" : "1",
+		"freqscale" : 1,
+		"freq" : [0.0208333333333, 0.9791666666667],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0208333333333
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["109", "29"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Tujia",
+			"desc" : "Los tujia o tuchia son uno de los 56 grupos étnicos oficialmente reconocidos por el gobierno de la República Popular China. Viven en la zona de las montañas en las provincias de Hunan y Hubei. Su población aproximada es de ocho millones.",
+			"wiki" : "https://es.wikipedia.org/wiki/Tujia"
+		},
+		"nobs" : "20",
+		"xobs" : "5",
+		"freqscale" : 1,
+		"freq" : [0.25, 0.75],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.25
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["24.25", "-25.56926433"],
+		"pop" : {
+      "super" : "Africa",
+			"etnia" : "Bantu Sudafricano",
+			"desc" : "El término bantú se refiere a cualquier individuo perteneciente a los más de cuatrocientos grupos étnicos de pueblos melanoafricanos, que hablan lenguas bantúes, y que viven al sur de una línea que va desde Duala (Camerún) hasta la desembocadura del Yuba (Somalia).",
+			"wiki" : "https://es.wikipedia.org/wiki/Bant%C3%BA"
+		},
+		"nobs" : "16",
+		"xobs" : "0",
+		"freqscale" : 1,
+		"freq" : [0.0, 1.0],
+		"chrom_pos" : "1:200153271",
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["17", "4"],
+		"pop" : {
+      "super" : "Africa",
+			"etnia" : "Pigmeos Baka",
+			"desc" : "Los baka, conocidos también en el congo por el de Bayaka, son un pueblo perteneciente a las tribus pigmeas, que vive en las selvas lluviosas ecuatoriales, en la región sudoriental de Camerún, en la zona aledaña a la República del Congo, la República Centroafricana y Gabón.",
+			"wiki" : "https://es.wikipedia.org/wiki/Pigmeos_Baka"
+		},
+		"nobs" : "44",
+		"xobs" : "8",
+		"freqscale" : 1,
+		"freq" : [0.181818181818, 0.818181818182],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.181818181818
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["11", "43"],
+		"pop" : {
+      "super" : "Europa",
+			"etnia" : "Etruscos",
+			"desc" : "Los etruscos fueron un pueblo de la antigüedad cuyo núcleo geográfico fue la Toscana (Italia), a la cual dieron su nombre.",
+			"wiki" : "https://es.wikipedia.org/wiki/Etruscos"
+		},
+		"nobs" : "14",
+		"xobs" : "0",
+		"freqscale" : 1,
+		"freq" : [0.0, 1.0],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["119", "27"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "She",
+			"desc" : "Los she son uno de los 56 grupos étnicos oficialmente reconocidos por el gobierno de la República Popular China. Son la minoría más amplia en la provincia de Fujian. También están presentes en Zhejiang, Jiangxi, Guangdong y Anhui. Viven en pequeñas comunidades que están ampliamente distribuidas por el territorio.",
+			"wiki" : "https://es.wikipedia.org/wiki/She"
+		},
+		"nobs" : "20",
+		"xobs" : "10",
+		"freqscale" : 1,
+		"freq" : [0.5, 0.5],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.5
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["-108", "29"],
+		"pop" : {
+      "super" : "America",
+			"etnia" : "Pima",
+			"desc" : "Los akimel o'odham o pima son un grupo indígena que vive en el estado de Arizona, Estados Unidos y en el estado mexicano en Sonora y Chihuahua.",
+			"wiki" : "https://es.wikipedia.org/wiki/Pueblo_pima"
+		},
+		"nobs" : "28",
+		"xobs" : "2",
+		"freqscale" : 1,
+		"freq" : [0.0714285714286, 0.9285714285714],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0714285714286
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["126.5", "50.43389257"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Oroqen",
+			"desc" : "Los oroqen son una minoría étnica, una de las 56 oficialmente reconocidas por el gobierno de la República Popular China. Son una de las minorías étnicas más pequeñas del país, con una población aproximada de siete mil personas. Habitan mayoritariamente en la provincia de Mongolia Interior.",
+			"wiki" : "https://es.wikipedia.org/wiki/Oroqen"
+		},
+		"nobs" : "18",
+		"xobs" : "5",
+		"freqscale" : 1,
+		"freq" : [0.277777777778, 0.722222222222],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.277777777778
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["155", "-6"],
+		"pop" : {
+      "super" : "Oceania",
+			"etnia" : "Melanesios",
+			"desc" : "Los melanesios están asentados en un grupo de islas del Pacífico sur, como Nueva Guinea, Kanaky (Nueva Caledonia), Vanuatu, Salomón, Fiji, Santa Cruz, así como en otras más pequeñas y en los archipiélagos de Bismarck y el de las Luisíadas.",
+			"wiki" : "https://es.wikipedia.org/wiki/Melanesia"
+		},
+		"nobs" : "22",
+		"xobs" : "5",
+		"freqscale" : 1,
+		"freq" : [0.227272727273, 0.772727272727],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.227272727273
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["10", "46"],
+		"pop" : {
+      "super" : "Europa",
+			"etnia" : "Italiano",
+			"desc" : "Los italianos son un grupo étnico del sur de Europa, cuyo principal asentamiento es Italia, y posee una amplia representación a lo largo de Europa Occidental, América y Australia. Su lengua nativa es el italiano y su religión es predominantemente católica. Biológicamente pertenecen al grupo racial európido de tipo nórdico-mediterráneo.",
+			"wiki" : "https://es.wikipedia.org/wiki/Pueblo_italiano"
+		},
+		"nobs" : "24",
+		"xobs" : "2",
+		"freqscale" : 1,
+		"freq" : [0.0833333333333, 0.9166666666667],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0833333333333
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["124", "48.49753416"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Daur",
+			"desc" : "Los daur son una minoría étnica, una de las 56 oficialmente reconocidas por el gobierno de la República Popular China. Habitan principalmente en la región autónoma de Mongolia Interior y en las provincias de Heilongjiang y Xinjiang. Su población aproximada es de unas trece mil personas.",
+			"wiki" : "https://es.wikipedia.org/wiki/Daur"
+		},
+		"nobs" : "18",
+		"xobs" : "6",
+		"freqscale" : 1,
+		"freq" : [0.333333333333, 0.666666666667],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.333333333333
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["35", "31"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Beduino",
+			"desc" : "El nombre beduino significa 'morador del desierto'. Se da el nombre de beduinos a los árabes nómadas que habitan en los desiertos de Arabia Saudita, Siria, Jordania, Irak e Israel. Son originarios de la península arábiga.",
+			"wiki" : "https://es.wikipedia.org/wiki/Beduino"
+		},
+		"nobs" : "90",
+		"xobs" : "3",
+		"freqscale" : 1,
+		"freq" : [0.0333333333333, 0.9666666666667],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0333333333333
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["20", "-21"],
+		"pop" : {
+      "super" : "Africa",
+			"etnia" : "San",
+			"desc" : "Se llama genéricamente bosquimanos o también san, basarawa, sho o kung, a varios pueblos del sudeste de Africa, tradicionalmente cazadores-recolectores, que hablan alguna de las lenguas joisanas noroccidentales. La palabra bosquimano deriva del afrikáans boschjesman, 'hombre del bosque'.",
+			"wiki" : "https://es.wikipedia.org/wiki/San"
+		},
+		"nobs" : "10",
+		"xobs" : "0",
+		"freqscale" : 1,
+		"freq" : [0.0, 1.0],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["100", "26"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Naxi",
+			"desc" : "Los naxi son un grupo étnico que habita las laderas del Himalaya en la parte sudoeste de las provincias de Yunnan y Sichuan en la República Popular China. Se cree que son originarios del Tíbet. Los naxi son uno de los 56 grupos étnicos reconocidos oficialmente por el gobierno chino.",
+			"wiki" : "https://es.wikipedia.org/wiki/Naxi"
+		},
+		"nobs" : "16",
+		"xobs" : "5",
+		"freqscale" : 1,
+		"freq" : [0.3125, 0.6875],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.3125
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["138", "38"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Japones",
+			"desc" : "Los japoneses son el grupo étnico que se identifica bajo la cultura de Japón así como con su descendencia. Alrededor del mundo, aproximadamente ciento treinta millones de personas son de ascendencia japonesa; la gran mayoria residen en Japón. El término de 'pueblo japonés' también puede ser usado para referirse los grupos étnicos yamato y ryukyuenses.",
+			"wiki" : "https://es.wikipedia.org/wiki/Pueblo_japon%C3%A9s"
+		},
+		"nobs" : "56",
+		"xobs" : "19",
+		"freqscale" : 1,
+		"freq" : [0.339285714286, 0.660714285714],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.339285714286
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["129.5", "62.98287845"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Yakut",
+			"desc" : "Los yakutos o yacutos, son un pueblo túrquico que vive en la República de Sajá (Yakutia), en Rusia. Conforman el mayor grupo autóctono de Siberia.",
+			"wiki" : "https://es.wikipedia.org/wiki/Yakutos"
+		},
+		"nobs" : "50",
+		"xobs" : "15",
+		"freqscale" : 1,
+		"freq" : [0.3, 0.7],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.3
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["35", "32"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Palestinos",
+			"desc" : "El pueblo palestino, llamado habitualmente palestinos o árabes palestinos, es un pueblo semita del levante mediterráneo con orígenes familiares en la región histórica de Palestina y que constituye una de las poblaciones autóctonas de la totalidad de territorios de Palestina e Israel.",
+			"wiki" : "https://es.wikipedia.org/wiki/Pueblo_palestino"
+		},
+		"nobs" : "92",
+		"xobs" : "1",
+		"freqscale" : 1,
+		"freq" : [0.0108695652174, 0.9891304347826],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0108695652174
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["105", "12"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Jemer",
+			"desc" : "El pueblo Jemer (o Khmer) es la etnia predominante en Camboya, representando aproximadamente el 90% de los habitantes del país. La mayoría de los jemeres son seguidores del estilo jemer del budismo. Residen importantes poblaciones de jemeres en zonas adyacentes de Tailandia y en Vietnam.",
+			"wiki" : "https://es.wikipedia.org/wiki/Pueblo_jemer"
+		},
+		"nobs" : "20",
+		"xobs" : "4",
+		"freqscale" : 1,
+		"freq" : [0.2, 0.8],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.2
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["143", "-4"],
+		"pop" : {
+      "super" : "Oceania",
+			"etnia" : "Papues",
+			"desc" : "Papúes es un término para describir a los diferentes pueblos indígenas de Nueva Guinea y las islas vecinas. Según un estudio, las personas de Papúa, junto con los melanesios, son los únicos seres humanos modernos conocidos cuyos antepasados ​​prehistóricos cruzaron con los homínidos de Denisova.",
+			"wiki" : "https://es.wikipedia.org/wiki/Pap%C3%BAes"
+		},
+		"nobs" : "34",
+		"xobs" : "9",
+		"freqscale" : 1,
+		"freq" : [0.264705882353, 0.735294117647],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.264705882353
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["0", "43"],
+		"pop" : {
+      "super" : "Europa",
+			"etnia" : "Vasco",
+			"desc" : "La etnia vasca se encuentra en la península ibérica y sur de Francia, perteneciendo su territorio natal actualmente a España y Francia. Los vascos actuales son descendiente del pueblo vascón (actual Navarra) y los pueblos que estos vasconizaron a lo largo de la historia. El origen del término vasco es desconocido.",
+			"wiki" : "https://es.wikipedia.org/wiki/Etnia_vasca"
+		},
+		"nobs" : "48",
+		"xobs" : "0",
+		"freqscale" : 1,
+		"freq" : [0.0, 1.0],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.0
+	}, {
+		"alleles" : ["G", "A"],
+		"pos" : ["133.5", "47.4976192"],
+		"pop" : {
+      "super" : "Asia",
+			"etnia" : "Hezhen",
+			"desc" : "Los hezhen o nanái son una minoría étnica que habita en la zona de Siberia en Rusia y en la provincia de Heilongjiang, en la República Popular China. En Rusia la población aproximada es de unas doce mil personas mientras que en China son casi seis mil. Son una de las 56 minorías étnicas oficialmente reconocidas por el gobierno de la República Popular China.",
+			"wiki" : "https://es.wikipedia.org/wiki/Hezhen"
+		},
+		"nobs" : "16",
+		"xobs" : "6",
+		"freqscale" : 1,
+		"freq" : [0.375, 0.625],
+		"chrom_pos" : "1:200153271",
+		"rawfreq" : 0.375
+	}
+]

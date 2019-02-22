@@ -1,0 +1,25 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">×</span></button>
+      <h4 class="modal-title"><i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i> Variant Effect Predictor (VEP)</h4>
+    </div>
+    <div class="modal-body">
+    <p><span class="label label-default">Variant Effect Predictor</span> <small>(Predictor de Efecto de Variante)</small> es una de las herramientas más utilizadas en <a href="http://www.ensembl.org/index.html" target="_blank">Ensembl <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a> y <a href="http://ensemblgenomes.org/" target="_blank">EnsemblGenomes <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>. Permite explorar y analizar cuál es el efecto que las variantes (SNPs, CNV, indeles o variaciones estructurales) tienen en un gen, secuencia, proteínas, transcripción o factor de transcripción en particular.</p>
+    <p>Para utilizar VEP se requiere la ubicación de las variantes y las variaciones de nucleótidos para generar los siguientes resultados:</p>
+    <ol>
+      <li>Los genes y las transcripciones afectados por la variante</li>
+      <li>Localización de las variantes</li>
+      <li>Cómo la variante afecta a la síntesis de proteínas (por ejemplo, la generación de un codón de parada)</li>
+      <li>La comparación con otras bases de datos para encontrar variantes conocidas iguales</li>
+    </ol>
+
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cerrar</button>
+    </div>
+  </div>
+  <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->

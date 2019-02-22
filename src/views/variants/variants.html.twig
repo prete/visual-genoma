@@ -1,0 +1,210 @@
+{% set title = 'Listado de Variantes | Alteraciones en nucleótidos | Visual Genoma' %}
+{% set header = 'Listado de Variantes ' %}
+{% set header_opt = 'Alteraciones en nucleótidos'  %}
+{% set active_menu = 'variants' %}
+{% set breadcrumbs = ['Variantes', 'Listado de Variantes'] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<div id="variants-table-fields-modal" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Estos son los campos del listado de variantes</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped table-condensed table-hover table-bordered">
+          <tr><th>Campo</th><th>Significado</th></tr>
+          <tr>
+            <td><span class="badge">Cromosoma</span></td>
+            <td>Indica a qué cromosoma pertenece la variante.</td>
+          </tr>
+          
+          <tr>
+            <td><span class="badge">Posición</span></td>
+            <td>Indica la posición de la variante dentro del cromosoma.</td>
+          </tr>
+          <tr>
+            <td><span class="badge">Tipo</span></td>
+            <td>Las variantes pueden clasificarse de una forma genérica en dos clases: <strong>SNP</strong> e <strong>INDELS</strong>.</td>
+          </tr>
+          
+          <tr>
+            <td><span class="badge">Referencia</span></td>
+            <td>Es el nucleótido que se encuentra en el genoma de referencia, contra el que se compara el suyo para encontrar diferencias.</td>
+          </tr>
+          
+          <tr>
+            <td><span class="badge">Alteración</span></td>
+            <td>Es el nucleótido modificado que fue encontrado en su genoma.</td>
+          </tr>
+          
+          <tr>
+            <td><span class="badge">RS</span></td>
+            <td>RSID es un identificador asignado por el NCBI a un SNP. Una estrella indica que la variante posee el identificador.</td>
+          </tr>
+          
+          <tr>
+            <td><span class="badge">Calidad</span></td>
+            <td>El proceso que se uso para obtener su archivo genómico incluye un índice de calidad por cada variante para saber qué tan confiable es el resultado.</td>
+          </tr>
+
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-primary">
+         <div class="box-header with-border">
+            <h3 class="box-title">
+              <i class="fa fa-fw fa-book" aria-hidden="true"></i> 
+              Conceptos iniciales
+            </h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 16px;">
+            <p>Las variaciones más comunes son los <a href="#" class="link-help-icon open-help-modal" onclick="return false;" data-modal-name="snp.modal">polimorfismos de nucleótido simple</a> o SNPs, que consisten en una variación de un único <a href="#" class="link-help-icon open-help-modal" onclick="return false;" data-modal-name="nucleotido.modal">nucleótido</a> de la secuencia. Se estima que hay alrededor de 10 millones de SNPs en el genoma humano. Su importancia se basa en que pueden estar asociados otros SNPs responsables de enfermedades o asociados a un mayor riesgo de sufrir alguna anomalía de la salud, por lo que pueden actuar como marcadores para localizar los genes responsables en las secuencias.</p>
+            <p>Aquí puede ver el listado de todas las variantes encontradas en su archivo de informacón genómica o consultar el <a href="#variants-table-fields-modal" class="link-help-icon" data-toggle="modal">significado de los campos</a>. Para obtener información completa sobre la variante sólo haga click sobre la misma.</p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+
+<div class="row">
+
+  <div class="col-md-12">
+    <div class="box box-primary">
+      <div class="box-header with-border">
+        <h3 class="box-title">
+          <i class="fa fa-fw fa-list" aria-hidden="true"></i> 
+          Variantes de nucleótidos
+        </h3>
+        <div class="box-tools pull-right">
+          <div class="has-feedback">
+            <input type="text" class="form-control input-sm" placeholder="Buscar...">
+            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+          </div>
+        </div>
+        <!-- /.box-tools -->
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="mailbox-controls">
+          <div class="pull-right">
+            {{page}}/{{total}}
+            <div class="btn-group">
+              {% if has_prev %}
+                <a href="/variants/?page={{page-1}}" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></a>
+              {% endif %}
+              {% if has_next %}
+                <a href="/variants/?page={{page+1}}"class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></a>
+              {% endif %}
+            </div>
+            <!-- /.btn-group -->
+          </div>
+          <!-- /.pull-right -->
+        </div>
+        <div class="table-responsive mailbox-messages">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th style="width:10%">Cromosoma</th>
+                <th>Posición</th>
+                <th>Tipo</th>
+                <th>Referencia</th>
+                <th>Alteración</th>
+                <th>RS</th>
+                <th>Calidad</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for record in records %}
+            <tr class="clickable-row" data-href="/variants/id/{{record['idvariant']}}">
+              <td class="variant-chrom">{{ record['chrom'] }}</td>
+              <td class="variant-pos">{{ record['pos'] }}</td>
+              <td class="variant-type">
+                {% if record['variant_type']=='SNV' %}
+                  <span class="label label-primary" data-toggle="tooltip" data-placement="left" title="Variante de un solo nucleótido">{{ record['variant_type'] }}</span>
+                {% else %}
+                  <span class="label label-warning" data-toggle="tooltip" data-placement="left" title="Inserciones/Deleciones">{{ record['variant_type'] }}</span>
+                {% endif %}
+              </td>
+              <td class="variant-ref" style="max-width:120px;overflow:hidden;text-overflow: ellipsis;">{{ record['ref'] }}</td>
+              <td class="variant-alt" style="max-width:120px;overflow:hidden;text-overflow: ellipsis;">{{ record['alt'] }}</td>
+              <td class="variant-rsid">
+                {% if record['id'] is not empty %}
+                  <i class="fa fa-star text-yellow" data-toggle="tooltip" data-placement="left" title="Posee rsID: {{record['id']}}"></i>
+                {% else %}
+                  <i class="fa fa-star-o text-yellow" data-toggle="tooltip" data-placement="left" title="No posee rsID"></i>
+                {% endif %}
+              </td>
+              <td class="variant-qual">{{ record['qual'] }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+          <!-- /.table -->
+        </div>
+        <!-- /.mail-box-messages -->
+      </div>
+      <!-- /.box-body -->
+      <div class="box-footer">
+        <div class="mailbox-controls">
+          <div class="pull-right">
+            {{page}}/{{total}}
+            <div class="btn-group">
+              {% if has_prev %}
+                <a href="/variants/?page={{page-1}}" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></a>
+              {% endif %}
+              {% if has_next %}
+                <a href="/variants/?page={{page+1}}" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></a>
+              {% endif %}
+            </div>
+            <!-- /.btn-group -->
+          </div>
+          <!-- /.pull-right -->
+        </div>
+      </div>
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+  $(document).ready(function(){
+    $(".clickable-row").click(function() {
+      var url = $(this).data("href");
+      if(url){
+        window.document.location = $(this).data("href");
+      }
+    });
+  });
+</script>
+{% endblock %}

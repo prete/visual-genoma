@@ -1,0 +1,1088 @@
+{% set title = 'Estadísticas del VCF | proyecto' %}
+{% set header = 'Estadísticas' %}
+{% set header_opt = 'Información estadística de su archivo genómico'  %}
+{% set active_menu = 'vcf_summary' %}
+{% set breadcrumbs = ['Visual Genoma','Archivo','Estadísticas',] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+{# VARIANTES POR CROMOSOMA #}
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-plus-square" aria-hidden="true"></i> Variantes</h3>
+        <div class="box-tools">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="box-body no-padding">
+        
+        <div class="row">
+          <div class="col-md-8">
+            <div id="variants-per-chromosome-chart"></div>
+          </div>
+          <!-- /.col -->
+          <div class="col-md-4">
+            <div id="variants-pie-chart"></div>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        
+      </div>
+      <!-- /.box-body -->
+      {#
+      <div class="box-footer">
+          <a href="#" class="btn btn-sm btn-default pull-right">Ver más <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>
+      </div>
+      #}
+      <!-- /.box-footer -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+{# VARIANTES DE UN SOLO NUCLEOTIDO #}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        {% set snv_count = 0 %}
+        {% for n in nucleotides %}
+          {% set snv_count = snv_count + n.count %}
+        {% endfor %}
+        <h3 class="box-title"><i class="fa fa-plus-square" aria-hidden="true"></i> Variantes de un solo nucleótido <small><span class="badge bg-aqua">{{variants.snv}}</span>/<span class="badge bg-default">{{variants.total}}</span></small></h3>
+        <div class="box-tools">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="box-body no-padding">
+        <div class="row">
+          <div class="col-md-4">
+            <table class="table table-bordered">
+                <tr>
+                  <th style="width:60px">Código</th>
+                  <th>Nucleótido modificado</th>
+                  <th>%</th>
+                  {#
+                  <th>Porcentaje</th>
+                  #}
+                </tr>
+                {% for n in nucleotides %}
+                  <tr>
+                    <td><span class="badge bg-{%if n.code=='A'%}light-blue{%elseif n.code=='T'%}red{%elseif n.code=='C'%}yellow{%else%}green{%endif%}">{{n.code}}</span></td>
+                    <td><strong>{{n.name}}</strong></td>
+                    <td><span class="badge bg-{%if n.code=='A'%}light-blue{%elseif n.code=='T'%}red{%elseif n.code=='C'%}yellow{%else%}green{%endif%}">{{ n.percentage | number_format(2) }}%</span></td>
+                    {#
+                    <td>
+                      <div class="progress progress-xs">
+                        <div class="progress-bar progress-bar-{%if n.code=='A'%}primary{%elseif n.code=='T'%}red{%elseif n.code=='C'%}yellow{%else%}green{%endif%}" style="width: {{n.percentage}}%"></div>
+                      </div>
+                    </td> 
+                    #}
+                  </tr>
+                {% endfor %}
+            </table>
+          </div>
+          <div class="col-md-4">
+            <div id="nucleotides-pie-chart"></div>  
+          </div>
+        </div>
+      </div>
+      <!-- /.box-body -->
+      {#
+      <div class="box-footer">
+        <a href="#" class="btn btn-sm btn-default pull-right">Ver más <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>
+      </div>
+      #}
+      <!-- /.box-footer -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+{# VARIANTES CLINICAS #}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-plus-square" aria-hidden="true"></i> Variantes clínicas que afectan la salud y enfermedades hereditarias</h3>
+        <div class="box-tools">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="box-body no-padding">
+        
+        <div class="row">
+          
+          <div class="col-md-12">
+            <div id="clinical-variants-chart"></div>
+          </div>
+          <!-- /.col -->
+          
+        </div>
+        <!-- /.row -->
+        
+      </div>
+      <!-- /.box-body -->
+      {#
+      <div class="box-footer">
+        <a href="#" class="btn btn-sm btn-default pull-right">Ver más <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>
+      </div>
+      <!-- /.box-footer -->  
+      #}
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+{# GENES POR CROMOSOMA #}
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-plus-square" aria-hidden="true"></i> Genes por cromosoma</h3>
+        <div class="box-tools">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="box-body no-padding">
+        <div id="genes-per-chromosome-chart"></div>
+      </div>
+      <!-- /.box-body -->
+      {#
+      <div class="box-footer">
+        <a href="#" class="btn btn-sm btn-default pull-right">Ver más <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>
+      </div>
+      <!-- /.box-footer -->
+      #}
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+{# VCF QUALITY #}
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-plus-square" aria-hidden="true"></i> Calidad de datos por cromosoma <small>Promedio: <span class="badge bg-aqua">{{variants.avg_qual | number_format(2, '.', '')}}</span></small></h3>
+        <div class="box-tools">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="box-body no-padding">
+        <div id="quality-per-chromosome-chart"></div>
+      </div>
+      <!-- /.box-body -->
+      {#
+      <div class="box-footer">
+        <a href="#" class="btn btn-sm btn-default pull-right">Ver más <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>
+      </div>
+      <!-- /.box-footer -->
+      #}
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /.col -->
+  <div class="col-md-6">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-plus-square" aria-hidden="true"></i> Resultado de Filtros</h3>
+        <div class="box-tools">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="box-body no-padding">
+        
+        <div class="row">
+          <div class="col-md-6">
+            <div id="filter-pass-fail-chart"></div>
+          </div>
+          <!-- /.col -->
+          <div class="col-md-6">
+              <div style="height:250px; overflow:scroll">
+                <table class="table table-condensed table-bordered table-responsive">
+                  <tr><th>Filtro</th><th>Descripción</th></tr>
+                  {% for f in filters %}
+                    <tr><td>{{f.id}}</td><td>{{f.description}}</td></tr>
+                  {% endfor %}
+                </table>
+              </div>
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+        
+      </div>
+      <!-- /.box-body -->
+      {#
+      <div class="box-footer">
+        <a href="#" class="btn btn-sm btn-default pull-right">Ver más <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>
+      </div>
+      <!-- /.box-footer -->
+      #}
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+
+{############################
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title">Genes patógenos</h3>
+        <div class="box-tools">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="box-body no-padding">
+        <div class="row">
+          <div class="col-md-6">
+            <div id="bipartite-genes-per-chromosome-chart"></div>
+          </div>
+          <!-- /.col -->
+          <div class="col-md-6">
+              <table class="table table-responsive table-hover table-striped">
+                <thead>
+                  <tr>
+                    <th>Gen</th>
+                    <th>Enfermedad</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for c in clinvar %}
+                  <tr class="clickable-row" data-href="/vcf/variants/id/{{c.idvariant}}">
+                    <td>{% for g in c.GENE | split(',') %}<span class="label label-danger">{{ g }}</span>{% endfor %}</td>
+                    <td class="clinvar-disease-name">{% for disease in c.CLNDBN | split('|') %}{{ disease | replace('_',' ') }}<br/>{% endfor %}</td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+              <!-- /.table -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+########################}
+
+{% endblock %}
+
+{% block scripts %}
+<script charset="utf-8" src="https://d3js.org/d3.v4.min.js"></script>
+<script src="http://vizjs.org/viz.v1.1.0.min.js"></script>
+
+
+{########### VARIANT BARS CHART ###########}
+
+<style>
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.bar {
+  fill: steelblue;
+}
+
+.x.axis path {
+  display: none;
+}
+</style>
+<script>
+function createStackedBarChart(){
+  //http://bl.ocks.org/mstanaland/6100713
+  
+  var chromosomes = {
+    '1':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10,
+    '11':11, '12':12, '13':13, '14':14, '15':15, '16':16, '17':17, '18':18, '19':9, '20':20,
+    '21':11, '22':22, 'X':23, 'Y':24
+  };
+
+  var margin = {top: 20, right: 20, bottom: 30, left: 40};
+  var width = $("#variants-per-chromosome-chart").width() - margin.left - margin.right;
+  var height = 300 - margin.top - margin.bottom;
+
+  var g = d3.select("#variants-per-chromosome-chart").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var tooltip = d3.select("#variants-per-chromosome-chart").append("div").attr("class", "bar-tooltip");
+    
+  var x = d3.scaleBand()
+      .rangeRound([0, width])
+      .padding(0.1)
+      .align(0.1);
+  
+  var y = d3.scaleLinear()
+      .rangeRound([height, 0]);
+  
+  var z = d3.scaleOrdinal()
+      .range([
+        "#ff9933", //indels
+        "#65a3c6"  //snvs
+      ]);
+  
+  var stack = d3.stack().keys(["snvs", "indels"])
+              .order(d3.stackOrderNone)
+              .offset(d3.stackOffsetNone);
+
+  var xAxisName = g.append("g")
+    .attr("class", "stacked-bar-tooltip")
+    .style("display", "none");
+      
+  xAxisName.append("rect")
+    .attr("width", 30)
+    .attr("height", 20)
+    .attr("fill", "white")
+    .style("opacity", 0.5);
+  
+  xAxisName.append("text")
+    .attr("x", 15)
+    .attr("dy", "1.2em")
+    .style("text-anchor", "middle")
+    .attr("font-size", "12px")
+    .attr("font-weight", "bold")
+    .text("Variantes");
+    
+  d3.json("/graphs/source/variants/bars", function(error, data) {
+    if (error) throw error;
+  
+    x.domain(data.map(function(d) { return d.chromosome; }));
+    y.domain([0, d3.max(data, function(d) { return parseInt(d.total); })]).nice();
+    z.domain(data);
+  
+    g.selectAll(".serie")
+      .data(stack(data))
+      .enter().append("g")
+        .attr("class", "serie")
+        .attr("fill", function(d) { return z(d.key); })
+      .selectAll("rect")
+      .data(function(d) { return d; })
+      .enter().append("rect")
+        .attr("x", function(d) { return x(d.data.chromosome); })
+        .attr("y", function(d) { return y(d[1]); })
+        .attr("height", function(d) { return y(d[0]) - y(d[1]); })
+        .attr("width", x.bandwidth())
+        .on("mousemove", function(d){
+          var pos = d3.mouse(this);
+          var tooltipHTML = 
+              '<table class="table table-condensed table-bordered table-striped">'+
+		          '<tbody>'+
+		          '<tr><th class="text-center;white-space:nowrap;" colspan="2">Cantidad de variantes</th></tr>'+
+              '<tr><td>Variantes de un solo nucleótido</td><td><span class="badge pull-right" style="background-color: '+z('snvs')+' !important">'+(d.data.snvs)+'</span></td></tr>'+
+              '<tr><td>Inserciones/Deleciones</td><td><span class="badge pull-right" style="background-color: '+z('indels')+' !important">'+(d.data.indels)+'</span></td></tr>'+
+              '</tbody></table>'+
+              '<span class="label label-default pull-right text-uppercase">Cromosoma '+(d.data.chromosome)+'</span>';
+          return tooltip
+            .style("top", (pos[1] + margin.top) + "px")
+            .style("left", (pos[0] + margin.left + 16) + "px")
+    		    .style("display", "inline-block")
+  		      .html(tooltipHTML);
+        })
+        .on("mouseout", function(d){
+          tooltip.style("display", "none");
+        });
+        
+    g.append("g")
+        .attr("class", "axis axis--x")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+    g.append("g")
+        .attr("class", "axis axis--y")
+        .call(d3.axisLeft(y).ticks(10, "s"))
+      .append("text")
+        .attr("x", 2)
+        .attr("y", y(y.ticks(10).pop()))
+        .attr("dy", "0.35em")
+        .attr("text-anchor", "start")
+        .attr("fill", "#000")
+        .text("Variantes");
+    
+    var legend = g.selectAll(".legend")
+      .data(["Variantes de un solo nucleótido", "Inserciones/Deleciones"])
+      .enter().append("g")
+        .attr("class", "legend")
+        .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; })
+        .style("font", "10px sans-serif");
+  
+    legend.append("rect")
+        .attr("x", width - 18)
+        .attr("width", 18)
+        .attr("height", 18)
+        .attr("fill", z);
+  
+    legend.append("text")
+        .attr("x", width - 24)
+        .attr("y", 9)
+        .attr("dy", ".35em")
+        .attr("text-anchor", "end")
+        .text(function(d) { return d; });
+  });
+}
+</script>
+
+{########### VARIANTS PIE CHART ###########}
+<script>
+function createVariantsPieChart(){
+  var width = $("#variants-pie-chart").width();
+
+  var height = 250;
+  var radius = Math.min(width, height) / 2;
+  var colors = { 'snvs':'#65a3c6', 'indels':'#ff9933'};
+  
+  var arc = d3.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(0);
+
+  var labelArc = d3.arc()
+    .outerRadius(radius - 40)
+    .innerRadius(radius - 40);
+  
+  var pie = d3.pie()
+    .value(function(d) { return d.count; });
+  
+  var svg = d3.select("#variants-pie-chart").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+  
+  var tooltip = d3.select("#variants-pie-chart").append("div").attr("class", "pie-tooltip");
+  
+  d3.json("/graphs/source/variants/pie", function(error, data) {
+    if (error) throw error;
+
+    data['snvs'] = +data['snvs'];
+    data['indels'] = +data['indels'];
+    data['total'] = data['snvs'] + data['indels'];
+
+    data = [
+      {name:'SNV', code: 'snvs', count: data['snvs'], percentage:(data['snvs']/data['total'])*100},
+      {name:'INDEL', code: 'indels', count: data['indels'], percentage:(data['indels']/data['total'])*100},
+    ];
+    
+    var g = svg.selectAll(".arc")
+      .data(pie(data))
+      .enter().append("g")
+        .attr("class", "arc");
+  
+    g.append("path")
+      .attr("d", arc)
+      .style("fill", function(d) { return colors[d.data.code]; })
+      .on("mousemove", function(d){
+        var pos = d3.mouse(this);
+        return tooltip
+          .style("top",  pos[1]+(height/2)-32 + "px")
+          .style("left", pos[0]+(width/2)  + "px")
+          .style("display", "inline-block")
+  		    .style("box-shadow", "-3px 3px 15px #CECECE")
+          .html('<strong>'+(d.data.name)+'</strong> <span class="badge" style="background-color: '+colors[d.data.code]+' !important">'+d.data.count+'</span>');
+      })
+      .on("mouseout", function(d){
+        return tooltip
+          .style("display", "none");
+      });
+  
+    var text = g.append("text")
+      .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+      .attr("dy", ".35em")
+      .style("box-shadow", "-3px 3px 15px #262626");
+    
+    text.append("tspan")
+      .attr("x", "0")
+      .attr("dy", "1.2em")
+      .style("font-weight", "bold")
+      .text(function(d) { return d.data.name; });
+      
+    text.append("tspan")
+      .attr("x", "0")
+      .attr("dy", "1.2em")
+      .text(function(d) { return '('+d.data.percentage.toFixed(2)+'%)'; });
+      
+  });
+}
+</script>
+
+{########### NUCLEOTIDES PIE CHART ###########}
+<style>
+.arc text {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+.arc path {
+  stroke: #fff;
+}
+.pie-tooltip {
+    position: absolute;
+    display: none;
+    width: auto;
+    height: auto;
+    background: none repeat scroll 0 0 white;
+    border: 0 none;
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: -3px 3px 15px #888888;
+    color: black;
+    font: 12px sans-serif;
+    padding: 5px;
+    text-align: center;
+}
+</style>
+
+<script>
+function createPieChart(){
+  function type(d) {
+    d.count =+ d.count;
+    return d;
+  }
+  
+  var width = $("#nucleotides-pie-chart").width();
+  var height = 200;
+  var radius = Math.min(width, height) / 2;
+  
+  var colors = {
+    'A':'#3c8dbc',
+    'T':'#dd4b39',
+    'C':'#f39c12',
+    'G':'#00a65a'
+  };
+  
+  var arc = d3.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(0);
+
+  var labelArc = d3.arc()
+    .outerRadius(radius - 40)
+    .innerRadius(radius - 40);
+  
+  var pie = d3.pie()
+    .value(function(d) { return d.count; });
+  
+  var svg = d3.select("#nucleotides-pie-chart").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+  
+  var tooltip = d3.select("#nucleotides-pie-chart").append("div").attr("class", "pie-tooltip");
+  
+  d3.json("/graphs/source/nucleotides/pie", function(error, data) {
+    if (error) throw error;
+  
+    var g = svg.selectAll(".arc")
+      .data(pie(data))
+      .enter().append("g")
+        .attr("class", "arc");
+  
+    g.append("path")
+      .attr("d", arc)
+      .style("fill", function(d) { return colors[d.data.code]; })
+      .on("mousemove", function(d){
+        return tooltip
+          .style("left", "0px")
+  		    .style("top", "0px")
+  		    .style("display", "inline-block")
+  		    .style("box-shadow", "-3px 3px 15px "+colors[d.data.code])
+          .html("<strong>"+(d.data.name)+"</strong><br>"+d.data.count+" variantes");
+      })
+      .on("mouseout", function(d){
+        return tooltip
+          .style("display", "none");
+      });
+  
+    g.append("text")
+      .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+      .attr("dy", ".35em")
+      .text(function(d) { return d.data.name; });
+  });
+}
+</script>
+
+{########### CLINAVAR  ###########}
+
+<style>
+
+#clinical-variants-chart {
+  position:relative;
+}
+.node {
+  box-sizing: border-box;
+  position: absolute;
+  overflow: hidden;
+}
+
+.node-label {
+  padding: 4px;
+  line-height: 1em;
+  white-space: pre;
+}
+
+.node-value {
+  color: rgba(0,0,0,0.8);
+  font-size: 9px;
+  margin-top: 1px;
+}
+
+</style>
+<script>
+function createClinicalVariantChart(){
+
+    var tooltip = d3.select("#clinical-variants-chart").append("div").attr("class", "bar-tooltip");
+    
+  var width = $("#clinical-variants-chart").width();
+  var height = 650;
+  
+  function getNodeColor(node){
+    if(!node.data.parentName)
+      return '';
+    if(/pathogenic/i.test(node.data.parentName)){
+      return '#dd4b39';
+    } else if(/benign/i.test(node.data.parentName)){
+      return '#00a65a';
+    } else {
+      return '#d3d3d3';
+    }
+  }
+  
+  var stratify = d3.stratify();
+  
+  var treemap = d3.treemap()
+      .size([width, height])
+      .padding(1)
+      .round(true);
+  
+  d3.json("/graphs/source/variants/clinical/hierarchy", function(error, data){
+    if (error) throw error;
+  
+    var root = stratify(data)
+      .sum(function(d) { return 1; })
+      .sort(function(a, b) { return b.height - a.height || b.value - a.value; });;
+  
+    treemap(root);
+  
+    d3.select("#clinical-variants-chart")
+      .style("width", width + "px")
+      .style("height", height + "px")
+      .selectAll(".node")
+      .data(root.leaves())
+      .enter().append("div")
+        .attr("class", "node")
+        //.attr("title", function(d) { return d.data.name; })
+        .style("left", function(d) { return d.x0 + "px"; })
+        .style("top", function(d) { return d.y0 + "px"; })
+        .style("width", function(d) { return d.x1 - d.x0 + "px"; })
+        .style("height", function(d) { return d.y1 - d.y0 + "px"; })
+        .style("background", function(d) { while (d.depth > 2) d = d.parent; return getNodeColor(d); })
+        .on("mousemove", function(d){
+          
+          var tooltipHTML = '<table class="table table-condensed table-bordered table-striped" style="max-width:200px;">'+
+            '<tr><th>Relevancia</th><th>Enfermedad</th><th>Entrada</th><th>Origen de Datos</th></tr>'+
+            '<tr><td><span class="badge" style="background-color:'+getNodeColor(d)+';">'+d.data.CLINSIG+'</span></td><td>'+d.data.CLNDBN+'</td><td>'+d.data.CLNACC+'</td><td>'+d.data.CLNDSDB+'</td></tr>'+
+            '</table>';
+          
+          var pos = d3.mouse(this);
+          var top = d.y0+pos[1];
+          var left = d.x0+pos[0];
+          
+          return tooltip
+            .style("top",  top + "px")
+            .style("left", left + "px")
+            .style("display", "inline-block")
+    		    .style("box-shadow", "-3px 3px 15px #636363")
+    		    .html(tooltipHTML);
+        })
+        .on("mouseout", function(d){
+          return tooltip
+            .style("display", "none");
+        })
+      .append("div")
+        .attr("class", "node-label")
+        .text(function(d) { return d.data.name; })
+      .append("div")
+        .attr("class", "node-value")
+        .text(function(d) { return (d.data.parentName ? d.data.parentName : ''); });
+  })
+}
+</script>
+
+
+{########### GENES  ###########}
+<style>
+.node--hover circle {
+  stroke: #000;
+  stroke-width: 1.2px;
+}
+.genes-text {
+  font: 6px sans-serif;
+  text-anchor: middle;
+}
+</style>
+<script>
+function createGenes(){  
+  
+  // falta implementar
+  // http://plnkr.co/edit/Gel6gWwDOVwT8miuhfD5?p=preview
+  
+  // basado en ejemplo
+  // http://bl.ocks.org/mbostock/ca5b03a33affa4160321
+  
+  var chromosomes = {
+    '1':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10,
+    '11':11, '12':12, '13':13, '14':14, '15':15, '16':16, '17':17, '18':18, '19':9, '20':20,
+    '21':11, '22':22, 'X':23, 'Y':24
+  };
+  
+  var margin = 20;
+  var diameter = $("#genes-per-chromosome-chart").width();
+
+  var color = d3.scaleOrdinal()
+    .range(d3.schemeCategory20c
+        .map(function(c) { c = d3.rgb(c); c.opacity = 0.6; return c; }));
+
+  var svg = d3.select("#genes-per-chromosome-chart").append("svg")
+      .attr("width", diameter)
+      .attr("height", diameter)
+    .append("g");
+      //.attr("transform", "translate( "+ diameter / 2 + "," + diameter / 2 + ")");
+  
+  var pack = d3.pack()
+    .size([diameter, diameter])
+    .padding(3);
+    
+  d3.json("/graphs/source/chromosome/genes/hierarchy", function(error, data) {
+    if (error) throw error;
+  
+    var root = d3.hierarchy(data, function(d) { return d.children; })
+      .sum(function(d) { return d.children ? 0 : d.size; });
+  
+    pack(root);
+  
+    var node = svg.selectAll("g")
+      .data(root.descendants())
+      .enter().append("g")
+        .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+        .attr("class", function(d) { return "node" + (!d.children ? " node--leaf" : d.depth ? "" : " node--root"); })
+        .each(function(d) { d.node = this; });
+  
+    node.append("circle")
+        .attr("id", function(d) { return "node-" + d.data.name; })
+        .attr("r", function(d) { return d.r; })
+        .style("fill", function(d) { return color(d.data.parent); });
+  
+    var leaf = node.filter(function(d) { return !d.children; });
+  
+    leaf.append("clipPath")
+        .attr("id", function(d) { return "clip-" + d.data.name; })
+      .append("use")
+        .attr("xlink:href", function(d) { return "#node-" + d.data.name + ""; });
+  
+    leaf.append("text")
+        .attr("class", "genes-text")
+        .attr("clip-path", function(d) { return "url(#clip-" + d.data.name + ")"; })
+      .selectAll("tspan")
+        .data(function(d) { return d.data.name; })
+      .enter().append("tspan")
+        .attr("x", 0)
+        .attr("y", function(d, i, nodes) { return 13 + (i - nodes.length / 2 - 0.5) * 10; })
+        .text(function(d) { return d; });
+  
+    node.append("title")
+        .text(function(d) { return d.data.name });
+
+  });
+}
+</script>
+
+{########### QUALITY PER CHROMOSOME ###########}
+<style>
+.bar-tooltip {
+    position: absolute;
+    display: none;
+    width: auto;
+    height: auto;
+    background: none repeat scroll 0 0 white;
+    border: 0 none;
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: -3px 3px 15px #888888;
+    color: black;
+    min-width:200px;
+    font: 12px sans-serif;
+    padding: 5px;
+    z-index:9999;
+}
+</style>
+<script>
+function createQualityBars(){
+
+  var margin = {top: 20, right: 20, bottom: 30, left: 40},
+      width = $("#quality-per-chromosome-chart").width() - margin.left - margin.right,
+      height = 250 - margin.top - margin.bottom;
+  
+  var x = d3.scaleBand()
+          .range([0, width])
+          .padding(0.1);
+  var y = d3.scaleLinear()
+          .range([height, 0]);
+            
+  var svg = d3.select("#quality-per-chromosome-chart").append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+  var tooltip = d3.select("#quality-per-chromosome-chart").append("div").attr("class", "bar-tooltip");
+  
+  // get the data
+  d3.json("/graphs/source/chromosome/quality/bars", function(error, data) {
+    if (error) throw error;
+    
+    // format the data
+    data.forEach(function(d) {
+      d.avg_quality = +d.avg_quality;
+      d.max_quality = +d.max_quality;
+      d.min_quality = +d.min_quality;
+    });
+  
+    var mean = d3.mean(data, function(d) { return d.avg_quality; });
+  
+    function getFillColor(d){ if(d.avg_quality>=mean) return '#00a65a'; else if(d.avg_quality>=mean*0.50) return '#f39c12'; else return '#dd4b39';}
+  
+    // Scale the range of the data in the domains
+    x.domain(data.map(function(d) { return d.chromosome; }));
+    y.domain([0, d3.max(data, function(d) { return d.avg_quality; })]);
+  
+    // append the rectangles for the bar chart
+    svg.selectAll(".bar")
+        .data(data)
+      .enter().append("rect")
+        .attr("class", "quality-bar")
+        .attr("fill", getFillColor)
+        .attr("x", function(d) { return x(d.chromosome); })
+        .attr("y", function(d) { return y(d.avg_quality); })
+        .attr("width", x.bandwidth())
+        .attr("height", function(d) { return height - y(d.avg_quality); })
+        .on("mousemove", function(d){
+          var pos = d3.mouse(this);
+          var tooltipHTML = 
+                '<table class="table table-condensed table-bordered table-striped">'+
+  		          '<tbody>'+
+  		          '<tr class="text-center;white-space:nowrap;"><th colspan="2">Calidad de las variantes</th></tr>'+
+                '<tr><td>Promedio</td><td><span class="badge pull-right" style="background-color:'+(getFillColor(d))+' !important">'+(d.avg_quality.toFixed(2))+'</span></td></tr>'+
+                '<tr><td>Mínimo</td><td><span class="badge pull-right badge-default">'+(d.min_quality.toFixed(2))+'</span></td></tr>'+
+                '<tr><td>Máximo</td><td><span class="badge pull-right badge-default">'+(d.max_quality.toFixed(2))+'</span></td></tr>'+
+                '</tbody>'+
+                '</table>'+
+                '<span class="label label-default pull-right text-uppercase">Cromosoma '+(d.chromosome)+'</span>';
+          
+          return tooltip
+            .style("top", (pos[1] + margin.top + 16) + "px")
+            .style("left", (pos[0] + margin.left + 16) + "px")
+    		    .style("display", "inline-block")
+  		      .html(tooltipHTML);
+        })
+        .on("mouseout", function(d){
+          tooltip.style("display", "none");
+        });
+  
+    // add the x Axis
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+  
+    // add the y Axis
+    svg.append("g")
+        .call(d3.axisLeft(y));
+  
+  });
+
+}
+</script>
+
+{########### FILTER PIE ###########}
+
+<script>
+function createFilterPie(){  
+  var width = $("#filter-pass-fail-chart").width();
+
+  var height = 250;
+  var radius = Math.min(width, height) / 2;
+  
+  var colors = { 'pass':'#27de83', 'fail':'#de2827'};
+  
+  var arc = d3.arc()
+    .outerRadius(radius - 10)
+    .innerRadius(0);
+
+  var labelArc = d3.arc()
+    .outerRadius(radius - 40)
+    .innerRadius(radius - 40);
+  
+  var pie = d3.pie()
+    .value(function(d) { return d.count; });
+  
+  var svg = d3.select("#filter-pass-fail-chart").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+  
+  var tooltip = d3.select("#filter-pass-fail-chart").append("div").attr("class", "pie-tooltip");
+  
+  d3.json("/graphs/source/filters/pass-fail/pie", function(error, data) {
+    if (error) throw error;
+
+    data['pass'] = +data['pass'];
+    data['fail'] = +data['fail'];
+    data['total'] = data['pass'] + data['fail'];
+
+    data = [
+      {name:'Superados', code: 'pass', count: data['pass'], percentage:(data['pass']/data['total'])*100},
+      {name:'Fallados', code: 'fail', count: data['fail'], percentage:(data['fail']/data['total'])*100},
+    ];
+    
+    var g = svg.selectAll(".arc")
+      .data(pie(data))
+      .enter().append("g")
+        .attr("class", "arc");
+  
+    g.append("path")
+      .attr("d", arc)
+      .style("fill", function(d) { return colors[d.data.code]; })
+      .on("mousemove", function(d){
+        var pos = d3.mouse(this);
+        return tooltip
+          .style("top", "50px")
+          .style("left", "50px")
+          .style("display", "inline-block")
+  		    .style("box-shadow", "-3px 3px 15px #CECECE")
+          .html('<strong>'+(d.data.name)+'</strong> <span class="badge" style="background-color: '+colors[d.data.code]+' !important">'+d.data.percentage+'%</span>');
+      })
+      .on("mouseout", function(d){
+        return tooltip
+          .style("display", "none");
+      });
+  
+    g.append("text")
+      .attr("transform", function(d) { return "translate(" + labelArc.centroid(d) + ")"; })
+      .attr("dy", ".35em")
+      .style("box-shadow", "-3px 3px 15px #262626")
+      .text(function(d) { return d.data.name; });
+  });
+}
+</script>
+
+{########### BIPARTITE ###########}
+
+<style>
+.mainBars rect{
+  shape-rendering: auto;
+  fill-opacity: 0;
+  stroke-width: 0.5px;
+  stroke: rgb(0, 0, 0);
+  stroke-opacity: 0;
+}
+.subBars{
+	shape-rendering:crispEdges;
+}
+.edges{
+	stroke:none;
+	fill-opacity:0.5;
+}
+</style>
+<script>
+function createBiPartiteChart(){
+    var width = $("#bipartite-genes-per-chromosome-chart").width();
+
+    var chromosomes = {
+      '1':1, '2':2, '3':3, '4':4, '5':5, '6':6, '7':7, '8':8, '9':9, '10':10,
+      '11':11, '12':12, '13':13, '14':14, '15':15, '16':16, '17':17, '18':18, '19':9, '20':20,
+      '21':11, '22':22, 'X':23, 'Y':24
+    };
+    
+    function sortChromosomes(a, b){
+      return d3.ascending(chromosomes[a], chromosomes[b]);
+    }
+    
+    d3.json("/graphs/source/chromosomes/genes/bipartite", function(error, data) {
+      
+      if (error) throw error;
+      
+      var svg = d3.select("#bipartite-genes-per-chromosome-chart").append("svg").attr("width", width).attr("height", 500);
+      var g = svg.append("g").attr("transform","translate(50,50)");
+      
+      var bp=viz.bP()
+      		.data(data)
+      		.min(12)
+      		.pad(1)
+      		.barSize(35)
+      		.sortPrimary(sortChromosomes)
+      		.fill(d => d3.schemeCategory20[d.primary]);
+      			
+      g.call(bp);
+      
+      g.selectAll(".mainBars").append("text").attr("class","label")
+    	.attr("x", d => (d.part == "primary" ? -30 : 30))
+    	.attr("y", d => +6)
+    	.text(d => d.key)
+    	.attr("text-anchor",d=>(d.part=="primary"? "end": "start"));
+    });
+}
+</script>
+
+<script>
+  $(document).ready(function(){
+    createStackedBarChart();
+    createVariantsPieChart();
+    
+    createPieChart();
+    
+    createClinicalVariantChart();
+    //createGenes();
+    createQualityBars();
+    createFilterPie();
+    //createBiPartiteChart();
+  });
+  
+</script>
+{% endblock %}

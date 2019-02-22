@@ -1,0 +1,4 @@
+"Tipo";"Enfermedad";"Variante - Cromosoma";"Variante - Posición";"Variante - Tipo";"Variante - Referencia";"Variante - Alteración";"Variante - RS";"Variante - Calidad";"Gen";"Registro";
+{% for record in records %}
+"{{record['significance'] | upper}}";"{{ record['disease_name'] | replace({'_':' '})}}";"{{ record['chrom'] }}";"{{ record['pos'] }}";"{{ record['variant_type'] }}";"{{ record['ref'] }}";"{{ record['alt'] }}";"{{record['id']}}";"{{ record['qual'] }}";"{{ record['gene'] }}";"http://www.ncbi.nlm.nih.gov/clinvar/{{ record['accession'] }}/";
+{% endfor %}

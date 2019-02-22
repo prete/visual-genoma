@@ -1,0 +1,33 @@
+{% set title = 'Variantes Benignas | Variantes Clínicas | VISUAL GENOMA' %}
+{% set header = 'Variantes Benignas' %}
+{% set active_menu = 'clinvar' %}
+{% set breadcrumbs = ['Variantes', 'Clínicas', 'Benignas'] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    
+    <div class="info-box bg-green">
+      <span class="info-box-icon"><i class="fa fa-fw fa fa-heart heart-animation"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">BENIGNAS (<strong>{{ records | length }}</strong>)</span>
+        {#<span class="info-box-number">{{ records | length }}</span>#}
+        <div class="info-box-text">
+          <p style="text-transform: none; white-space: normal; word-wrap: break-word;">Esta clasificación significa que la variante no está asociada con cualquier otra condición médica conocida. Puede ser una variante bien documentada encontrada en la población general. Esencialmente un resultado bueno.</p>
+        </div>
+      </div>
+      <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+    
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+{% include '/variants/clinical_grid.html.twig' %}
+
+{% endblock %}

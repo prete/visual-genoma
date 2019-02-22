@@ -1,0 +1,4 @@
+[2019-01-27 22:27:02] myapp.INFO: Matched route "GET_". {"route_parameters":{"_controller":"[object] (Closure: {})","_route":"GET_"},"request_uri":"http://bio-prete.c9users.io/"} []
+[2019-01-27 22:27:02] myapp.INFO: Populated the TokenStorage with an anonymous Token. [] []
+[2019-01-27 22:27:02] myapp.INFO: > GET / [] []
+[2019-01-27 22:27:02] myapp.INFO: < 200 [] []

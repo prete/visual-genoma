@@ -1,0 +1,33 @@
+{% set title = 'Otras Variantes | Variantes Clínicas | VISUAL GENOMA' %}
+{% set header = 'Otras Variantes' %}
+{% set active_menu = 'clinvar' %}
+{% set breadcrumbs = ['Variantes', 'Clínicas', 'Otras'] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    
+    <div class="info-box bg-teal">
+      <span class="info-box-icon"><i class="fa fa-fw fa fa-heart heart-animation"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">OTRAS <small><i>(otras, no provisto, respuesta a drogas)</i></small> (<strong>{{ records | length }}</strong>)</span>
+        {#<span class="info-box-number">{{ records | length }}</span>#}
+        <div class="info-box-text">
+          <p style="text-transform: none; white-space: normal; word-wrap: break-word;">Esta clasificación significa que existen estudios sobre la variante pero el resultado no tienen directa influencia en una condición médica.</p>
+        </div>
+      </div>
+      <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+    
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+{% include '/variants/clinical_grid.html.twig' %}
+
+{% endblock %}

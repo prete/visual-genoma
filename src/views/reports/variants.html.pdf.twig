@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Listado de Variantes - Visual Genoma</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link href="{{ app.request.getSchemeAndHttpHost() }}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<style>
+table { page-break-inside:auto !important }
+tr    { page-break-inside:avoid !important; page-break-after:auto !important }
+</style>
+  
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Main content -->
+    <section class="content">
+
+      <div class="row">
+        
+        <div class="col-xs-6">
+          <span class="logo-lg">
+            <p><img src="{{ app.request.getSchemeAndHttpHost() }}/resources/images/logo-50px.png"> <b style="font-size:150%">Visual Genoma</b></p>
+          </span>
+        </div>
+        
+        <div class="col-xs-6 aling-rigth">
+          <p class="text-right">Listado Completo de Variantes</p>
+        </div>
+        
+      </div>
+      <!-- /.row -->
+      
+      <br />
+      
+      <div class="row" style="font-size:70%">
+        <div class="col-md-12">
+                <table class="table table-hover table-striped">
+                  
+                    <tr>
+                      <th style="width:10px;">Crom</th>
+                      <th>Posición</th>
+                      <th>Tipo</th>
+                      <th>Referencia</th>
+                      <th>Alteración</th>
+                      <th>RS</th>
+                      <th>Calidad</th>
+                    </tr>
+                    
+                    {% for record in records %}
+                    <tr class="clickable-row">
+                      <td class="variant-chrom">{{ record['chrom'] }}</td>
+                      <td class="variant-pos">{{ record['pos'] }}</td>
+                      <td class="variant-type">
+                        {% if record['variant_type']=='SNV' %}
+                          <span class="label label-primary" data-toggle="tooltip" data-placement="left" title="Variante de un solo nucleótido">{{ record['variant_type'] }}</span>
+                        {% else %}
+                          <span class="label label-warning" data-toggle="tooltip" data-placement="left" title="Inserciones/Deleciones">{{ record['variant_type'] }}</span>
+                        {% endif %}
+                      </td>
+                      <td class="variant-ref" style="max-width:120px;overflow:hidden;text-overflow: ellipsis;">{{ record['ref'] }}</td>
+                      <td class="variant-alt" style="max-width:120px;overflow:hidden;text-overflow: ellipsis;">{{ record['alt'] }}</td>
+                      <td class="variant-rsid">
+                        {% if record['id'] is not empty %}
+                          <i class="fa fa-star text-yellow" data-toggle="tooltip" data-placement="left" title="Posee rsID: {{record['id']}}"></i>
+                        {% else %}
+                          <i class="fa fa-star-o text-yellow" data-toggle="tooltip" data-placement="left" title="No posee rsID"></i>
+                        {% endif %}
+                      </td>
+                      <td class="variant-qual">{{ record['qual'] }}</td>
+                    </tr>
+                    {% endfor %}
+                  </table>
+                <!-- /.table -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+      
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+</div>
+<!-- ./wrapper -->
+
+<script>
+</script>
+
+</body>
+</html>

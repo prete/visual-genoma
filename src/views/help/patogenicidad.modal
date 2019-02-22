@@ -1,0 +1,17 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">×</span></button>
+      <h4 class="modal-title"><i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i> Patogenicidad Calculada</h4>
+    </div>
+    <div class="modal-body">
+      <p>Hay muchas herramientas especializadas en determinar automáticamente  si un <strong>Polimorfismo de Nucleotido Simple</strong> es <span class="label label-danger">perjudicial</span> (patogénica, dañina, o que causa la enfermedad) o <span class="label label-success">neutral</span> (tolerada, benigna, no dañina). Algunas, como <strong>SIFT</strong>, se basan en la secuencia de conservación, bajo la premisa de que la interrupción de una secuencia muy conservada será perjudicial. Otras, como <strong>PolyPhen-2</strong>, tratan de evaluar el efecto de los cambios de aminoácidos en las estructuras de proteínas. <strong>CADD</strong> mezcla varios tipos de información genómica. Y algunas herramientas, como <strong>Condel</strong>, combinan las salidas de otras herramientas.</p>
+      <p>Debido a la gran cantidad de estos métodos, una cuestión práctica importante es responder cuál de estas herramientas caracteriza mejor, es decir, cuál predice correctamente el carácter patogénico de nuevas variantes. La comunidad considera muy difícil, por no decir imposible, comparar adecuadamente estas herramientas de predicción de variantes perjudiciales. La razón es que en la mayoría de los casos, cuando una variante de un gen está anotada, todas las demás variantes de ese gen que están disponibles en la base de datos también tienen la misma anotación.</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cerrar</button>
+    </div>
+  </div>
+  <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->

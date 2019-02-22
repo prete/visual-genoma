@@ -1,0 +1,17 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">×</span></button>
+      <h4 class="modal-title"><i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i> Detalle Funcional</h4>
+    </div>
+    <div class="modal-body">
+      <p>La <strong>genómica funcional</strong> es un campo de la biología molecular que se propone utilizar la vasta acumulación de datos producidos por los proyectos de genómica (como los "proyectos genoma" de los distintos organismos) para describir las funciones e interacciones entre genes (y proteínas).</p>
+      <p>A diferencia de la genómica y la proteómica, la genómica funcional se centra en los aspectos dinámicos de los genes, como su transcripción, la traducción, las interacciones proteína-proteína, en oposición a los aspectos estáticos de la información genómica como la secuencia del ADN o su estructura.</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cerrar</button>
+    </div>
+  </div>
+  <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->

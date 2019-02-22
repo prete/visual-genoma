@@ -1,0 +1,13 @@
+{% if breadcrumbs is defined %}
+    <ol class="breadcrumb">
+        {% for bread in breadcrumbs %}
+            {% if loop.first %}
+                <li><i class="fa fa-sitemap" aria-hidden="true"></i> {{ bread }}</li>
+            {% elseif loop.last %}
+                <li class="active">{{bread}}</li>
+            {% else %}
+                <li>{{ bread }}</li>
+            {% endif %}
+        {% endfor %}
+    </ol>
+{% endif %}

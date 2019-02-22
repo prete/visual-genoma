@@ -1,0 +1,184 @@
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="box">
+      <div class="box-body">
+        <div class="table-responsive mailbox-messages">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th><a href="#" class="">Impacto</a></th>
+                <th><a href="#" class="">Condición</a></th>
+                <th><a href="#" class="">Variante</a></th>
+                <th><a href="#" class="">Gen</a></th>
+                <th><a href="#" class="">Registro</a></th>
+                <th><a href="#" class="">Origen de datos</a></th>
+                {#<th><a href="#" class="open-help-modal" onclick="return false;" data-modal-name="nucleotido.modal" data-toggle="popover" data-trigger="hover" data-placement="top" title="Estado de revisión" data-content="ClinVar">Estado de revisión</a></th>#}
+              </tr>
+            </thead>
+            <tbody>
+             {% for record in records %}
+                <tr class="clickable-row" data-href="/variants/id/{{record.idvariant}}">
+                  {#<td class="clinvar-significance">{{record.significance}}</td>#}
+                  <td class="clinvar-relevance">
+                    {% set btnClass = "success" %}
+                    {% if "HIGH" in record.impact %}
+                    {% set btnClass = "danger" %}
+                    {% elseif "MODERATE" in record.impact %}
+                    {% set btnClass = "warning" %}
+                    {% endif %}
+                    <a href="#{{record.impact | lower}}-impact-modal" class="btn btn-xs btn-{{btnClass}} btn-block link-help-icon" data-toggle="modal">{{record.impact | upper}}</a>
+                    {#{%if random('12')=='1' %}<i class="fa fa-fw fa-arrow-down text-green" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Riesgo disminuido"></i> {{random(100)}}%{%else%}<i class="fa fa-fw fa-arrow-up text-red" aria-hidden="true"  data-toggle="tooltip" data-placement="top" title="Riesgo aumentado"></i>{{random(100)}}%{%endif%}#}
+                  </td>
+                  <td class="clinvar-disease-name">
+                    {{ record.disease_name | replace({'_':' '})}}
+                  </td>
+                  <td class="clinvar-variant">
+                    <a href="/variants/id/{{record.idvariant}}" class="btn btn-xs bg-navy"  data-toggle="tooltip" data-placement="top" title="Ver variante que genera esta modificación">Variante <i class="fa fa-search-plus" aria-hidden="true"></i></a>
+                  </td>
+                  <td class="clinvar-gene">
+                    <a href="http://www.ncbi.nlm.nih.gov/gene/?term=({{record.gene}}%5Bsym%5D)+AND+%22Homo+sapiens%22" class="btn btn-block btn-xs btn-primary" target="_blank" data-toggle="tooltip" data-placement="top" title="Ver en NCBI Gene">{{record.gene}} <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>
+                  </td>
+                  <td class="clinvar-accession">
+                    <a href="http://www.ncbi.nlm.nih.gov/clinvar/{{ record.accession }}/" class="btn btn-block btn-xs btn-default" target="_blank" data-toggle="tooltip" data-placement="top" title="Ver en NCBI ClinVar">ClinVar <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>
+                  </td>
+                  <td class="clinvar-dsdb">
+                    {% set db_names = record.disease_database_name | split(':') %}
+                    {% set db_id = record.disease_database_id | replace({'HP:': 'HP'}) | split(':') %}
+                    {% for db in db_names %}
+                      {% if db matches '/Human_Phenotype_Ontology/i' %}
+                        <a href="http://compbio.charite.de/hpoweb/showterm?id={{db_id[loop.index0] | replace({'HP': 'HP:'})}}" target="_blank" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Buscar referencia en Human Phenotype Ontology">HPO <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>
+                      {% elseif db matches '/EFO/i' %}
+                        <a href="http://www.ebi.ac.uk/efo/={{db_id[loop.index0]}}" target="_blank" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Buscar referencia en Experimental Factor Ontology">{{db}} <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>
+                      {% elseif db matches '/ORPHA/i' %}
+                        <a href="http://www.orpha.net/consor/cgi-bin/Disease_Search_Simple.php?lng=ES&Disease_Disease_Search_diseaseType=ORPHA&Disease_Disease_Search_diseaseGroup={{db_id[loop.index0]}}" target="_blank" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Buscar referencia en Orphanet">{{db}} <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>
+                      {% else %}
+                        <a href="http://www.ncbi.nlm.nih.gov/medgen/?term={{db_id[loop.index0]}}" target="_blank" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" title="Buscar referencia en NCBI">{{db}} <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a>
+                      {% endif %}
+                    {% endfor %}
+                  </td>
+                  {# leer http://www.ncbi.nlm.nih.gov/clinvar/docs/assertion_criteria/ #}
+                  {#<td class="clinvar-revstat">{{ record.review_status }}</td>#}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <!-- /.table -->
+        </div>
+        <!-- /.mail-box-messages -->
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+    
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+
+<div id="low-impact-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><i class="fa fa-fw fa-share-alt"></i> IMPACTO: <span class="label label-success">LOW</span> (Bajo)</h4>
+      </div>
+      <div class="modal-body">
+        <p>Esta variante es el resultado de una modifcación que no tiene un impacto significativo. Esto significa que esta variante tiene un <strong>impacto muy bajo y por lo tanto una probabilidad muy baja de afectar negativamente a su genoma</strong>.</p>
+        <p>Muchos de los factores que influyen en el impacto tienen que ver con cómo son modificados los <a href="#" class="link-help-icon open-help-modal" onclick="return false;" data-modal-name="codon.modal">codones</a>. Las variantes de bajo impacto están relacionadas con:</p>
+        <ul class="list-group">
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> Duplicación de un segmento grande del cromosoma.</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> La variante hace que el codón de inicio sea mutado en otro codón de inicio.</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> La variante hace que el codón de fin sea mutado en otro codón de fin.</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> La variante ocurre en una región no codificante o un intrón.</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> Una variante en la región 5'UTR (región no traducida de genes) produce una secuencia de tres bases que puede ser un codón de inicio.</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> La variante hace que el codón modificado produzca la misma proteína.</li>
+       </ul>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modifier-impact-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><i class="fa fa-fw fa-share-alt"></i> IMPACTO: <span class="label label-success">MODIFIER</span> (Modificador)</h4>
+      </div>
+      <div class="modal-body">
+        <h3></h3>
+        <p>Esta variante es el resultado de una modifcación que no tiene un impacto significativo. Esto significa que esta variante tiene un <strong>impacto muy bajo y por lo tanto una probabilidad muy baja de afectar negativamente a su genoma</strong>.</p>
+        <p>Muchos de los factores que influyen en el impacto tienen que ver con cómo son modificados los <a href="#" class="link-help-icon open-help-modal" onclick="return false;" data-modal-name="codon.modal">codones</a>. Las variantes modificador son de bajo impacto y están relacionadas con:</p>
+        <ul class="list-group">
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> La variante afecta una zona no codificante de un gen.</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> La variante ocurre en un gen pero fuera de la zona codificante.</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> La variante ocurre en una región no codificante o un intrón.</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> Una variante en la región 3'UTR (región no traducida de genes).</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> Una variante en la región 5'UTR (región no traducida de genes).</li>
+       </ul>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="moderate-impact-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><i class="fa fa-fw fa-share-alt"></i> IMPACTO: <span class="label label-warning">MODERATE</span> (Moderado)</h4>
+      </div>
+      <div class="modal-body">
+        <p>Esta variante es el resultado de una modifcación que puede llegar a tener un impacto en su genoma. Esto significa que esta variante tiene un <strong>impacto moderado y por lo tanto una probabilidad media de afectar negativamente su genoma</strong>. Este incremento hace que su grupo de riesgo para la condición asociada sea <span class="label label-warning">MEDIO</span>.</p>
+        <p>Muchos de los factores que influyen en el impacto tienen que ver con cómo son modificados los <a href="#" class="link-help-icon open-help-modal" onclick="return false;" data-modal-name="codon.modal">codones</a>. Las variantes de impacto moderado están relacionadas con:</p>
+        <ul class="list-group">
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> Inversión de un segmento grande del cromosoma.</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> Inserción, Deleción o Modificación de varios codones.</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> La variante hace que el codón modificado produzca otra proteína.</li>
+       </ul>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="high-impact-modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><i class="fa fa-fw fa-share-alt"></i> IMPACTO: <span class="label label-danger">HIGH</span> (Alto)</h4>
+      </div>
+      <div class="modal-body">
+        <p>Esta variante es el resultado de una modifcación que puede llegar a tener un impacto en su genoma. Esto significa que esta variante tiene un <strong>impacto alto y por lo tanto una probabilidad superior al promedio de afectar negativamente su genoma</strong>. Este incremento hace que su grupo de riesgo para la condición asociada sea <span class="label label-danger">ALTO</span>.</p>
+        <p>Muchos de los factores que influyen en el impacto tienen que ver con cómo son modificados los <a href="#" class="link-help-icon open-help-modal" onclick="return false;" data-modal-name="codon.modal">codones</a>. Las variantes de alto impacto están relacionadas con:</p>
+        <ul class="list-group">
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> Un segmento grande del cromosoma es borrado.</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> Un exón completo es duplicado, invertido o borrado.</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> La variante causa un cambio de marco de lectura (frame-shift).</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> Un gen completo es duplicado o borrado.</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> Dos genes se fusionan.</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> La variante hace que el codón de inicio sea mutado en un codón de fin.</li>
+          <li class="list-group-item"><i class="fa fa-fw fa-chevron-circle-right" aria-hidden="true"></i> La variante hace que el codón de fin sea mutado en otro codón de fin.</li>
+       </ul>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

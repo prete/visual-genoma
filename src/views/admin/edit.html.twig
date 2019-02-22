@@ -1,0 +1,117 @@
+{% set title = 'Usuario | Administración | VISUAL GENOMA' %}
+{% set header = 'Perfil' %}
+{% set header_opt = ''  %}
+{% set active_menu = 'admin' %}
+{% set breadcrumbs = ['Administración', 'Usuario','Perfil',] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}  <!-- Main content -->
+
+<div class="row">
+     <div class="col-md-9">
+        <form class="form-horizontal" method="post">
+          
+          <div class="form-group">
+            <div class="col-sm-12">
+              {% if error is defined and error is not empty %}
+              <div class="alert alert-danger">{{error}}</div>
+              {% endif %}
+              {% if success is defined and success is not empty %}
+              <div class="alert alert-success">{{success}}</div>
+              {% endif %}
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <div class="col-sm-offset-3 col-sm-2">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="active" {{ (active) ? ' checked ' : '' }} > Activo
+                </label>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="checkbox">
+                <label>
+                  <input type="checkbox" name="isadmin" {{ (isadmin) ? ' checked ' : '' }}  > Adminitrador
+                </label>
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Email</label>
+            <div class="col-sm-9">
+              <input type="email" class="form-control" name="email" value="{{email}}" placeholder="Email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="name" class="col-sm-3 control-label">Nombre completo</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="name" value="{{name}}" placeholder="Nombre completo">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="genero" class="col-sm-3 control-label">G&eacute;nero</label>
+            <div class="col-sm-3">
+              <select name="gender" class="form-control">
+                <option value="Femenino" {{ (gender=='Femenino') ? ' selected ' : '' }}>Femenino</option>
+                <option value="Masculino" {{ (gender=='Masculino') ? ' selected ' : '' }}>Masculino</option>
+              </select>
+            </div>
+            
+            <label for="phone" class="col-sm-1 control-label">Teléfono</label>
+            <div class="col-sm-5">
+              <input type="phone" class="form-control" name="phone" value="{{phone}}" placeholder="Tel&eacute;fono">
+            </div>  
+          </div>
+          
+          <div class="form-group">
+            <label for="dni" class="col-sm-3 control-label">DNI</label>
+            <div class="col-sm-3">
+              <input type="dni" class="form-control" name="dni" value="{{dni}}" placeholder="DNI">
+            </div>
+            
+            <label for="movil" class="col-sm-1 control-label">Celular</label>
+            <div class="col-sm-5">
+              <input type="movil" class="form-control" name="movil" value="{{movil}}" placeholder="Celular">
+            </div>  
+          </div>
+          
+          <div class="form-group">
+            <label for="address" class="col-sm-3 control-label">Direcci&oacute;n</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="address" value="{{address}}" placeholder="Direcci&oacute;n">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-3">
+              <button type="submit" class="btn btn-block btn-primary">Guardar</button>
+            </div>
+            <div class="col-sm-3">
+              <a href="/admin" class="btn btn-block btn-warning">Volver</a>
+            </div>
+          </div>
+        </form>
+    </div>
+    <!-- /.col -->
+  
+  <div class="col-md-3">
+    
+    {% set tiempo = date().timestamp %}
+    {% set avatar_url = '/admin/avatar/' ~ id ~ '?t=' ~ tiempo %}
+    <img src="{{ avatar_url }}" class="img-responsive img-thumbnail center-block" alt="Avatar">
+    
+  </div>
+  <!-- /.col -->
+  
+</div>
+<!-- /.row -->
+{% endblock %}
+
+{% block scripts %}
+{% endblock %}

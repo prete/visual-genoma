@@ -1,0 +1,17 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">×</span></button>
+      <h4 class="modal-title"><i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i> ClinVar</h4>
+    </div>
+    <div class="modal-body">
+<p><strong><a href="http://www.ncbi.nlm.nih.gov/clinvar/" target="blank">ClinVar <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a></strong>, otro sitio del NCBI, que integra recursos propios y de terceros para poder evaluar los resultados desde diversos puntos de vista.</p>
+<p>La información que se registra tiene cuatro componentes principales: Tipo de variación (gen, SNP, etc), fenotipo, interpretación y evidencia. Incluso tiene un sistema de calificación con estrellas que permite estimar el grado de confianza que tiene cada ensayo (desde “dato en conflicto entre distintos remitentes” hasta “acordado por una sociedad profesional”).</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cerrar</button>
+    </div>
+  </div>
+  <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->

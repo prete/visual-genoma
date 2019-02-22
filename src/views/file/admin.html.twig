@@ -1,0 +1,69 @@
+{% set title = 'Administración de Archivos | Visual Genoma' %}
+{% set header = 'Administracion' %}
+{% set header_opt = 'Maneje sus archivos genómicos' %}
+{% set active_menu = 'files' %}
+{% set breadcrumbs = ['Visual Genoma','Archivos'] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+<style>
+.hand-cursor{
+  cursor: pointer;
+}
+
+.hover-shadow {
+  transition-timing-function: ease-in-out;
+  transition: box-shadow 0.5s;
+}
+
+.hover-shadow:hover {
+  box-shadow: 10px 10px 10px #888888;
+}
+
+</style>
+<div class="row">
+  <div class="col-md-6">
+    <div class="box box-solid hand-cursor hover-shadow" onclick="location.href='/file/upload';">
+      <div class="box-header with-border">
+        <h3 class="box-title">Carga de nuevos archivos genómicos</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="ion ion-ios-medkit"></i></span>
+            <div class="info-box-content">
+              <p></p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->
+  <div class="col-md-6">
+    <div class="box box-solid hand-cursor hover-shadow" onclick="location.href='/file/download';">
+      <div class="box-header with-border">
+        <h3 class="box-title">Listado y descarga de sus archivos</h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <div class="info-box">
+            <span class="info-box-icon bg-fuchsia"><i class="ion ion-ios-body"></i></span>
+            <div class="info-box-content">
+              <p></p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->  
+</div>
+<!-- /. row -->
+
+{% endblock %}

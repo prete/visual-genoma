@@ -1,0 +1,21 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">×</span></button>
+      <h4 class="modal-title"><i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i> Codón</h4>
+    </div>
+    <div class="modal-body">
+    <p>La información genética se escribe a partir de cuatro letras, a diferencia del ADN, en el ARNm son A, C, G y U. Funcionalmente son agrupadas de tres en tres. Cada grupo de tres se llama <strong>codón</strong> y lo que hace es codificar un aminoácido o un símbolo de puntuación (comienzo o parada).</p>
+    <p>Dado que cada codón codifica un aminoácido, hay 64 codones diferentes por combinación de los 4 nucleótidos en cada una de las 3 posiciones del triplete, de los cuales se codifican 20 aminoácidos, 3 codones de parada (terminación de la traducción) y un codón de comienzo (inicio de la traducción). Hay varios codones diferentes que codifican un mismo aminoácido.</p>
+    <h3>Codones de terminación</h3>
+    <p> Los 3 codones de terminación conocidos como codón de terminación, codón de parada o codón stop llamados ocre (UAA), ámbar (UAG) y ópalo (UGA) son los tres tripletes que al no codificar ningún aminoácido ocasionan el fin de la síntesis proteica.</p>
+    <h3>Codones de inicio</h3>
+    <p>Hay un codón de inicio de la traducción, el AUG, que codifica la metionina, es el primer codón de una transcripción de ARNm traducido por un ribosoma.</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+    </div>
+  </div>
+  <!-- /.modal-content -->
+</div>
+<!-- /.modal-dialog -->

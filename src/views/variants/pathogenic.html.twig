@@ -1,0 +1,33 @@
+{% set title = 'Variantes Patogénicas | Variantes Clínicas | Visual Genoma' %}
+{% set header = 'Variantes Patogénicas' %}
+{% set active_menu = 'clinvar' %}
+{% set breadcrumbs = ['Variantes', 'Clínicas', 'Patogénicas'] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+    
+    <div class="info-box bg-red">
+      <span class="info-box-icon"><i class="fa fa-fw fa fa-heart heart-animation"></i></span>
+      <div class="info-box-content">
+        <span class="info-box-text">PATOGENICAS (<strong>{{ records | length }}</strong>)</span>
+        {#<span class="info-box-number">{{ records | length }}</span>#}
+        <div class="info-box-text">
+          <p style="text-transform: none; white-space: normal; word-wrap: break-word;">Esta clasificación significa que existe evidencia que la variante se está asociando con una condición médica conocida. Esencialmente un resultado que debe ser tomando en cuenta por un profesional de la salud.</p>
+        </div>
+      </div>
+      <!-- /.info-box-content -->
+    </div>
+    <!-- /.info-box -->
+    
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+{% include '/variants/clinical_grid.html.twig' %}
+
+{% endblock %}

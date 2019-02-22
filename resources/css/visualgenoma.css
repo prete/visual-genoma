@@ -1,0 +1,36 @@
+.inner h3 {
+    font-size: 30px !important;
+    white-space: normal !important;
+}
+
+.heart-animation{
+  animation: beat .25s infinite alternate;
+}
+@keyframes beat{
+	to { transform: scale(1.1); }
+}
+
+.hover-shadow {
+  transition-timing-function: ease-in-out;
+  transition: box-shadow 0.5s;
+}
+
+.hover-shadow:hover {
+  box-shadow: 10px 10px 10px #888888;
+}
+.hover-shadow:hover > .icon{
+  animation: beat .25s infinite alternate;
+}
+
+.hand-cursor{
+  cursor: pointer;
+}
+
+.link-help-icon:after {
+   font-size: 10px;
+   font-family: FontAwesome;
+   content: '\f059';
+   display: inline-block;
+   padding-left: 3px;
+   vertical-align: middle;
+}

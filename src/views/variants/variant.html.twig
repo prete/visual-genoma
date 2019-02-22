@@ -1,0 +1,557 @@
+{#http://omnipotent.net/jquery.sparkline/#s-about#}
+{% set title = 'Variante | Alteración de nucleótidos | Visual Genoma' %}
+{% set header = 'Variante' %}
+{% set header_opt = extras['HGNC'] %}
+{% set active_menu = 'variants' %}
+{% set breadcrumbs = ['Variantes','Detalle'] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}  
+<!-- Main content -->
+
+
+<div id="variant-details-modal" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Campos de la descripción general de la variante</h4>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped table-condensed table-hover table-bordered">
+          <tr><th>Campo</th><th>Significado</th></tr>
+          <tr>
+            <td><span class="badge">Cromosoma</span></td>
+            <td>Indica a qué cromosoma pertenece la variante.</td>
+          </tr>
+          
+          <tr>
+            <td><span class="badge">Posición</span></td>
+            <td>Indica la posición de la variante dentro del cromosoma.</td>
+          </tr>
+          <tr>
+            <td><span class="badge">Tipo de Variante</span></td>
+            <td>La variante puede clasificarse de una forma genérica en dos clases: <strong>SNP</strong> e <strong>INDELS</strong>.</td>
+          </tr>
+          
+          <tr>
+            <td><span class="badge">Calidad</span></td>
+            <td>Índice de calidad de la variante para saber qué tan confiable es el resultado.</td>
+          </tr>
+          
+          <tr>
+            <td><span class="badge">Gen Principal</span></td>
+            <td>Gen principal en la que implacte la variante.</td>
+          </tr>
+          
+          <tr>
+            <td><span class="badge">Id (NCBI)</span></td>
+            <td>Código único de identificación utilizado por el NCBI para la variante.</td>
+          </tr>
+          
+          <tr>
+            <td><span class="badge">Relación con</span></td>
+            <td>Indica si la variante tiene relación con algún otro gen.</td>
+          </tr>
+          
+          <tr>
+            <td><span class="badge">Relación con</span></td>
+            <td>Indica si la variante se encuentra asociada a alguna enfermedad.</td>
+          </tr>
+          
+
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+
+    <!----------------------------------------------------- 
+    BOX CONCEPTOS INICIALES
+    ------------------------------------------------------>
+     <div class="box box-primary">
+         <div class="box-header with-border">
+            <h3 class="box-title">
+              <i class="fa fa-fw fa-book" aria-hidden="true"></i> 
+              Conceptos iniciales
+            </h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 16px;">
+            <p class="text-justify">Las variaciones más comunes son los <a href="#" class="link-help-icon open-help-modal" onclick="return false;" data-modal-name="snp.modal">polimorfismos de nucleótido simple</a> o SNPs, que consisten en una variación de un único <a href="#" class="link-help-icon open-help-modal" onclick="return false;" data-modal-name="nucleotido.modal">nucleótido</a> de la secuencia. Se estima que hay alrededor de 10 millones de SNPs en el genoma humano. Su importancia se basa en que pueden estar asociados otros SNPs responsables de enfermedades o asociados a un mayor riesgo de sufrir alguna anomalía de la salud, por lo que pueden actuar como marcadores para localizar los genes responsables en las secuencias.</p>
+            <p class="text-justify">Aquí puede ver el detalle de una variante genética en particular. Específicamente puede consultar: </p>
+                <ul class="list-group">
+                  <li class="list-group-item" style="height: 30px; padding: 3px 15px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> Una <strong>descripción general</strong> de la variante, que incluye un vistazo preliminar a la misma <a href="#box-descripcion-general" class="btn btn-xs btn-default">ver <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a></li>
+                  <li class="list-group-item" style="height: 30px; padding: 3px 15px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> El detalle de sus <strong>nucleótidos</strong> <a href="#box-nucleotidos" class="btn btn-xs btn-default">ver <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a></li>
+                  <li class="list-group-item" style="height: 30px; padding: 3px 15px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> La <strong>patogenicidad calculada</strong> mediante herramientas predictivas bioinformáticas para determinar el impacto de la variante <a href="#box-patogenicidad-calculada" class="btn btn-xs btn-default">ver <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a></li>
+                  <li class="list-group-item" style="height: 30px; padding: 3px 15px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> Los <strong>detalles funcionales</strong> que muestran en qué genes impacta la variante, cómo es el impacto y qué funcionalidad del gen resulta afecta<a href="#box-detalles-funcionales" class="btn btn-xs btn-default">ver <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a></li>
+                  <li class="list-group-item" style="height: 30px; padding: 3px 15px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> Las <strong>predicciones</strong> sobre los efectos que pueda causar la variante sobre un gen <a href="#box-prediccion-calculada" class="btn btn-xs btn-default">ver <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a></li>
+                  <li class="list-group-item" style="height: 30px; padding: 3px 15px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> Los <strong>detalles clínicos</strong> específicos sobre la variante genética que surgen del análisis de los datos almacenados por ClinVar <a href="#box-detalles-clinicos" class="btn btn-xs btn-default">ver <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a></li>
+                  <li class="list-group-item" style="height: 30px; padding: 3px 15px;"><i class="fa fa-check-square-o" aria-hidden="true"></i> Las <strong>referencias en bases de datos externas</strong> con información adicional <a href="#box-bases-de-datos" class="btn btn-xs btn-default">ver <i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a></li>
+                </ul>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+       
+       
+    <!----------------------------------------------------- 
+    BOX DESCRIPCION GENERAL
+    ------------------------------------------------------>       
+    <div class="box box-primary" id="box-descripcion-general">
+      <div class="box-header with-border">
+        <h3 class="box-title">
+          <i class="fa fa-fw fa-book" aria-hidden="true"></i>
+          Descripción general
+        </h3>
+        <div class="box-tools">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="box-body" style="font-size:16px;">
+        
+        <p>De los 23 cromosomas del ser humano, esta variante se encuentra en el <span class="label label-primary">Cromosoma {{variant['chrom']}}</span>. Más específicamente en la <span class="label label-success">posición {{variant['pos']}}</span> de ese cromosoma. Esta zona del cromosoma {{variant['chrom']}} se llama <strong>{{variant['chrom']}}{{variant['chrom_zone']}}</strong>. A este tipo de notación se lo conoce como "locus cromosómico". Puede ubicar la variante en la representación del cromosoma que se encuentra a continuación:</p>
+        
+        <div id="cyto-location" width="100%"></div>
+        
+        <p>Su archivo genómico fue obtenido mediante un proceso, que puede o no haber contenido errores, por lo tanto, para asegurar la calidad del mismo, se le asignó un índice de calidad a cada variante encontrada. En el caso de esta variante, el índice de calidad asignado fue de <span class="label label-warning">{{variant['qual']}}</span>.</p>
+        
+        <p>Un primer ánalisis reveló que el gen principal que afecta esta variante es <a href="#box-bases-de-datos-genes" class="btn btn-xs btn-primary">{{extras['gene']}}</a>. Puede obtener más información del mismo al final de la página.</p>
+        
+        <p>Comparando con archivos históricos, se han establecido las siguientes relaciones:</p>
+        <table class="table table-hover table-striped table-condensed table-bordered">
+          <tr>
+            <th style="width:20%">Relación con otro cromosoma</th>
+            <td>{% if extras['other_chrom'] is empty %}<span class="label label-default">ningún otro cromosoma</span>{% else %}<span class="label label-info">{{extras['other_chrom'] | replace({'chr': 'CROMOSOMA '}) }}</span>{% endif %}</td>
+          </tr>
+          <tr>
+            <th style="width:20%">Relación con enfermedades de tipo</th>
+            <td>{% if extras['GAD'] is empty %}<span class="label label-success">NINGUNA</span>{% else %}<span class="label label-danger">{{extras['GAD']}}</span>{% endif %}</td>
+          </tr>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+
+
+    <!----------------------------------------------------- 
+    BOX NUCLEOTIDOS
+    ------------------------------------------------------>
+     <div class="box box-primary" id="box-nucleotidos">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-fw fa-ellipsis-h" aria-hidden="true"></i> Nucleótidos de la variante <a href="#" onclick="return false;" class="btn btn-xs bg-purple open-help-modal" data-modal-name="nucleotido.modal" data-toggle="tooltip" data-placement="top" title="Qué es esto?"><i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i></a></h3>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body"  style="font-size:16px;">
+        <div class="table-responsive">
+          <p>
+            Esta variante es de tipo {% if variant['variant_type']=='SNV' %} <span class="label label-primary">Variante de nucleótido simple</span>{%else%}<span class="label label-danger">INDEL (Incersión/Delesión)</span>{%endif%}.
+          {% if variant['variant_type']=='SNV' %} 
+            Este tipo de variante es una modificación de una sola base o <a href="#" class="link-help-icon open-help-modal" onclick="return false;" data-modal-name="nucleotido.modal">nucleótido</a>.</p>
+          {%else%}
+            La palabra indel es una contracción de "inserción o deleción", en referencia a los dos tipos de mutaciones genéticas que se consideran a menudo juntas a causa de su efecto similar y la incapacidad de distinguir entre ellas en una comparación de dos secuencias.
+          {%endif%}
+          </p>
+          <p>Para esta variante, el cambio fue el siguiente:</>
+          <table class="table table-hover table-bordered no-margin">
+            <tbody>
+              {% set reference = variant['ref'] | split('') %}
+               <tr style="width:100%;overflow:auto !important;">
+                <td style="width:20%"><strong>Bases originales</strong></td>
+                <td>
+                  {% for base in reference %}
+                    <a href="#" class="btn btn-xs btn-flat btn-default">{{base}}</a>
+                  {% endfor %}
+                </td>
+              </tr>
+              {% for alt in variant['alt'] | split(',') %}
+               <tr style="width:100%;overflow:auto !important;">
+                <td style="width:20%"><strong>Bases modificadas</strong></td>
+                <td>
+                    {% for idx, base in alt | split('') %}
+                      {% if reference[idx] is defined %}
+                        {% if reference[idx] == base %}  
+                          <a href="#" class="btn btn-xs btn-flat btn-default">{{base}}</a>
+                        {% else %}
+                          <a href="#" class="btn btn-xs btn-flat btn-warning">{{base}}</a>
+                        {% endif %}
+                      {% else %}
+                        <a href="#" class="btn btn-xs btn-flat btn-success">{{base}}</a>
+                      {% endif %}
+                    {% endfor %}
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+    </div>
+
+
+    <!----------------------------------------------------- 
+    BOX PATOGENICIDAD CALCULADA
+    ------------------------------------------------------>
+    <div class="box box-navy" id="box-patogenicidad-calculada">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-fw fa-flask" aria-hidden="true"></i> Patogenicidad calculada <a href="#" class="btn btn-xs bg-purple open-help-modal" onclick="return false;" data-modal-name="patogenicidad.modal" data-toggle="tooltip" data-placement="top" title="Qué es esto?"><i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i></a></h3>
+        <div class="box-tools">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="box-body table-responsive" style="font-size:16px;">
+        <p>Dependiendo del lugar del cromosoma al que afecte la variante, ésta puede tener consecuencias muy graves. No siempre es posible  saber qué efecto tendrá, pero gracias al avance de las técnicas computacionales (como la inteligencia artificial), es posible armar modelos predictivos que determinen con cierta certeza el resultado de la variante y cómo impactará en su salud.</p>
+        <p>Aplicando algoritmos de reconocimiento de patogenicidad de variantes, se obtuvieron los siguientes resultados:</p>
+        <table class="table table-hover table-bordered">
+            <tr>
+              <th>Herramienta</th>
+              {% for p in predictions %}
+                <th><span data-toggle="tooltip" data-placement="left" title="Resultado: {{p['score']}}">{{p['type']}}</span></th>
+              {%endfor%}
+            </tr>
+            <tr>
+              <th style="text-overflow:ellipsis;text-center;">Predicción</th>  
+            {% for p in predictions %}
+              {% if p['type'] == 'PROVEAN' %}
+                  <td>{% if p['prediction']=='D' %}<span class="text-red" data-toggle="tooltip" data-placement="right" title="DAÑINO"><i class="fa fa-fw fa-2x fa-exclamation-circle" aria-hidden="true"></i></span>{% elseif p['prediction']=='N' %}<span class="text-green" data-toggle="tooltip" data-placement="right" title="NEUTRAL"><i class="fa fa-fw fa-2x fa-info-circle" aria-hidden="true"></i></span>{% else %}<span data-toggle="tooltip" data-placement="right" title="{{ p['prediction']}}"><i class="fa fa-fw fa-2x fa-question-circle" aria-hidden="true"></i></span>{% endif %}</td>
+              {% elseif p['type'] == 'MutationTaster' %}
+                <td>{% if p['prediction']=='A' %}<span class="text-red" data-toggle="tooltip" data-placement="right" title="ENFERMEDAD AUTOSOMICA"><i class="fa fa-fw fa-2x fa-exclamation-circle" aria-hidden="true"></i></span>{% elseif p['prediction']=='D' %}<span class="text-red" data-toggle="tooltip" data-placement="right" title="ENFERMEDAD"><i class="fa fa-fw fa-2x fa-exclamation-circle" aria-hidden="true"></i></span>{% elseif p['prediction']=='N' %}<span class="text-green" data-toggle="tooltip" data-placement="right" title="POLIMORFISMO"><i class="fa fa-fw fa-2x fa-info-circle" aria-hidden="true"></i></span>{% elseif p['prediction']=='P' %}<span class="text-green" data-toggle="tooltip" data-placement="right" title="POLIMORFISMO AUTOMATICO"><i class="fa fa-fw fa-2x fa-info-circle" aria-hidden="true"></i></span>{% else %}<span data-toggle="tooltip" data-placement="right" title="{{ p['prediction']}}"><i class="fa fa-fw fa-2x fa-question-circle" aria-hidden="true"></i></span>{% endif %}</td>
+              {% elseif  p['type'] matches '/(FATHMM|SIFT)/' %}
+                <td>{% if p['prediction']=='D' %}<span class="text-red" data-toggle="tooltip" data-placement="right" title="DAÑINO"><i class="fa fa-fw fa-2x fa-exclamation-circle" aria-hidden="true"></i></span>{% elseif p['prediction'] == 'T' %}<span class="text-green" data-toggle="tooltip" data-placement="right" title="TOLERADO"><i class="fa fa-fw fa-2x fa-info-circle" aria-hidden="true"></i></span>{% else %}<span data-toggle="tooltip" data-placement="right" title="{{ p['prediction']}}"><i class="fa fa-fw fa-2x fa-question-circle" aria-hidden="true"></i></span>{% endif %}</td>
+              {% elseif p['type'] matches '/^Polyphen*/' %}
+                <td>{% if p['prediction'] == 'D' %}<span class="text-red" data-toggle="tooltip" data-placement="right" title="PROBABLEMENTE DAÑINO"><i class="fa fa-fw fa-2x fa-exclamation-circle" aria-hidden="true"></i></span>{% elseif p['prediction']=='P' %}<span class="text-yellow" data-toggle="tooltip" data-placement="right" title="POSIBLEMENTE DAÑINO"><i class="fa fa-fw fa-2x fa-exclamation-circle" aria-hidden="true"></i></span>{% elseif p['prediction']=='B' %}<span class="text-green" data-toggle="tooltip" data-placement="right" title="BENIGNO"><i class="fa fa-fw fa-2x fa-info-circle" aria-hidden="true"></i></span>{% else %}<span data-toggle="tooltip" data-placement="right" title="{{ p['prediction']}}"><i class="fa fa-fw fa-2x fa-question-circle" aria-hidden="true"></i></span>{% endif %}</td>
+              {% else %}
+                <td><span data-toggle="tooltip" data-placement="left" title="{{ p['prediction']}}"><i class="fa fa-question-circle" aria-hidden="true"></i></span></td>
+              {% endif %}
+            {% endfor %}
+            </tr>
+        </table>
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+    
+    <!----------------------------------------------------- 
+    BOX DETALLES FUNCIONALES
+    ------------------------------------------------------>
+    <div class="box box-info" id="box-detalles-funcionales">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-fw fa-link" aria-hidden="true"></i> Detalles funcionales ({{functionalAnnotations|length}}) <a href="#" onclick="return false;" class="btn btn-xs bg-purple open-help-modal" data-modal-name="detalle_funcional.modal" data-toggle="tooltip" data-placement="top" title="Qué es esto?"><i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i></a></h3>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered no-margin">
+            <thead>
+              <tr>
+                <th style="width:20%">Gen</th>
+                <th style="width:20%">Impacto</th>
+                <th>Anotaciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for f in functionalAnnotations %}
+                <tr>
+                  <td rowspan="{{( f.annotations|length)+1 }}"><span class="label label-primary">{{f.gene}}</span></td>
+                </tr>
+                {% for ann in f.annotations %}  
+                <tr>
+                    <td>
+                        {% if ann.impact=='ALTO' %}
+                          <span class="label label-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{ann.impact}}</span>
+                        {% elseif ann.impact=='MODERADO' %}
+                          <span class="label label-warning"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{ann.impact}}</span>
+                        {% else %}
+                          <span class="label label-success"><i class="fa fa-check-circle" aria-hidden="true"></i> {{ann.impact}}</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                      <ul>
+                        {% for a in ann.annotation %}
+                          <li>{% if a == 'missense variant'%}mutación con cambio de sentido{%else%}{{ a }}{%endif%}</li>
+                        {% endfor %}
+                      </ul>
+                    </td>
+                </tr>
+                {% endfor %}
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+
+
+    <!----------------------------------------------------- 
+    BOX PREDIUCCIONES CALCULADAS / VEP
+    ------------------------------------------------------>
+      <div class="box box-warning" id="box-prediccion-calulada">
+        <div class="box-header with-border">
+          <h3 class="box-title"><i class="fa fa-fw fa-unlink" aria-hidden="true"></i> Predicciones calculadas de la variante ({{consequenceAnnotations|length}}) <small><a href="#" onclick="return false;" class="btn btn-xs bg-purple open-help-modal" data-modal-name="vep.modal" data-toggle="tooltip" data-placement="top" title="Qué es esto?"><i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i></a></small></h3>
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body">
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered table-striped no-margin">
+              <thead>
+                <tr>
+                  <th style="width:15%">Gen</th>
+                  <th style="width:15%">Impacto</th>
+                  <th>Anotaciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for c in consequenceAnnotations %}
+                  <tr>
+                    <td rowspan="{{( c.annotations|length)+1 }}"><span class="label label-primary">{{c.gene}}</span></td>
+                  </tr>
+                  {% for ann in c.annotations %}  
+                  <tr>
+                      <td>
+                          {% if ann.impact=='ALTO' %}
+                            <span class="label label-danger"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{ann.impact}}</span>
+                          {% elseif ann.impact=='MODERADO' %}
+                            <span class="label label-warning"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{ann.impact}}</span>
+                          {% else %}
+                            <span class="label label-success"><i class="fa fa-check-circle" aria-hidden="true"></i> {{ann.impact}}</span>
+                          {% endif %}
+                      </td>
+                      <td>
+                        <ul>
+                          {% for a in ann.annotation %}
+                            <li>{{ a }}</li>
+                          {% endfor %}
+                        </ul>
+                      </td>
+                  </tr>
+                  {% endfor %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <!-- /.table-responsive -->
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+
+
+    <!----------------------------------------------------- 
+    BOX DETALLES CLINICOS / CLINVAR
+    ------------------------------------------------------>
+    <div class="box box-danger" id="box-detalles-clinicos">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-fw fa-medkit" aria-hidden="true"></i> Detalles clínicos ({{clinicalAnnotations|length}}) <small><a href="#" class="btn btn-xs bg-purple open-help-modal" onclick="return false;" data-modal-name="clinvar.modal" data-toggle="tooltip" data-placement="top" title="Qué es esto?"><i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i></a></small></h3>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+          <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+        <div class="table-responsive">
+          <table class="table table-hover table-bordered table-striped no-margin">
+            <thead>
+              <tr>
+                <th style="width:20%">Tipo</th>
+                <th>Detalle</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for c in clinicalAnnotations %}
+                <tr>
+                  <td>
+                    {% if c.significance matches '/patho/i' or c.significance matches '/risk/i' %}
+                    {#{% if c.significance in ['PROBABLEMENTE PATOGENA', 'PATOGENA', 'AUMENTA RIESGO'] %}#}
+                      <span class="label label-danger">{{c.significance | upper}}</span>
+                    {% elseif c.significance matches '/(association|affects)/i' or c.significance matches '/drug/i'%}
+                    {#{% elseif c.significance in ['RESPUESTA A DROGAS', 'ASOCIACION', 'AFFECTA'] %}#}
+                      <span class="label label-warning">{{c.significance | upper}}</span>
+                    {% elseif c.significance matches '/benign/i' or c.significance matches '/protective/i'%}
+                    {#{% elseif c.significance in ['BENIGNA', 'PROBABLEMENTE BENIGNA', 'PROTECTORA'] %}#}
+                      <span class="label label-success">{{c.significance | upper}}</span>
+                    {% else %}
+                      <span class="label label-default">{{c.significance | upper}}</span>
+                    {% endif %}
+                  </td>
+                  <td>{{c.name | replace({'_':' '})}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        <!-- /.table-responsive -->
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.box -->
+
+
+    <!----------------------------------------------------- 
+    BOX REFERENCIAS BASES DE DATOS EXTERNAS
+    ------------------------------------------------------>          
+      <div class="box box-info" id="box-bases-de-datos">
+        <div class="box-header with-border">
+          <h3 class="box-title"><i class="fa fa-fw fa-database" aria-hidden="true"></i> Referencias en bases de datos externas</h3>
+
+          <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body" style="font-size:16px;">
+          
+          <p class="text-justify">Una base de datos biológica es una colección de información sobre ciencias de la vida, recogida de experimentos científicos, literatura publicada, tecnología de experimentación de alto rendimiento, y análisis computacional. Contiene información de áreas de investigación incluyendo genómica, proteómica, metabolómica, expresión génica mediante microarrays, y filogenética. La información contenida en bases de datos biológicas incluye funciones, estructura y localización (tanto celular como cromosómica) de genes, efectos clínicos de mutaciones, así como similitudes de secuencias y estructuras biológicas.</p>
+          <p class="text-justify">En los últimos años, debido a la rápida evolución de las técnicas experimentales de alto rendimiento (Secuenciación del ADN, Cristalografía de rayos X, Microarreglo de ADN) se generó un crecimiento exponencial en la cantidad de datos biológicos (secuencias genómicas y de proteínas, estructuras de proteínas, expresión génica, mutaciones, etc) que generaron la necesidad de contar con formas eficientes de almacenar la información.</p>
+          
+           <!-- RSID -->
+           {% if variant['id'] is not empty %}
+             <h4 id="box-bases-de-datos-rsid">Reference Cluster ID (RSID)</h4>
+              {% for rsid in variant['id'] | split(';') %}
+                  <a class="btn btn-app" href="http://www.ensembl.org/Homo_sapiens/Variation/Explore?v={{rsid}}&filters=source:dbsnp&assm=GCF_000001405.28" target="_blank" data-placement="bottom" title="Variant Explorer - Ensembl genome browser"><span class="badge bg-green">{{rsid}}</span><i class="fa fa-database" aria-hidden="true"></i> Ensemble Variation</a>
+                  <a class="btn btn-app" href="http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?type=rs&rs={{ rsid }}" target="_blank"  data-placement="bottom" title="dbSNP Short Genetic Variations - NCBI"><span class="badge bg-green">{{rsid}}</span><i class="fa fa-database" aria-hidden="true"></i> NCBI dbSNP</a>
+                  <a class="btn btn-app" href="https://www.ncbi.nlm.nih.gov/variation/view/?q={{rsid}}&filters=source:dbsnp&assm=GCF_000001405.28" target="_blank" data-placement="bottom" title="Variation Viewer"><span class="badge bg-green">{{rsid}}</span><i class="fa fa-database" aria-hidden="true"></i> NCBI Variation</a>
+                  <a class="btn btn-app" href="https://www.snpedia.com/index.php/{{rsid}}" target="_blank"  data-placement="bottom" title=""><span class="badge bg-green">{{rsid}}</span><i class="fa fa-database" aria-hidden="true"></i> SNPedia</a>
+                  <a class="btn btn-app" href="http://exac.broadinstitute.org/awesome?query={{rsid}}" target="_blank" data-placement="bottom" title="Exome Aggregation Consortium Browser"><span class="badge bg-green">{{rsid}}</span><i class="fa fa-database" aria-hidden="true"></i> ExAC Browser</a>
+                  <a class="btn btn-app" href="http://popgen.uchicago.edu/ggv/?search={{rsid}}" target="_blank" data-placement="bottom" title="Geography of Genetic Variants Browser - Universidad de Chicago"><span class="badge bg-green">{{rsid}}</span><i class="fa fa-database" aria-hidden="true"></i> GGV Browser</a>
+              {% endfor %}
+            {% endif %}
+            
+            <!-- GENES -->
+            {% if externalReferences.genes is not empty %}
+                <h4 id="box-bases-de-datos-genes">Genes</h4>
+                {% for g in externalReferences.genes %}
+                    {% if g.ncbi is defined %}
+                    <a class="btn btn-app" href="http://www.ncbi.nlm.nih.gov/gene/?term={{g.ncbi}}[sym]+AND+Homo+sapiens[Organism]" target="_blank"><span class="badge bg-teal">{{g.name}}</span><i class="fa fa-database" aria-hidden="true"></i> NCBI Genes</a>
+                    {% endif %}
+                    {% if g.ensembl is defined %}
+                      <a class="btn btn-app" href="http://www.ensembl.org/id/{{ g.ensembl }}" target="_blank"><span class="badge bg-teal">{{g.name}}</span><i class="fa fa-database" aria-hidden="true"></i> Ensembl Genes</a>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            <!-- FEATURES -->
+            {% if (externalReferences.features.ncbi is not empty) or (externalReferences.features.ensembl is not empty) %}
+                <h4 id="box-bases-de-datos-expresion">Expresión</h4>
+                {% for f in externalReferences.features.ncbi %}
+                  <a class="btn btn-app" href="http://www.ncbi.nlm.nih.gov/nuccore/{{ f }}" target="_blank"><span class="badge bg-red">{{f}}</span><i class="fa fa-database" aria-hidden="true"></i> NCBI nucleotide</a>
+                {% endfor %}
+                {% for f in externalReferences.features.ensembl %}
+                  {% if 'ENST' in f %}
+                    <a class="btn btn-app" href="http://www.ensembl.org/id/{{ f }}" target="_blank"><span class="badge bg-red">{{f}}</span><i class="fa fa-database" aria-hidden="true"></i> Ensembl Transcript</a>
+                  {% elseif 'ENSR' in f %}
+                      <a class="btn btn-app" href="http://grch37.ensembl.org/Homo_sapiens/Regulation/Context?rf={{ f }}" target="_blank"><span class="badge bg-red">{{f}}</span><i class="fa fa-database" aria-hidden="true"></i> Ensembl Regulation</a>
+                  {% endif %}
+                {% endfor %}                      
+            {% endif %}
+
+            <!-- PROTEINAS -->
+            {% if (externalReferences.proteins.ensembl is not empty) or (externalReferences.proteins.uniparc is not empty) or (externalReferences.proteins.swissprot is not empty) or (externalReferences.proteins.ccds is not empty) %}
+                <h4 id="box-bases-de-datos-proteinas">Proteínas</h4>
+                {% for p in externalReferences.proteins.ensembl %}
+                  <a class="btn btn-app" href="http://www.ensembl.org/id/{{ p }}" target="_blank"><span class="badge bg-yellow">{{p}}</span><i class="fa fa-database" aria-hidden="true"></i> Ensembl protein</a>
+                {% endfor %}
+                {% for p in externalReferences.proteins.uniparc %}
+                  <a class="btn btn-app" href="http://www.uniprot.org/uniparc/?query={{ p }}" target="_blank"><span class="badge bg-yellow">{{p}}</span><i class="fa fa-database" aria-hidden="true"></i> UniParc</a>
+                {% endfor %}
+                {% for p in externalReferences.proteins.swissprot %}
+                  <a class="btn btn-app" href="http://www.uniprot.org/uniprot/?query={{ p }}" target="_blank"><span class="badge bg-yellow">{{p}}</span><i class="fa fa-database" aria-hidden="true"></i> UniProt</a>
+                {% endfor %}
+                {% for p in externalReferences.proteins.ccds %}
+                  {% if p != "YES" %}
+                  <a class="btn btn-app" href="https://www.ncbi.nlm.nih.gov/CCDS/CcdsBrowse.cgi?REQUEST=CCDS&DATA={{ p }}&ORGANISM=9606&BUILDS=CURRENTBUILDS" target="_blank"><span class="badge bg-yellow">{{p}}</span><i class="fa fa-database" aria-hidden="true"></i> NCBI CCDS</a>
+                  {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            <!-- CLINVAR -->
+            {% if externalReferences.clinical is not empty %}
+                <h4 id="box-bases-de-datos-clinicas">Clínicas</h4>
+                {% for c in externalReferences.clinical %}
+                  <a class="btn btn-app" href="http://www.ncbi.nlm.nih.gov/clinvar/{{ c }}" target="_blank"><span class="badge bg-purple">{{c}}</span><i class="fa fa-database" aria-hidden="true"></i> NCBI ClinVar</a>
+                {% endfor %}
+            {% endif %}
+          </div>
+          <!-- /.table-responsive -->
+        </div>
+        <!-- /.box body -->
+      </div>
+      <!-- /.box -->
+    
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+<script src="/resources/cyto-chromosome/cyto-chromosome.js"></script>
+
+{% set alt_length = 0%}
+{% for alt in variant['alt'] | split(',') %}
+  {% set alt_length = max(alt_length, alt | length)  %}
+{% endfor %}
+
+<script type="text/javascript">
+  $(document).ready(function(){
+      var chrom = cyto_chr.chromosome();
+      chrom
+        .segment("{{variant['chrom']}}")
+        .target('#cyto-location')
+        .resolution("550") //400, 550, or 850
+        .width($('#cyto-location').width())
+        .useRelative(false)
+        .showAxis(true)
+        .render();
+        
+      chrom.newSelector("{{variant['pos']}}", "{{variant['pos']+alt_length*10000}}");
+      
+      console.log(chrom.getSelections());
+      
+      chrom.on('bandclick', function(e) {
+          console.log(chrom.getSelections());
+      });
+
+  });
+</script>
+{% endblock %}

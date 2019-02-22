@@ -1,0 +1,354 @@
+{% set title = 'Anatograma | Expresión de células y genes específicos de tejidos | Visual Genoma' %}
+{% set header = 'Anatograma' %}
+{% set header_opt = 'Expresión de células y genes específicos de tejidos' %}
+{% set active_menu = 'anatogram' %}
+{% set breadcrumbs = ['Visual Genoma','Anatograma'] %}
+
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<style>
+
+th.titulogen {
+    width: 100px;
+    height: 100px;
+    cursor: default;
+}
+
+th.rotate {
+    height: 100px;
+    white-space: nowrap;
+    cursor: default;
+}
+
+th.rotate > div {
+    transform: 
+        translate(0px, 50px)
+        rotate(270deg);
+}
+
+.hilight-tissue-in-table{
+    color: black;
+    font-weight: bolder;
+    background: rgba(60, 60, 120, 0.05) !important;
+}
+
+.svg-tooltip {
+    position: absolute;
+    display: none;
+    width: auto;
+    height: auto;
+    background: none repeat scroll 0 0 white;
+    border: 0 none;
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: -3px 3px 15px #888888;
+    color: black;
+    min-width:200px;
+    font: 12px sans-serif;
+    padding: 5px;
+    opacity: 0.85;
+    z-index:9999;
+}
+
+</style>
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-primary">
+         <div class="box-header with-border">
+            <h3 class="box-title">
+              <i class="fa fa-fw fa-book" aria-hidden="true"></i> 
+              Conceptos iniciales
+            </h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 16px;">
+            <p>Los <strong>genes codifican proteínas</strong> con funciones que se corresponden con varias actividades. Muchas de ellas <strong>tienen efectos sobre los tejidos u órganos del cuerpo</strong>.</p>
+            <p>En los siguientes grupos de tejidos u órganos del cuerpo  se expresan cerca de 5000 genes diferentes.</p>
+            <div class="row">
+                <div class="col-sm-offset-1 col-sm-2">
+                <ul>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="El tejido adiposo o tejido graso es el conformado por la asociación de células que acumulan lípidos.">Adiposo</a></li>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Las glándulas suprarrenales son dos estructuras retroperitoneales, la derecha de forma piramidal y la izquierda de forma semilunar, ambas están situadas encima de los riñones. Su función consiste en regular las respuestas al estrés.">Adrenal</a></li>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="El cerebro humano es el centro del sistema nervioso, es un órgano muy complejo y realiza importantes funciones vitales.">Cerebro</a></li>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="El término científico mama se emplea para designar la región del pecho femenino humano que contiene la glándula mamaria y los conductos galactóforos empleados para la lactancia.">Mamas</a></li>
+                </ul>
+                </div>
+                
+                <div class="col-sm-2">
+                <ul>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="El ovario es la gónada u órgano reproductor femenino productor y secretor de hormonas sexuales y óvulos">Ovarios</a></li>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="La próstata es una glándula de los mamíferos machos que está unida al cuello de la vejiga de la orina y a la uretra y que segrega un líquido blanquecino y viscoso cuya función es estimular el movimiento de los espermatozoides.">Próstata</a></li>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Los testículos son las gónadas masculinas, productoras de los espermatozoides y de las hormonas sexuales (testosterona).">Testículos</a></li>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="El colon es la última porción del aparato digestivo en la mayoría de los vertebrados; extrae agua y sal de residuos sólidos antes de que sean eliminados del cuerpo.">Colon</a></li>
+                </ul>
+                </div>
+                
+                <div class="col-sm-2">
+                <ul>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="El corazón es el órgano muscular principal del aparato circulatorio en todos los animales que poseen un sistema circulatorio. En el ser humano es un músculo hueco y piramidal situado en la cavidad torácica. Funciona como una bomba aspirante e impelente, bombeando la sangre a todo el cuerpo">Corazón</a></li>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Los riñones son los órganos más importantes del sistema urinario. Se encargan de la filtración, absorción y reabsorción del agua, sales e iones que llegan para la producción de orina.">Riñones</a></li>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Los leucocitos (también llamados glóbulos blancos) son un conjunto heterogéneo de células sanguíneas que son ejecutoras de la respuesta inmunitaria.">Leucocitos</a></li>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="El hígado es uno de los órganos más importantes por su actividad metabólica. Es un órgano glandular al que se adjudican funciones muy importantes, como la síntesis de proteínas, función desintoxicante, almacenaje de vitaminas y glucógeno, además de secreción de bilis, entre otras.">Hígado</a></li>
+                </ul>
+                </div>
+
+                <div class="col-sm-2">
+                <ul>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Los pulmones son los órganos en los cuales la sangre recibe oxígeno desde el aire y a su vez la sangre se desprende del dióxido de carbono el cual pasa al aire. ">Pulmones</a></li>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="La linfa es un líquido transparente que recorre los vasos linfáticos y generalmente carece de pigmentos. La linfa realiza tres funciones: Recolectar y devolver el líquido intersticial a la sangre; Defender el cuerpo contra los organismos patógenos; Absorber los nutrientes del aparato digestivo y volcarlos en las venas subclavias.">Linfa</a></li>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="Los músculos esqueléticos son un tipo de músculos estriados unidos al esqueleto. Son usados para facilitar el movimiento y mantener la unión hueso-articulación. El cuerpo humano está formado de un 90% de este tipo de músculo y un 10% de músculo cardíaco y visceral.">Músculos esqueletales</a></li>
+                    <li><a href="#" class="link-help-icon" title="" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="La glándula tiroides es una glándula neuroendocrina, situada junto al cartílago tiroides sobre la tráquea. Regula el metabolismo del cuerpo, es productora de proteínas y regula la sensibilidad del cuerpo a otras hormonas.">Tiroides</a></li>
+                </ul>
+                </div>
+            </div>
+            <p>En la siguiente tabla se pueden ver los diferentes <strong>genes que han sido modificados</strong> por algún <a href="#" class="link-help-icon open-help-modal" onclick="return false;" data-modal-name="snp.modal">polimorfismo de nucleótido simple</a> y que nivel de influencia tienen sobre cada uno de los tejidos u órganos. El nivel de influencia ha sido clasificado como: No influye (<i class="fa fa-fw fa-star-o"></i>), Influye un poco (<i class="fa fa-fw fa-star-half-o"></i>), Influye mucho (<i class="fa fa-fw fa-star"></i>)</p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="box">
+            <div class="box-body">
+                <div id="loading-bodymap" class="overlay">
+                  <i class="fa fa-refresh fa-spin"></i>
+                </div>
+                <svg id="svg"></svg>
+                FILTRO: <button type="button" style="display:none;" onclick="clearTableFilter()" class="btn btn-danger" id="tableFilterButton"><span id="currentTableFilter"></span> <span aria-hidden="true">&times;</span></button>
+            </div>
+        </div>
+    </div>
+   <!-- /.col -->
+   
+   <div class="col-md-8">
+        <div class="box">
+            <div class="box-body" style="min-height: 450px;max-height:500px; overflow-y:scroll;">
+                <div id="loading-table" class="overlay">
+                  <i class="fa fa-refresh fa-spin"></i>
+                </div>
+                <table id="gene-tissue-table" class="table table-condensed table-bordered table-hover" style="table-layout: fixed; /*height:auto; overflow-y:auto;*/">
+                    <tbody>
+                    </tbody>
+                </table>
+                <div style="height:100%"></div>
+            </div>
+        </div>
+   </div>
+   <!-- /.col -->
+</div>
+<!-- /.row -->
+
+
+<div id="tissue-modal" class="modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">Organo/Tejido</h4>
+      </div>
+      <div class="modal-body">
+        <p>a jack el destripador le gusta esto <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+{% endblock %}
+
+{% block scripts %}
+	<script src="/resources/bodymap/snap.svg.js"></script>
+	<script src="/resources/bodymap/bodymap.vg.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="/resources/bodymap/bodymap.vg.css">
+	
+	<script>
+
+        var tejidosGXA = [];
+
+	    // Tejidos mostrados en Expression Atlas - http://www.ebi.ac.uk/gxa/experiments/E-MTAB-513?ref=aebrowse
+        var tissues = [
+            { svgPathId: "UBERON_0001013", name: "adipose", description:'Adiposo', columnIdx:1 },
+            { svgPathId: "CL_0000336", name: "adrenal", description:'Adrenal', columnIdx:2 },
+            { svgPathId: "UBERON_0000955", name: "brain", description:'Cerebro', columnIdx:3 },
+            { svgPathId: "UBERON_0000948", name: "breast", description:'Mamas', columnIdx:4 },
+            { svgPathId: "UBERON_0001155", name: "colon", description:'Colon', columnIdx:5 },
+            { svgPathId: "UBERON_0000948", name: "heart", description:'Corazón', columnIdx:6 },
+            { svgPathId: "UBERON_0002113", name: "kidney", description:'Riñones', columnIdx:7 },
+            //"CL_0000738", //leukocyte
+            { svgPathId: "UBERON_0001021", name: "leukocyte", description:'Leucocitos', columnIdx:8 },
+            { svgPathId: "UBERON_0002107", name: "liver", description:'Higado', columnIdx:9 },
+            { svgPathId: "UBERON_0002048", name: "lung", description:'Pulmones', columnIdx:10 },
+            { svgPathId: "UBERON_0000029", name: "lymph_node", description:'Linfa', columnIdx:11 },
+            { svgPathId: "UBERON_0003134", name: "ovary", description:'Ovarios', columnIdx:12 },
+            { svgPathId: "UBERON_0002367", name: "prostate", description:'Próstata', columnIdx:13 },
+            { svgPathId: "UBERON_0014892", name: "skeletal_muscle", description:'Músculos', columnIdx: 14 },
+            { svgPathId: "UBERON_0000473", name: "testis", description:'Testículos', columnIdx:15 },
+            { svgPathId: "UBERON_0002046", name: "thyroid", description:'Tiroides', columnIdx:16 },
+        ];
+	
+		//$("#loading-bodymap").show();
+		
+		// Carga titulos de la tabla de tejidos
+        var htmlTitulo = '<tr>';
+        htmlTitulo += '<th class="titulogen" style="vertical-align: middle;">Gen</th>';
+        tissues.forEach(function(tissue){ 
+            htmlTitulo += '<th class="rotate tissue-'+tissue.name+'" onmouseover="onMoseOverTable(\''+tissue.svgPathId+'\',\''+tissue.name+'\')" ';
+            htmlTitulo += 'onmouseout="onMoseOutTable(\''+tissue.svgPathId+'\',\''+tissue.name+'\')" ><div><span>'+tissue.description+'</span></div></th>';
+        });
+        htmlTitulo += '</tr>';
+        $('#gene-tissue-table').append(htmlTitulo);
+		
+        // Carga la tabla de genes y tejidos
+		$.get("/gxa/tissues/genes/filter/variants", function(resultado){
+            resultado.datos.forEach(function(d){
+                var tds = '';
+                var tissuesInThisRow = ''
+                
+                tds += '<td>';
+                tds += '<div class="dropdown"><button class="btn btn-xs btn-block btn-primary dropdown-toggle" type="button" data-toggle="dropdown">'+ d['gene'];
+                tds += '&nbsp;<span class="caret"></span></button><ul class="dropdown-menu">';
+                tds += '<li role="presentation" class="dropdown-header">Consulte este gen</li>';
+                tds += '<li><a target="_blank" href="http://www.orpha.net/consor/cgi-bin/Disease_Genes_Simple.php?lng=ES&Disease_Disease_Genes_diseaseType=Gen&Disease_Disease_Genes_diseaseGroup=' + d['gene'] + '">Ver OrphaNet <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a></li>';
+                tds += '<li><a target="_blank" href="http://www.ensembl.org/Homo_sapiens/Gene/Summary?g=' + d['gene'] + '">Ver Ensembl <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a></li>';
+                tds += '<li><a target="_blank" href="https://www.ncbi.nlm.nih.gov/gene/?term=(' + d['gene'] + '[sym])+AND+%22Homo+sapiens%22%5Bporgn%3A__txid9606%5D">Ver NCBI <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a></li>';
+                tds += '</ul></div>';
+                tds += '</td>';
+                
+                /*
+                tds += '<td><a href="http://www.ensembl.org/Homo_sapiens/Gene/Summary?g='+d['ensembl']+'"'+
+                      ' data-toggle="tooltip" data-placement="bottom" title="Ver gen '+d['gene']+' en ensembl!"'+
+                      '" target="_blank" class="btn btn-xs btn-primary">'+d['gene']+' <i class="fa fa-fw fa-external-link" aria-hidden="true"></i></a></td>';
+                */
+                tissues.forEach(function(tissue){ 
+                    var t = tissue.name;
+                    var color = 'rgba(255,255,255,0.3)';
+                    if(+d[t]>25){
+                       color = 'rgba(202,202,202,0.3)';
+                    }
+                    if(+d[t]>50){
+                       color = 'rgba(0,0,255,0.3)';
+                    }
+                    
+                    tds += '<td class="tissue-'+t+' '+tissue.columnIdx+'" style="text-align:center; width:25px !important; background-color:'+color+';" ';
+                    tds += 'onmouseover="onMoseOverTable(\''+tissue.svgPathId+'\',\''+tissue.name+'\')" ';
+                    tds += 'onmouseout="onMoseOutTable(\''+tissue.svgPathId+'\',\''+tissue.name+'\')" ';
+                    tds += 'data-tissue-influence="'+d[t]+'">';
+                    if(d[t]<20){
+                        tds += '<i class="fa fa-fw fa-star-o" style="cursor:pointer;" aria-hidden="true" data-toggle="tooltip" title="El gen \''+d['gene']+'\' no tiene incidencia sobre \''+tissue.description+'\'."></i>';
+                    }else if (d[t]<50){
+                        tds += '<i class="fa fa-fw fa-star-half-o" style="cursor:pointer;" aria-hidden="true"  data-toggle="tooltip" title="El gen \''+d['gene']+'\' tiene algo de incidencia sobre \''+tissue.description+'\'."></i>';
+                    }else{
+                        tds += '<i class="fa fa-fw fa-star" style="cursor:pointer;" aria-hidden="true" data-toggle="tooltip" title="El gen \''+d['gene']+'\' tiene mucha incidencia sobre \''+tissue.description+'\'."></i>';
+                    }
+                    tds += '</td>'; 
+                });
+                $('#gene-tissue-table tbody').append('<tr class="row-tissue">'+tds+'</tr>');
+            });
+            $("#loading-table").hide();
+            //$("#gene-tissue-table").show();
+		});
+
+	    function onMoseOverOrgan(svgId, name){
+	        //console.log(">> IN ",svgId);
+	        $(".tissue-"+name).each(function(idx){$(this).addClass("hilight-tissue-in-table");});
+	    }
+	    
+	    function onMoseOutOrgan(svgId, name){
+	        //console.log(svgId, " OUT >>");
+	        $(".tissue-"+name).each(function(idx){$(this).removeClass("hilight-tissue-in-table");});
+	    };
+	    
+	    function onMoseOverTable(svgId, name){
+	        $(".tissue-"+name).each(function(idx){$(this).addClass("hilight-tissue-in-table");});
+	        mapa.seleccionar(svgId);
+	    };
+	    
+	    function onMoseOutTable(svgId, name){
+	        $(".tissue-"+name).each(function(idx){$(this).removeClass("hilight-tissue-in-table");});
+	        mapa.deseleccionar(svgId);
+	    };
+	
+	    function onMouseClickOrgan(svgId, name){
+	        $("#tissue-modal .modal-title").html(name+ " (id="+svgId+")");
+	        //$("#tissue-modal").modal('show');
+	        filterTableByTissue(name);
+	    };
+	    
+	    function clearTableFilter(){
+	        //limpio filtro
+	        $("#tableFilterButton").hide();
+	        $("#currentTableFilter").text("");
+	        //rest tabla
+	         $(".row-tissue").each(function(idx){
+	            $(this).show();
+	         });
+	    }
+	    function filterTableByTissue(name){
+	        $(".row-tissue").each(function(idx){
+	            $(this).show();
+	         });
+	        tissues.forEach(function(t){
+	           if(t.name==name){
+               	   //creo boton
+	               $("#currentTableFilter").text(t.description);
+    	           $("#tableFilterButton").show();
+    	           //hardcodeo nivel de filtro
+    	           var val = 50;
+    	           //filtro tabla
+    	           $(".row-tissue").each(function(){
+    	               var td = this.cells[t.columnIdx];
+        	            if($(td).data('tissue-influence')<=val){
+        	                $(this).hide();
+        	            };
+        	        });
+	           } 
+	           return false;
+	        });
+	    };
+	    
+	    function finishLoadingBodyMap(){
+	        $("#loading-bodymap").hide();
+	        //$("#div-id-bodymap").show();
+	    }
+	
+	    var humansvgpath = "/resources/bodymap/svg/human_male.svg";
+        {% if isfemale is defined %}
+            humansvgpath = "/resources/bodymap/svg/human_female.svg";     
+        {% endif %}
+	
+		var config = {
+			svgId: "svg",
+			pathSvg: humansvgpath,
+			organoConfig: {	colour: "#A0A1A2", opacity: 0.5 },
+		};
+		
+		// Creo el mapa del cuerpo humano
+		var mapa = BodyMapCreate(config, tissues, onMoseOverOrgan, onMoseOutOrgan, onMouseClickOrgan, finishLoadingBodyMap);
+		
+		//zoom?
+		function onMouseWheel(event){
+            var viewBox = document.getElementById("svg").getAttribute('viewBox').split(' ');
+		    var zoomStep = (event.deltaY >= 0) ? 1.1 : 0.9;
+		    viewBox[2] = viewBox[2] * zoomStep;
+		    viewBox[3] = viewBox[3] * zoomStep;
+            document.getElementById("svg").setAttribute('viewBox', viewBox.join(' '));
+            return event.preventDefault();
+		}
+		document.getElementById("svg").addEventListener('wheel', onMouseWheel);
+	</script>
+{% endblock %}

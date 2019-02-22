@@ -1,0 +1,40 @@
+{% set title = 'Vista Cuerpo Humano | Expresión de células y genes específicos de tejidos | Visual Genoma' %}
+{% set header = 'Vista Cuerpo Humano' %}
+{% set header_opt = 'Expresión de células y genes específicos de tejidos' %}
+{% set active_menu = 'anatogram' %}
+{% set breadcrumbs = ['Visual Genoma','Vistas','Cuerpo Humano','Introducción'] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-6">
+     <div class="box box-solid">
+          <div class="box-body" style="font-size: 18px;">
+            <p>El cuerpo humano tiene tejidos.</p>
+            <p>Los tejidos se generan con proteínas.</p>
+            <p>Los genes generan proteínas.</p>
+            <p>Si tus genes contienen alguna mutación afectan a las proteínas, por ende a los tejidos.</p>
+            <p><a class="btn btn-block btn-primary" href="/anatogram/body" title="ver cuerpo humano">Ver representación sobre el cuerpo humano<i class="fa fa-fw fa-chevron-right"></i></a></p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+  
+     <div class="col-md-6">
+     <div class="box box-solid">
+          <div class="box-body" style="font-size: 18px;">
+            <p>fioreti quiere graficos aca.</p>
+            <p><img src="http://i.imgur.com/UQOmdwT.jpg" alt="choreo"></p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+{% endblock %}

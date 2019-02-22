@@ -1,0 +1,211 @@
+{% set title = 'Perfil | Usuario | Visual Genoma' %}
+{% set header = 'Perfil' %}
+{% set header_opt = ''  %}
+{% set active_menu = '' %}
+{% set breadcrumbs = ['Usuario','Perfil',] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}  <!-- Main content -->
+<div class="row">
+     <div class="col-md-9">
+        <form class="form-horizontal" method="post">
+          
+          <div class="form-group">
+            <div class="col-sm-12">
+              {% if error is defined and error is not empty %}
+              <div class="alert alert-danger">{{error}}</div>
+              {% endif %}
+              {% if success is defined and success is not empty %}
+              <div class="alert alert-success">{{success}}</div>
+              {% endif %}
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="email" class="col-sm-3 control-label">Email</label>
+            <div class="col-sm-9">
+              <input type="email" class="form-control" name="email" value="{{email}}" placeholder="Email">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-9">
+              <button class="btn btn-block btn-deault" type="button" data-toggle="collapse" data-target="#collapsePassword" aria-expanded="false" aria-controls="collapsePassword">Cambiar contraseña</button>
+            </div>
+          </div>
+          <div class="collapse" id="collapsePassword">
+            <div class="form-group">
+              <label for="password" class="col-sm-3 control-label">Contraseña actual</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" name="password" placeholder="Contraseña">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password1" class="col-sm-3 control-label">Nueva contraseña</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" name="password1" placeholder="Nueva contraseña">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password2" class="col-sm-3 control-label">Repita contraseña</label>
+              <div class="col-sm-9">
+                <input type="password" class="form-control" name="password2" placeholder="Repita contraseña">
+              </div>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="name" class="col-sm-3 control-label">Nombre completo</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="name" value="{{name}}" placeholder="Nombre completo">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="genero" class="col-sm-3 control-label">G&eacute;nero</label>
+            <div class="col-sm-3">
+              <select name="gender" class="form-control">
+                <option value="Femenino" {{ (gender=='Femenino') ? ' selected ' : '' }}>Femenino</option>
+                <option value="Masculino" {{ (gender=='Masculino') ? ' selected ' : '' }}>Masculino</option>
+              </select>
+            </div>
+            
+            <label for="phone" class="col-sm-1 control-label">Teléfono</label>
+            <div class="col-sm-5">
+              <input type="phone" class="form-control" name="phone" value="{{phone}}" placeholder="Tel&eacute;fono">
+            </div>  
+          </div>
+          
+          <div class="form-group">
+            <label for="dni" class="col-sm-3 control-label">DNI</label>
+            <div class="col-sm-3">
+              <input type="dni" class="form-control" name="dni" value="{{dni}}" placeholder="DNI">
+            </div>
+            
+            <label for="movil" class="col-sm-1 control-label">Celular</label>
+            <div class="col-sm-5">
+              <input type="movil" class="form-control" name="movil" value="{{movil}}" placeholder="Celular">
+            </div>  
+          </div>
+          
+          <div class="form-group">
+            <label for="address" class="col-sm-3 control-label">Direcci&oacute;n</label>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" name="address" value="{{address}}" placeholder="Direcci&oacute;n">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <div class="col-sm-offset-6 col-sm-3">
+              <button type="submit" class="btn btn-block btn-primary">Guardar</button>
+            </div>
+            <div class="col-sm-3">
+              <a href="/user/profile" class="btn btn-block btn-warning">Cancelar</a>
+            </div>
+          </div>
+        </form>
+    </div>
+    <!-- /.col -->
+    
+  {% set tiempo = date().timestamp %}
+  {% set avatar_url = '/user/profile/avatar' ~ '?t=' ~ tiempo %}
+  
+  <div class="col-md-3">
+    <div class="row">
+      <div class="col-md-12">
+        <img src="{{ avatar_url }}" class="img-responsive img-thumbnail center-block" alt="Avatar">
+      </div>
+    </div>
+    
+    <div id="msjerrorarchivo" class="row" style="display:none;">
+      <div class="col-md-12 text-center" >
+        <p class="text-danger"><strong>Ops!</strong> Error al cargar el archivo. Recuerde que el archivo debe ser en formato PNG o JPG y no debe medir más de 7 Kb.</p>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-12 text-center" >
+
+        <span id="btncargar" class="btn btn-link fileinput-button">
+            <span>Cambiar</span>
+            <input id="fileupload" type="file" name="file" accept=".jpg, .png, .jpeg">
+        </span>
+        
+        <div id="progress" class="progress" style="display:none;">
+          <div class="progress-bar progress-bar-success"></div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+{% endblock %}
+
+{% block scripts %}
+
+<script type="text/javascript" src="/resources/jquery.fileupload/vendor/jquery.ui.widget.js"></script>
+<script type="text/javascript" src="/resources/jquery.fileupload/jquery.fileupload.js"></script>
+
+<script>
+$(function () {
+    'use strict';
+    var url = '/user/profile/avatar/upload';
+    $('#fileupload').fileupload({
+        url: url,
+
+        add: function(e, data) {
+          var error = false;
+          var acceptFileTypes = /^image\/(gif|jpe?g|png)$/i;
+          if(!acceptFileTypes.test(data.originalFiles[0]['type'])) {
+              error = true;
+          }
+          if(data.originalFiles[0]['size'] > 7168) {
+              error = true;
+          }
+          if(error) {
+            $('#btncargar').show();
+            $('#msjerrorarchivo').show();
+            $('#progress').hide();
+          } else {
+            data.submit();
+          }
+        },
+        start: function (e) {
+          $('#btncargar').hide();
+          $('#msjerrorarchivo').hide();
+          $('#progress').show();
+        }, 
+        send: function (e, data) {
+          if (data.files.length != 1) {
+              return false;
+          }
+        },
+        done: function (e, data) {
+          //console.log(data.result);
+          $('#btncargar').show();
+          $('#msjerrorarchivo').hide();
+          $('#progress').hide();
+          location.reload();
+        },
+        fail: function(e, data) {
+          $('#btncargar').show();
+          $('#msjerrorarchivo').show();
+          $('#progress').hide();
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progress-bar').css(
+                'width',
+                progress + '%'
+            );
+        }
+    });
+    //.prop('disabled', !$.support.fileInput)
+    //    .parent().addClass($.support.fileInput ? undefined : 'disabled');
+});
+</script>
+
+{% endblock %}

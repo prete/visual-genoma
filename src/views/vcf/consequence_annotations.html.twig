@@ -1,0 +1,168 @@
+{% set title = 'Consecuencias | proyecto' %}
+{% set header = 'Consecuencias' %}
+{% set header_opt = 'Anotaciones de consecuencias calculadas (predicciones)'  %}
+{% set active_menu = 'consequence_annotations' %}
+{% set breadcrumbs = ['VCF','Consecuencias calculadas',] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h4>Se encontraron {{total_records}} variaciones en su archivo.</h4>
+    
+    {% if table_records is defined %}
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-condensed table-hover">
+            <tr>
+                <th>Allele</th>
+                <th>Consequence</th>
+                <th>IMPACT</th>
+                <th>SYMBOL</th>
+                <th>Gene</th>
+                <th>Feature_type</th>
+                <th>Feature</th>
+                <th>BIOTYPE</th>
+                <th>EXON</th>
+                <th>INTRON</th>
+                <th>HGVSc</th>
+                <th>HGVSp</th>
+                <th>cDNA_position</th>
+                <th>CDS_position</th>
+                <th>Protein_position</th>
+                <th>Amino_acids</th>
+                <th>Codons</th>
+                <th>Existing_variation</th>
+                <th>DISTANCE</th>
+                <th>STRAND</th>
+                <th>SYMBOL_SOURCE</th>
+                <th>HGNC_ID</th>
+                <th>CANONICAL</th>
+                <th>TSL</th>
+                <th>CCDS</th>
+                <th>ENSP</th>
+                <th>SWISSPROT</th>
+                <th>TREMBL</th>
+                <th>UNIPARC</th>
+                <th>SIFT</th>
+                <th>PolyPhen</th>
+                <th>DOMAINS</th>
+                <th>GMAF</th>
+                <th>AFR_MAF</th>
+                <th>AMR_MAF</th>
+                <th>ASN_MAF</th>
+                <th>EAS_MAF</th>
+                <th>EUR_MAF</th>
+                <th>SAS_MAF</th>
+                <th>AA_MAF</th>
+                <th>EA_MAF</th>
+                <th>CLIN_SIG</th>
+                <th>SOMATIC</th>
+                <th>PUBMED</th>
+                <th>MOTIF_NAME</th>
+                <th>MOTIF_POS</th>
+                <th>HIGH_INF_POS</th>
+                <th>MOTIF_SCORE_CHANGE</th>
+            </tr>
+            {% for record in table_records %}
+                <tr>
+                    <td>{{ record['Allele'] }}</td>
+                    <td>{{ record['Consequence'] | split('&') | join('<br/>') | raw}}</td>
+                    <td>{{ record['IMPACT'] }}</td>
+                    <td>
+                        <div class="btn-group">
+                        <button aria-expanded="false" type="button" class="btn btn-default btn-xs btn-flat dropdown-toggle" data-toggle="dropdown">
+                          {{ record['SYMBOL'] }}
+                          <span class="caret"></span>
+                          <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                          <li><a href="http://www.ncbi.nlm.nih.gov/gene?term={{ record['SYMBOL'] }}[sym]+AND+Homo+sapiens[Organism]">NCBI <i class="fa fa-fw fa-external-link"></i></a></li>
+                          <li><a href="http://www.ensembl.org/Homo_sapiens/Gene/Summary?g={{ record['SYMBOL'] }}">Ensembl <i class="fa fa-fw fa-external-link"></i></a></li>
+                        </ul>
+                      </div>
+                    </td>
+                    <td><a href="http://www.ensembl.org/id/{{ record['Gene'] }}" title="Ver en Ensembl Genome Browser" target="_blank" class="btn btn-xs btn-default btn-flat">{{ record['Gene'] }} <i class="fa fa-fw fa-external-link"></i></a></a></td>
+                    <td>{{ record['Feature_type'] }}</td>
+                    <td>
+                        {% if 'ENST' in record['Feature'] %}
+                            <a href="http://www.ensembl.org/id/{{ record['Feature'] }}" title="Ver en Ensembl" target="_blank" class="btn btn-xs btn-default btn-flat">{{ record['Feature'] }} <i class="fa fa-fw fa-external-link"></i></a>
+                        {% elseif 'ENSR' in record['Feature'] %}
+                            <a href="http://grch37.ensembl.org/Homo_sapiens/Regulation/Context?rf={{ record['Feature'] }}" title="Ver en Ensembl" target="_blank" class="btn btn-xs btn-default btn-flat">{{ record['Feature'] }} <i class="fa fa-fw fa-external-link"></i></a>
+                        {% endif %}
+                    </td>
+                    <td>{{ record['BIOTYPE'] }}</td>
+                    <td>{{ record['EXON'] }}</td>
+                    <td>{{ record['INTRON'] }}</td>
+                    <td>{{ record['HGVSc'] }}</td>
+                    <td>{{ record['HGVSp'] }}</td>
+                    <td>{{ record['cDNA_position'] }}</td>
+                    <td>{{ record['CDS_position'] }}</td>
+                    <td>{{ record['Protein_position'] }}</td>
+                    <td>{{ record['Amino_acids'] }}</td>
+                    <td>{{ record['Codons'] }}</td>
+                    <td>{{ record['Existing_variation'] | split('&') | join('<br/>') | raw}}</td>
+                    <td>{{ record['DISTANCE'] }}</td>
+                    <td>{{ record['STRAND'] }}</td>
+                    <td>{{ record['SYMBOL_SOURCE'] }}</td>
+                    <td>{{ record['HGNC_ID'] }}</td>
+                    <td>{{ record['CANONICAL'] }}</td>
+                    <td>{{ record['TSL'] }}</td>
+                    <td>{{ record['CCDS'] }}</td>
+                    <td>
+                        {% if  record['ENSP'] is not empty %}
+                            <a href="http://www.ensembl.org/id/{{ record['ENSP'] }}" title="Ver en Ensembl" target="_blank" class="btn btn-xs btn-default btn-flat">{{ record['ENSP'] }} <i class="fa fa-fw fa-external-link"></i></a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if  record['SWISSPROT'] is not empty %}
+                            <div class="btn-group">
+                                <button aria-expanded="false" type="button" class="btn btn-default btn-xs btn-flat dropdown-toggle" data-toggle="dropdown">
+                                  {{ record['SWISSPROT'] }}
+                                  <span class="caret"></span>
+                                  <span class="sr-only">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                  <li><a href="http://www.uniprot.org/uniprot/{{ record['SWISSPROT'] }}" title="Ver en UniProt" target="_blank">UniProt <i class="fa fa-fw fa-external-link"></i></a></li>
+                                  <li><a href="http://amp.pharm.mssm.edu/Harmonizome/protein/{{ record['SWISSPROT'] }}" title="Ver en Harmonizome (Icahn School of Medicine)">Harmonizome <i class="fa fa-fw fa-external-link"></i></a></li>
+                                </ul>
+                          </div>
+                          {% endif %}
+                    </td>
+                    <td>{{ record['TREMBL']  | split('&') | join('<br/>') | raw}}</td>
+                    <td>
+                        {% if  record['UNIPARC'] is not empty %}
+                            <a href="http://www.uniprot.org/uniparc/{{ record['UNIPARC'] }}" title="Ver en UniProt/UniParc" target="_blank" class="btn btn-xs btn-default btn-flat">{{ record['UNIPARC'] }} <i class="fa fa-fw fa-external-link"></i></a>
+                        {% endif %}
+                    </td>
+                    <td>{{ record['SIFT'] }}</td>
+                    <td>{{ record['PolyPhen'] }}</td>
+                    <td>{{ record['DOMAINS'] | split('&') | join('<br/>') | raw }}</td>
+                    <td>{{ record['GMAF'] }}</td>
+                    <td>{{ record['AFR_MAF'] }}</td>
+                    <td>{{ record['AMR_MAF'] }}</td>
+                    <td>{{ record['ASN_MAF'] }}</td>
+                    <td>{{ record['EAS_MAF'] }}</td>
+                    <td>{{ record['EUR_MAF'] }}</td>
+                    <td>{{ record['SAS_MAF'] }}</td>
+                    <td>{{ record['AA_MAF'] }}</td>
+                    <td>{{ record['EA_MAF'] }}</td>
+                    <td>{{ record['CLIN_SIG'] }}</td>
+                    <td>{{ record['SOMATIC'] }}</td>
+                    <td>{{ record['PUBMED'] }}</td>
+                    <td>{{ record['MOTIF_NAME'] }}</td>
+                    <td>{{ record['MOTIF_POS'] }}</td>
+                    <td>{{ record['HIGH_INF_POS'] }}</td>
+                    <td>{{ record['MOTIF_SCORE_CHANGE'] }}</td>   
+                </tr>
+            {% endfor %}
+        </table>
+      </div>
+        <div class="text-center">
+          <ul class="pagination"style="display:inline-block">
+              {% for p in table_paginig %}
+                  <li><a href="/vcf/consequence_annotations?id={{ app.request.get('id') }}&page_number={{p}}">{{p}}</a></li>
+              {% endfor %}
+          </ul>
+        </div>
+    {% endif %}
+  
+{% endblock %}

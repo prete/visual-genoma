@@ -1,0 +1,43 @@
+{% set title = 'Circos view | proyecto' %}
+{% set header = 'Circos' %}
+{% set header_opt = 'Explore relationships' %}
+{% set active_menu = 'circos' %}
+{% set breadcrumbs = ['proyecto','Circos',] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <p>SNP filetrados por Polyphen2 HVAR score.</p>
+    <p>Mostrando: Probably damaging (D) y possibly damaging (P) solamente (0.447<=pp2_hdiv)</p>
+    <div id="biocircos"></div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="/resources/d3/d3.v3.min.js"></script>
+    <script type="text/javascript" src="/resources/js/LF1396.js"></script>
+    <script type="text/javascript" src="/resources/js/biocircos-1.1.0.js"></script>
+    <!-- Genome configuration -->
+    <script>
+      var BioCircosGenome = [
+         ["1" , 249250621],["2" , 243199373],["3" , 198022430],["4" , 191154276],["5" , 180915260],["6" , 171115067],
+         ["7" , 159138663],["8" , 146364022],["9" , 141213431],["10" , 135534747],["11" , 135006516],["12" , 133851895],
+         ["13" , 115169878],["14" , 107349540],["15" , 102531392],["16" , 90354753],["17" , 81195210],["18" , 78077248],
+         ["19" , 59128983],["20" , 63025520],["21" , 48129895],["22" , 51304566],["X" , 155270560],["Y" , 59373566]
+      ];
+      var data = [SNPData.id, SNPData.css, SNPData.data];
+      /*var chr1 = [SNPData.id, SNPData.css, SNPData.data['1']];
+      var chr2 = [SNPData.id, SNPData.css, SNPData.data['2']];
+      var chr3 = [SNPData.id, SNPData.css, SNPData.data['3']];
+      var chr4 = [SNPData.id, SNPData.css, SNPData.data['4']];*/
+      BioCircos01 = new BioCircos(data/*chr1,chr2,chr3,chr4*/,BioCircosGenome,{  // Initialize BioCircos.js with "BioCircosGenome" and Main configuration
+      //Main configuration
+         target : "biocircos",                       // Main configuration "target"
+         svgWidth : 900,                             // Main configuration "svgWidth"
+         svgHeight : 600,                            // Main configuration "svgHeight"
+         chrPad : 0.04,                              // Main configuration "chrPad"
+         innerRadius: 220,                           // Main configuration "innerRadius"
+         outerRadius: 270,                           // Main configuration "outerRadius"
+      });
+      BioCircos01.draw_genome(BioCircos01.genomeLength); // BioCircos.js callback
+    </script>
+{% endblock %}

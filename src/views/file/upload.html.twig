@@ -1,0 +1,160 @@
+{% set title = 'Carga de Archivo | Visual Genoma' %}
+{% set header = 'Carga de Archivo' %}
+{% set header_opt = 'Importe su información genética' %}
+{% set active_menu = 'files' %}
+{% set breadcrumbs = ['Visual Genoma','Carga de Archivo','Importador'] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-solid">
+          <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-fw fa-file-code-o" aria-hidden="true"></i> Variant Call Format (VCF)</h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body">
+            <p>Es un formato de archivo de texto que se usa en Bioinformática para almacenar variaciones de la secuencia de genes y su información.</p>
+            <p>Este formato se ha desarrollado a la luz de los grandes proyectos de secuenciación del ADN y genotipado, como el <a href="http://www.1000genomes.org/home" target="_blank">Proyecto 1000 Genomas</a>.</p>
+            <p>La versión actual es la <a href="https://samtools.github.io/hts-specs/" target="_blank">4.3</a> aunque el Proyecto 1000 Genomas ha desarrollado sus propias especificaciones para variaciones estructurales tales como duplicados, difíciles de acomodar en el esquema existente. También existen un grupo de herramientas para editar y manipular los ficheros VCF.</p>
+          </div>
+           <!-- /.box-body -->   
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-solid">
+          <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-fw fa-cloud-upload" aria-hidden="true"></i> Carga de archivo <strong>VCF</strong> con su información genómica</h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body">
+            {% if message is defined %}
+                <div class="alert alert-info" role="alert">
+                    <strong>{{message}}</strong><br/>
+                </div>
+            {% endif %}
+            
+             <form id="upload_form" action="/file/upload" method="post" enctype="multipart/form-data">
+                 <input type="hidden" name="PHP_SESSION_UPLOAD_PROGRESS" value="{{app['user']['iduser']}}"/>
+                  <div class="input-group col-md-12">
+                      <span class="input-group-btn">
+                        <span class="btn btn-primary" onclick="$('#upload').click();">Buscar archivo</span>
+                        <input id="upload" name="upload" accept=".vcf, .txt, .tsv" onchange="$('#fake-path').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+                      </span>
+                      <span id="fake-path" class="form-control"></span>
+                      <span class="input-group-btn">
+                          <button class="btn btn-danger" onclick="startUploading(); return true;" type="submit"><i class="fa fa-fw fa-upload" aria-hidden="true"></i> Subir!</button>
+                      </span>
+                    </div>
+             </form>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+
+
+<!-- Processing Modal -->
+<div class="modal modal-static fade" id="processing-modal" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="text-center">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <i id="upload-file-icon" class="fa fa-upload fa-4x fa-fw" aria-hidden="true"></i>
+                            <h4 id="upload-title">Cargando archivo...</h4>
+                        </div>
+                        <div class="col-sm-6">
+                            <i id="processing-file-icon" class="text-muted fa fa-cog fa-4x fa-fw" aria-hidden="true"></i>
+                            <h4 id="processing-title" class="text-muted">Procesando archivo...</h4>
+                        </div>
+                    </div>
+                     <div id="upload-progress-bar-container" class="progress">
+                      <div id="upload-progress-bar"     class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:0%"><span id="upload-progress-bar-number"></span></div>
+                    </div>
+                    <div id="processing-progress-bar-container" class="progress" >
+                      <div id="processing-progress-bar" style="display:none;" class="progress-bar progress-bar-striped progress-bar-warning active" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width:100%"><span id="processing-progress-bar-number"></span></div>
+                    </div>
+                    <div id="upload-motivation">
+                        <p class="upload-legend-1"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true"></i> La carga del archivo puede llevar unos minutos...</p>
+                        <p class="upload-legend-2" style="display:none;"><i class="fa fa-refresh fa-spin fa-fw" aria-hidden="true"></i> Procesando archivo...</p>
+                    </div>
+                    <div id="upload-success"style="display:none;">
+                        <p>Su archivo ha sido cargado con éxito. Haga click en el siguiente botón para poder comenzar a disfrutar de todas las funcionalidades de <strong>Visual Genoma</strong>.</p>
+                        <h3><button type="button"  class="btn btn-success" onclick="">Carga Exitosa! <i class="fa fa-fw fa-chevron-right"></i></button></h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+function startUploading(){
+    setTimeout(uploadProgress,500);
+    $("#processing-modal").modal("show");
+}
+function uploadProgress(){
+    
+    $("#upload-title").show();
+    $(".upload-legend-1").show();
+    $(".upload-legend-2").hide();
+    $("#upload-file-icon").show();
+    $("#upload-file-icon").removeClass("text-success");
+    
+    $("#processing-file-icon").addClass("text-muted");
+    $("#processing-file-icon").removeClass("fa-spin");
+    $("#processing-title").addClass("text-muted");
+    $("#processing-progress-bar").hide();     
+    
+    $('.progress').fadeIn(100);
+    
+    setInterval(function() {
+    $.get("/file/upload_progress?randval="+ Math.random(), { },
+        function(data){
+            console.log(data);
+            
+            
+            $('#upload-progress-bar').width(data.progress +"%");
+            $('#upload-progress-bar-number').html(parseInt(data.progress) +"%");
+            
+            if(data.progress>95){
+                $("#upload-file-icon").addClass("text-success");
+                
+                $("#processing-file-icon").removeClass("text-muted");
+                $("#processing-title").removeClass("text-muted");
+                $("#processing-file-icon").addClass("fa-spin");
+                
+                $(".upload-legend-1").hide();
+                $(".upload-legend-2").show();
+                
+                $("#processing-progress-bar").show();
+            }
+        }
+    )},
+    1000);
+}
+</script>
+{% endblock %}

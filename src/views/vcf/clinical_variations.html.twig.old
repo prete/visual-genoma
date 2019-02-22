@@ -1,0 +1,46 @@
+{% set title = 'ClinVar | proyecto' %}
+{% set header = 'ClinVar' %}
+{% set header_opt = 'Varaintes clinicas'  %}
+{% set active_menu = 'clinical_variations' %}
+{% set breadcrumbs = ['VCF','Variantes clinicas',] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h4>Se encontraron {{total_records}} variaciones en su archivo.</h4>
+    
+    {% if table_records is defined %}
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-condensed table-hover">
+            <tr>
+            <th>id</th>
+              <th>Relevancia</th>
+              <th>CLNDBN</th>
+              <th>CLNACC</th>
+              <th>CLNDSDB</th>
+              <th>CLNDSDBID</th>
+              <th>CLNREVSTAT</th>
+            </tr>
+            {% for record in table_records %}
+                <tr>
+                    <td>{{ record['idsnv'] }}</td>
+                    <td>{{ record['CLINSIG'] }}</td>
+                    <td>{{ record['CLNDBN'] }}</td>
+                    <td>{{ record['CLNACC'] }}</td>
+                    <td>{{ record['CLNDSDB'] }}</td>
+                    <td>{{ record['CLNDSDBID'] }}</td>
+                    <td>{{ record['CLNREVSTAT'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+      </div>
+        <div class="text-center">
+          <ul class="pagination"style="display:inline-block">
+              {% for p in table_paginig %}
+                  <li><a href="/vcf/clinical_variations?id={{ app.request.get('id') }}&page_number={{p}}">{{p}}</a></li>
+              {% endfor %}
+          </ul>
+        </div>
+    {% endif %}
+  
+{% endblock %}

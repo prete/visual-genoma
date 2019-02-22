@@ -1,0 +1,250 @@
+{% set title = 'Navegador del Genoma | Visual Genoma' %}
+{% set header = 'Navegador del Genoma' %}
+{% set header_opt = 'Visualice y navegue información genómica' %}
+{% set active_menu = 'browser' %}
+{% set breadcrumbs = ['Visual Genoma','Navegador del Genoma'] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+
+    <div class="box box-solid">
+      <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-fw fa-search" aria-hidden="true"></i> Genoverse — Navegador del Genoma — <a href="#" class="btn btn-xs btn-default bg-purple" data-toggle="tooltip" data-placement="top" title="Iniciar tour del Navegador del Genoma!" onclick="start_tour()"> Tutorial paso a paso<i class="fa fa-fw fa-info-circle" aria-hidden="true"></i></a></h3>
+        <div class="box-tools">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <!-- /.box-header  -->
+      
+      <div class="box-body">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="form-group">
+              <select class="form-control" onchange="onChangeChromosome(this)">
+                <option value="1" data-chr-start="1" data-chr-end="24895">Cromosoma 1</option>
+                <option value="2" data-chr-start="1" data-chr-end="24219">Cromosoma 2</option>
+                <option value="3" data-chr-start="1" data-chr-end="19829">Cromosoma 3</option>
+                <option value="4" data-chr-start="1" data-chr-end="19021">Cromosoma 4</option>
+                <option value="5" data-chr-start="1" data-chr-end="18153">Cromosoma 5</option>
+                <option value="6" data-chr-start="1" data-chr-end="17080">Cromosoma 6</option>
+                <option value="7" data-chr-start="1" data-chr-end="15934">Cromosoma 7</option>
+                <option value="8" data-chr-start="1" data-chr-end="14513">Cromosoma 8</option>
+                <option value="9" data-chr-start="1" data-chr-end="13839">Cromosoma 9</option>
+                <option value="10" data-chr-start="1" data-chr-end="13379">Cromosoma 10</option>
+                <option value="11" data-chr-start="1" data-chr-end="13508">Cromosoma 11</option>
+                <option value="12" data-chr-start="1" data-chr-end="13327">Cromosoma 12</option>
+                <option value="13" data-chr-start="1" data-chr-end="11436">Cromosoma 13</option>
+                <option value="14" data-chr-start="1" data-chr-end="10704">Cromosoma 14</option>
+                <option value="15" data-chr-start="1" data-chr-end="10199">Cromosoma 15</option>
+                <option value="16" data-chr-start="1" data-chr-end="9033">Cromosoma 16</option>
+                <option value="17" data-chr-start="1" data-chr-end="8325">Cromosoma 17</option>
+                <option value="18" data-chr-start="1" data-chr-end="8037">Cromosoma 18</option>
+                <option value="19" data-chr-start="1" data-chr-end="5861">Cromosoma 19</option>
+                <option value="20" data-chr-start="1" data-chr-end="6444">Cromosoma 20</option>
+                <option value="21" data-chr-start="1" data-chr-end="4670">Cromosoma 21</option>
+                <option value="22" data-chr-start="1" data-chr-end="5081">Cromosoma 22</option>
+                <option value="X" data-chr-start="1" data-chr-end="15604">Cromosoma X</option>
+                <option value="Y" data-chr-start="1" data-chr-end="5722">Cromosoma Y</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+          <div class="col-md-12">
+              <div id="genoverse"></div>
+          </div>
+        </div>
+      </div>
+      <!-- /.box-body -->
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block stylesheets %}
+  <link rel="stylesheet" href="/resources/bootstrap-tour/css/bootstrap-tour-standalone.min.css">
+{% endblock %}
+
+
+{% block scripts %}
+
+<script src="/resources/bootstrap-tour/js/bootstrap-tour-standalone.min.js"></script>
+<script type="text/javascript" src="/resources/genoverse/js/genoverse.combined.nojquery.js"></script>
+<script type="text/javascript" src="/resources/genoverse/js/visualgenoma.track.js"></script>
+
+<script>
+  
+  function getUrlVars()
+  {
+      var vars = [], hash;
+      var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+      for(var i = 0; i < hashes.length; i++)
+      {
+          hash = hashes[i].split('=');
+          vars.push(hash[0]);
+          vars[hash[0]] = hash[1];
+      }
+      return vars;
+  }
+  
+  var genoverseWidget = {};
+  ////TOUR SETTINGS
+  var tour = new Tour({
+    steps: [
+    {
+      backdrop: true,
+      element: '#genoverse',
+      title: 'Genoverse',
+      content: 'Genoverse es el navegador del genoma que muestra información genómica en sus diferentes tracks <i>(pistas)</i>.'
+    },
+    {
+      element: 'td.gv-panel.gv-panel-left > ul.gv-label-container > li:nth-child(1)',
+      title: 'Tracks',
+      content: 'Permite seleccionar cuáles son los tracks que se desea visualizar.'
+    },
+    {
+      element: '.gv-chromosome',
+      title: 'Cariotipo del cromosoma',
+      content: '<a href="https://es.wikipedia.org/wiki/Cariotipo" class="btn btn-xs btn-primary" target="_blank">Cariotipo</a> es la representación gráfica del cromosoma y sus diferentes bandas.'
+    },
+    {
+      element: '.gv-karyotype-viewpoint',
+      title: 'Selección de segmento',
+      content: 'Segmento resaltado en rojo que indica a los tracks que deben mostrar información de la parte seleccionada del cromosoma.'
+    },
+    {
+      element: 'td.gv-panel.gv-panel-left > ul.gv-label-container > li:nth-child(2)',
+      title: 'Track: Secuencia',
+      content: 'Con una selección adecuada <i>(muy pequeña)</i> este track muestra las diferentes bases de nucleótidos.'
+    },
+    {
+      element: 'td.gv-panel.gv-panel-left > ul.gv-label-container > li:nth-child(4)',
+      title: 'Track: Genes',
+      content: 'Indica con diferentes colores los genes que se expresan en el segmento seleccionado del cromosoma.'
+    },
+    {
+      element: 'td.gv-panel.gv-panel-left > ul.gv-label-container > li:nth-child(5)',
+      title: 'Track: Leyenda de Genes',
+      content: 'Explica el color de cada gen en el track Genes.'
+    },
+    {
+      element: 'td.gv-panel.gv-panel-left > ul.gv-label-container > li:nth-child(6)',
+      title: 'Track: Regulatory Features',
+      content: 'Indica con las partes del genoma que podrían estar involucrados en la regulación de la transcripción de genes.'
+    },
+    {
+      element: 'td.gv-panel.gv-panel-left > ul.gv-label-container > li:nth-child(7)',
+      title: 'Track: dbSNP',
+      content: 'Con una selección adecuada <i>(muy pequeña)</i> este track muestra los <a href="https://es.wikipedia.org/wiki/Polimorfismo_de_nucle%C3%B3tido_%C3%BAnico" class="btn btn-xs btn-primary" target="_blank">SNP</a> que hay reportados en el segmento seleccionado.'
+    },
+    {
+      element: 'td.gv-panel.gv-panel-right > div.gv-button-set.gv-tooltip:nth-child(1)',
+      title: 'Controles: Desplazamiento',
+      content: 'Regula el desplazamiento del segmento de selección hacia la izquierda o derecha.'
+    },
+    {
+      element: 'td.gv-panel.gv-panel-right > div.gv-button-set.gv-tooltip:nth-child(2)',
+      title: 'Control: Zoom',
+      content: 'Regula el nivel de aumento del navegador sobre el segmento.'
+    },
+    {
+      element: 'td.gv-panel.gv-panel-right > div.gv-button-set.gv-tooltip:nth-child(3)',
+      title: 'Control: Selección',
+      content: 'Permite delimitar un área sobre los tracks para realizar operaciones <i>(zoom/center/highlight)</i>.'
+    },
+    {
+      element: 'td.gv-panel.gv-panel-right > div.gv-button-set.gv-tooltip:nth-child(6)',
+      title: 'Control: Pantalla Completa',
+      content: 'Pone en modo pantala completa el navegador del genoma.'
+    },
+    {
+      element: 'div.form-group>select.form-control',
+      title: 'Selección de Cromosoma',
+      content: 'Permite cambiar de Cromosoma para explorar todo su genoma.'
+    }
+  ],
+    storage: false,
+    smartPlacement: true,
+    template: '<div class="popover tour-tour">'+
+      '<div class="arrow"></div>'+
+      '<h3 class="popover-title"></h3>'+
+      '<div class="popover-content"></div>'+
+      '<div class="popover-navigation">'+
+          '<button class="btn btn-block btn-default btn-xs" data-role="prev">« Anterior</button>'+
+          //'<span data-role="separator"></span>'+
+          '<button class="btn btn-block btn-default btn-xs" data-role="next">Siguiente »</button>'+
+      '</div>'+
+      '<button class="btn btn-primary btn-xs pull-right" data-role="end">Finalizar</button>'+
+    '</div>"'
+  });
+  
+  // Initialize the tour
+  tour.init();
+  
+  function start_tour(){
+    tour.start(true);
+  }
+  
+  ////CHROMOSOME SELECTION
+  function onChangeChromosome(opt){
+    var opt = $(opt).find(':selected');
+    var settings = {
+      chr: opt.val(), 
+      start: opt.data('chr-start'),
+      end: 1000000//opt.data('chr-end')
+    };
+    window.document.location = '/genome_browser?r='+settings.chr+':'+settings.start+'-'+settings.end;
+  }
+ 
+  function createGenoverseWidget(opt){
+    
+    var configGenoverse = {
+      container : '#genoverse',
+      genome    : 'grch38', // see js/genomes/
+      //chr       : opt.chr,
+      //start     : opt.start,
+      //end       : opt.end,
+      plugins   : [ 'controlPanel', 'karyotype', 'trackControls', 'resizer', 'focusRegion', 'fullscreen', 'tooltips', 'fileDrop' ],
+      tracks    : [
+        Genoverse.Track.Scalebar,
+        Genoverse.Track.extend({
+          name       : 'Sequence',
+          controller : Genoverse.Track.Controller.Sequence,
+          model      : Genoverse.Track.Model.Sequence.Ensembl,
+          view       : Genoverse.Track.View.Sequence,
+          100000     : false,
+          resizable  : 'auto'
+        }),
+        Genoverse.Track.VisualGenoma,
+        Genoverse.Track.Gene,
+        Genoverse.Track.extend({
+          name            : 'Regulatory Features',
+          url             : '//rest.ensembl.org/overlap/region/human/__CHR__:__START__-__END__?feature=regulatory;content-type=application/json',
+          resizable       : 'auto',
+          model           : Genoverse.Track.Model.extend({ dataRequestLimit : 5000000 }),
+          setFeatureColor : function (f) { f.color = '#AAA'; }
+        }),
+        Genoverse.Track.dbSNP
+      ]
+    }
+    
+    return new Genoverse(configGenoverse);
+  }
+  
+  //// GENOVERSE INIT
+  $(document).ready(function () {
+    var chrom = getUrlVars()["r"].split(':')[0];
+    $('select option[value="'+chrom+'"]').attr("selected",true);
+    createGenoverseWidget();
+  });
+</script>
+    
+    
+{% endblock %}

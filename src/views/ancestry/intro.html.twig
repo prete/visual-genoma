@@ -1,0 +1,324 @@
+{% set title = 'Informe de Ancestría | Visual Genoma' %}
+{% set header = 'Informe de Ancestría' %}
+{% set header_opt = 'Línea de descendencia y la pertenencia a haplogrupos' %}
+{% set active_menu = 'ancestry' %}
+{% set breadcrumbs = ['Visual Genoma','Informe de Ancestría','Introducción'] %}
+
+{% extends 'layout.html.twig' %}
+
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-primary">
+         <div class="box-header with-border">
+            <h3 class="box-title">
+              <i class="fa fa-fw fa-book" aria-hidden="true"></i> 
+              Conceptos iniciales
+            </h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 16px;">
+            <p>Estudiar los <a href="#" class="link-help-icon open-help-modal" onclick="return false;" data-modal-name="snp.modal">polimorfismos de nucleótido simple</a> y cómo están organizados en los cromosomas, permite establecer <strong>haplotipos</strong> o regiones cromosómicas de polimorfismos asociados. Por su cercanía en el genoma tienden a heredarse de forma conjunta, porque hay una probabilidad muy reducida de que ocurran eventos de recombinación entre ellos. Muchos haplotipos son comunes para toda la población mundial, pero hay otros más prevalentes en unas poblaciones que otras. Estos últimos son los que nos interesan a la hora de determinar la ubicación geográfica de variantes.</p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-primary">
+         <div class="box-header with-border">
+            <h3 class="box-title">
+              <i class="fa fa-fw fa-flask" aria-hidden="true"></i>
+              Análisis de Ancestría
+            </h3>
+          </div>
+          <div class="box-body" style="font-size: 16px;">
+            <p>Luego de analizar su archivo de información genómica y compararlo con haplotipos conocidos, identificamos grupos poblacionales específicos que coinciden con las variantes existentes en su genoma. De esta forma podemos indicarle, con un porcentaje de confianza adecuado, su pertenencia a los diferentes grupos. De acuerdo al  <a class="link-help-icon" data-toggle="modal" href="#grupos-poblacionales">listado de gurpos poblacionales</a>, determinamos su pertenencia a cada grupo en función de la cantidad de variantes que presenta para cada uno.</p>
+            <div id="loading-mapa-poblaciones" style="margin: auto;">
+              <i class="fa fa-cog fa-spin"></i> Generando mapa...
+            </div>
+            <div id="mapa-poblaciones">
+            </div>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-primary">
+         <div class="box-header with-border">
+            <h3 class="box-title">
+              <i class="fa fa-fw fa-globe" aria-hidden="true"></i>
+              Mapa 3D
+            </h3>
+          </div>
+          <div class="box-body" style="font-size: 16px;">
+            <p>El <strong>Mapa 3D</strong> es un complemento exclusivo, que le permite navegar un mundo virtual y aprender sobre sus grupos de pertenencia de una forma novedosa.</p>
+            <p><a class="btn btn-lg btn-block btn-primary" href="/ancestry/worldmap" title="Ver representación">Ver representación geográfica de grupos de pertenencia en 3D<i class="fa fa-fw fa-chevron-right"></i></a></p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="modal fade" id="grupos-poblacionales" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><i class="fa fa-fw fa-globe"></i> Grupos Poblacionales</h4>
+      </div>
+      <div class="modal-body"  style="max-height:400px;overflow-y:scroll;">
+        <table id="popTable" class="table table-striped table-condensed table-hover table-bordered">
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
+{% block stylesheets %}
+<style>
+
+#mapa-poblaciones svg{
+  margin-left:auto;
+  margin-right:auto;
+  display:block;
+}
+#mapa-poblaciones{
+  overflow:scroll;
+}
+  
+.country {
+  fill: #ccc;
+  stroke: #fff;
+  stroke-width: .5px;
+  stroke-linejoin: round;
+}
+
+.graticule {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .3;
+  stroke-width: .5px;
+}
+
+.graticule.outline {
+  stroke: #333;
+  stroke-opacity: 1;
+  stroke-width: 1.5px;
+}
+
+
+.population {
+  /*fill: steelblue;*/
+  /*stroke: #000;*/
+}
+
+ .d3-tip {
+    line-height: 1;
+    /*font-weight: bold;*/
+    padding: 12px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 2px;
+  }
+
+  .d3-tip:after {
+    box-sizing: border-box;
+    display: inline;
+    font-size: 10px;
+    width: 100%;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+  }
+
+  .d3-tip.n:after {
+    content: "\25BC";
+    margin: -1px 0 0 0;
+    top: 100%;
+    left: 0;
+    text-align: center;
+  }
+
+  .d3-tip.e:after {
+    content: "\25C0";
+    margin: -4px 0 0 0;
+    top: 50%;
+    left: -8px;
+  }
+
+  .d3-tip.s:after {
+    content: "\25B2";
+    margin: 0 0 1px 0;
+    top: -8px;
+    left: 0;
+    text-align: center;
+  }
+
+
+  .d3-tip.w:after {
+    content: "\25B6";
+    margin: -4px 0 0 -1px;
+    top: 50%;
+    left: 100%;
+  }
+
+
+</style>
+{% endblock %}
+
+
+{% block scripts %}
+
+<script type="text/javascript" src="/resources/js/d3.v3.min.js"></script>
+<script type="text/javascript" src="/resources/js/d3.geo.projection.v0.min.js"></script>
+<script type="text/javascript" src="/resources/js/topojson.v1.min.js"></script>
+<script type="text/javascript" src="/resources/js/d3.tip.js"></script>
+
+<script type="text/javascript">
+var poblaciones;
+var poblacionesFeatures = [];
+var popColor = {'America':'#e41a1c','Africa':'#377eb8','Europa':'#4daf4a','Asia':'#984ea3','Oceania':'#ff7f00'};
+
+
+
+$.get('/resources/ancestry/ancestry.json', function(data){
+    data = data.sort(orderSuperPoblations);
+    poblaciones = data;
+    afterInit();
+});
+
+function orderSuperPoblations(a,b) {
+  if (a.pop.super < b.pop.super)
+    return -1;
+  if (a.pop.super > b.pop.super)
+    return 1;
+  return 0;
+};
+
+function afterInit(){
+  formatPoblaciones();  
+  drawPoblacionesMap();
+};
+
+
+function drawPoblacionesMap(){
+  var width = 900; //$("#mapa-poblaciones").width();
+  var height = 500;
+  
+  var projection = d3.geo.kavrayskiy7(),
+      color = d3.scale.category20(),
+      graticule = d3.geo.graticule();
+  
+  var path = d3.geo.path()
+      .projection(projection);
+  
+  var opacity = d3.scale.linear()
+    .domain([0.00, 0.50])
+    .range( [0.25, 1.00]);
+  
+  var svg = d3.select("#mapa-poblaciones")
+    .append("svg")
+      .style("margin","auto")
+      .style("display","block")
+      .attr("width", width)
+      .attr("height", height);
+
+  var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .html(function(d) { 
+      var tipText = '';
+      tipText += '<table class="table">';
+      tipText += '<tr><th>Etnia</th><td>'+d.properties.pop.etnia+'</td></tr>';
+      tipText += '<tr><th>Afinidad</th><td>'+(d.properties.rawfreq*100).toFixed(2)+'%</td></tr>';
+      tipText += '</table>';
+      tipText += '';
+      return tipText;
+    });
+
+  svg.call(tip);
+  
+  svg.append("path")
+      .datum(graticule)
+      .attr("class", "graticule")
+      .attr("d", path);
+  
+  svg.append("path")
+      .datum(graticule.outline)
+      .attr("class", "graticule outline")
+      .attr("d", path);
+
+  d3.json("/resources/ancestry/world-110m.json", function(error, world){
+    
+    var countries = topojson.feature(world, world.objects.countries).features,
+        neighbors = topojson.neighbors(world.objects.countries.geometries);
+  
+    svg.selectAll(".country")
+        .data(countries)
+      .enter().insert("path", ".graticule")
+        .attr("class", "country")
+        .attr("d", path)
+        .style("fill", "#CACACA");
+
+    svg.selectAll(".population")
+        .data(poblacionesFeatures)
+      .enter().append("path")
+        .attr("class", "population")
+        .style("stroke", '#000'/*function(d){ return popColor[d.properties.pop.super];}*/)
+        .style("fill-opacity", function(d){ return opacity(d.properties.rawfreq);})
+        .style("fill", function(d){ return popColor[d.properties.pop.super];})
+        .attr("d", path.pointRadius(function(d) { return 10; }))
+        .on('mouseover', tip.show)
+        .on('mouseout', tip.hide);
+        
+    $('#loading-mapa-poblaciones').hide();
+  });
+};
+function hexToR(h) {return parseInt((cutHex(h)).substring(0,2),16)}
+function hexToG(h) {return parseInt((cutHex(h)).substring(2,4),16)}
+function hexToB(h) {return parseInt((cutHex(h)).substring(4,6),16)}
+function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1,7):h}
+
+function formatPoblaciones(){
+  var html = "<tr><th>Continente</th><th>Etnia</th><th>Descripción del grupo poblacional</th><th></th></tr>";
+  poblaciones.forEach(function(p){
+    
+    //create feature
+    var feature = {type: "Feature", properties: {}, geometry: {type: "Point", coordinates: []}};
+    feature.properties = p;
+    feature.geometry.coordinates = [parseFloat(p.pos[0]),parseFloat(p.pos[1])];
+    poblacionesFeatures.push(feature)
+    
+    //list in populations table
+    html+='<tr><td style="background-color:rgba('+hexToR(popColor[p.pop.super])+','+hexToG(popColor[p.pop.super])+','+hexToB(popColor[p.pop.super])+',0.85)">'+p.pop.super+'</td><td><strong>'+p.pop.etnia+'</strong></td><td>'+p.pop.desc+'</td><td><a href="'+p.pop.wiki+'" target="_blank" class="btn btn-xs btn-default" data-toggle="tooltip" title="Ver en Wikipedia"><i class="fa fa-fw fa-wikipedia-w"></i></a></td></tr>';
+  });
+  $('#popTable').html(html);
+
+};
+</script>
+{% endblock %}

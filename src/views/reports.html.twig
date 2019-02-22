@@ -1,0 +1,179 @@
+{% set title = 'Reportes | Visual Genoma' %}
+{% set header = 'Reportes' %}
+{% set header_opt = 'Lleve su información genómica con usted' %}
+{% set active_menu = 'reports' %}
+{% set breadcrumbs = ['Visual Genoma','Reportes',] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<style>
+
+.text-vg-big {
+    font-size:100%;
+}
+
+</style>
+
+<div class="row">
+  {#
+  <div class="col-md-12 col-lg-6">
+    <div class="box box-solid hand-cursor hover-shadow"  onclick="location.href='/reports/variants/csv';">
+      <div class="box-header with-border">
+        <h3 class="box-title"><strong>Listado de Variantes</strong></h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-fw fa-file-excel-o" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+              <p class="text-vg-big">Exporte un listado completo de sus variantes genéticas en formato CSV compatible con Excel</p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->  
+  #}
+  
+  <div class="col-md-12 col-lg-6">
+    <div class="box box-solid hand-cursor hover-shadow"  onclick="location.href='/reports/variants/pdf';">
+
+         <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-fw fa-file-pdf-o" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+              <h4><strong>Listado de Variantes</strong></h4>
+              <p class="text-vg-big">Exporte un listado completo de sus variantes genéticas en formato PDF</p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->  
+
+  <div class="col-md-12 col-lg-6">
+    <div class="box box-solid hand-cursor hover-shadow"  onclick="location.href='/reports/variants/csv';">
+         <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-fw fa-file-excel-o" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+              <h4><strong>Listado de Variantes</strong></h4>
+              <p class="text-vg-big">Exporte un listado completo de sus variantes genéticas en formato CSV</p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->
+
+  <div class="col-md-12 col-lg-6">
+    <div class="box box-solid hand-cursor hover-shadow"  onclick="location.href='/reports/clinical/pdf';">
+         <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-fw fa-file-pdf-o" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+              <h4><strong>Informe Clínico</strong></h4>
+              <p class="text-vg-big">Exporte el listado completo de sus variantes clínicas en formato PDF</p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->  
+
+  <div class="col-md-12 col-lg-6">
+    <div class="box box-solid hand-cursor hover-shadow"  onclick="location.href='/reports/clinical/csv';">
+         <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-fw fa-file-excel-o" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+              <h4><strong>Informe Clínico</strong></h4>
+              <p class="text-vg-big">Exporte el informe clínico completo en formato CSV</p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->  
+  
+  <div class="col-md-12 col-lg-6">
+    <div class="box box-solid hand-cursor hover-shadow"  onclick="location.href='/reports/ancestry/pdf';">
+         <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-fw fa-file-pdf-o" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+              <h4><strong>Informe Ancestría</strong></h4>
+              <p class="text-vg-big">Exporte su reporte de ancestría en formato PDF</p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->
+
+    <div class="col-md-12 col-lg-6">
+    <div class="box box-solid hand-cursor hover-shadow"  onclick="location.href='/reports/ancestry/csv';">
+         <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-fw fa-file-excel-o" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+              <h4><strong>Informe Ancestría</strong></h4>
+              <p class="text-vg-big">Exporte su reporte de ancestría en formato CSV</p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->
+  
+    <div class="col-md-12 col-lg-6">
+    <div class="box box-solid hand-cursor hover-shadow" onclick="location.href='/reports/full/pdf';">
+         <div class="info-box">
+            <span class="info-box-icon bg-red"><i class="fa fa-fw fa-file-pdf-o" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+              <h4><strong>Informe Completo</strong></h4>
+              <p class="text-vg-big">Exporte un resumen completo de su estudio genómico en formato PDF</p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->
+  <div class="col-md-12 col-lg-6">
+    <div class="box box-solid hand-cursor hover-shadow" onclick="location.href='/file/download';">
+         <div class="info-box">
+            <span class="info-box-icon bg-black"><i class="fa fa-fw fa-file-code-o" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+              <h4><strong>VCF</strong></h4>
+              <p class="text-vg-big">Descargue el archivo VCF en su formato original</p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->
+</div>
+<!-- /. row -->
+
+
+<div class="modal fade" id="generando-reporte" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+          <div class="text-center">
+            <i id="bigIcon" class="fa fa-4x fa-fw" aria-hidden="true"></i>
+            <h4 id="tituloModal"></h4>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

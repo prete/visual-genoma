@@ -1,0 +1,347 @@
+{% set title = 'Preguntas Frecuentes | Visual Genoma' %}
+{% set header = 'Preguntas Frecuentes' %}
+{% set header_opt = 'Lista de preguntas y respuestas que surgen frecuentemente dentro del uso de Visual Genoma' %}
+{% set active_menu = 'faq' %}
+{% set breadcrumbs = ['Visual Genoma','Preguntas Frecuentes'] %}
+
+{% extends 'layout.html.twig' %}
+
+
+{% block stylesheets %}
+<style>
+
+.escalar-rotar {
+  transition-timing-function: ease-in-out;
+  transition: all 2s;
+}
+.collapsed-box:hover .escalar-rotar {
+  transform: scale(1.5) rotate(180deg);
+  color: #034931;
+}
+
+.collapsed-box > .with-hover-border {
+  transition-timing-function: ease-in-out;
+  transition: box-shadow 0.5s;
+}
+
+.collapsed-box > .with-hover-border:hover{
+  box-shadow: 10px 10px 10px #888888;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-solid">
+          <div class="box-header with-border with-hover-border">
+            <h3 class="box-title"><i class="fa fa-fw fa-info-circle" aria-hidden="true"></i> ¿Qué es un archivo genómico?</h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus escalar-rotar"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 18px;">
+            <p>Es un formato de archivo de texto que se usa en Bioinformática para almacenar variaciones de la secuencia de genes y su información.</p>
+            <p>Este formato se ha desarrollado a la luz de los grandes proyectos de secuenciación del ADN y genotipado, como el <a href="http://www.1000genomes.org/home" target="_blank">Proyecto 1000 Genomas</a>.</p>
+            <p>La versión actual es la <a href="https://samtools.github.io/hts-specs/" target="blank">4.3</a> aunque el Proyecto 1000 Genomas ha desarrollado sus propias especificaciones para variaciones estructurales tales como duplicados, difíciles de acomodar en el esquema existente. También existen un grupo de herramientas para editar y manipular los ficheros VCF.</p>            
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-solid">
+          <div class="box-header with-border with-hover-border">
+            <h3 class="box-title"><i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>¿Qué pasa con mis datos?</h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus escalar-rotar"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 18px;">
+            <p>En Visual Genoma nuestra prioridad son sus datos. Es por eso que contamos un sofisticado proceso de seguridad que asegura que usted será el único que tendrá acceso a su perfil genético.</p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-solid">
+          <div class="box-header with-border with-hover-border">
+            <h3 class="box-title"><i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>¿A qué bases de datos mundiales accede Visual Genoma?</h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus escalar-rotar"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 18px;">
+            <p>Visual Genoma complementa los resultados de su estudio genómico con información publicada en la bases de datos más reconocidas de mundo. Con Visual Genoma podrá acceder a información actualizada de las organizaciones científicas más importantes del mundo. </p>
+            
+            <ul>
+              <li>
+                <strong>NCBI - National Center for Biotechnology Information</strong>: <a href="https://www.ncbi.nlm.nih.gov/">https://www.ncbi.nlm.nih.gov/</a>
+              </li>
+              <li>
+                <strong>CBCB - Computational Biology Group at Charité Berlin</strong>: <a href="http://charite.github.io/">http://charite.github.io/</a>
+              </li>
+              <li>
+                <strong>EMBL-EBI - The European Bioinformatics Institute</strong>: <a href="http://www.ebi.ac.uk/">http://www.ebi.ac.uk/</a>
+              </li>
+              <li>
+                <strong>Orphanet</strong>: <a href="http://www.orpha.net/">http://www.orpha.net/</a>
+              </li>
+              <li>
+                <strong>Ensembl Project</strong>: <a href="http://www.ensembl.org/">http://www.ensembl.org/</a>
+              </li>
+              <li>
+                <strong>UniProt - The Universal Protein Resource</strong>: <a href="http://www.uniprot.org/">http://www.uniprot.org/</a>
+              </li>
+              <li>
+                <strong>SNPedia</strong>: <a href="https://www.snpedia.com/">https://www.snpedia.com/</a>
+              </li>
+              <li>
+                <strong>ExAC - The Exome Aggregation Consortium</strong>: <a href="http://exac.broadinstitute.org/">http://exac.broadinstitute.org/</a>
+              </li>
+              <li>
+                <strong>GGV - Geography of Genetic Variants</strong>: <a href="http://popgen.uchicago.edu/ggv/">http://popgen.uchicago.edu/ggv/</a>
+              </li>
+              <!--
+              <li>
+                <strong></strong>: <a href=""></a>
+              </li>
+              -->
+            </ul>
+            
+            
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-solid">
+          <div class="box-header with-border with-hover-border">
+            <h3 class="box-title"><i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>¿Puedo revisar los resultados con mi médico?</h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus escalar-rotar"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 18px;">
+            <p>Si. Desde I’magen siempre recomendamos que, ante cualquier duda, los datos presentados por la plataforma sean analisados en compañía de su médico de cabecera.</p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-solid">
+          <div class="box-header with-border with-hover-border">
+            <h3 class="box-title"><i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>¿Visual Genoma es una herramienta de pronóstico de enfermedades?</h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus escalar-rotar"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 18px;">
+            <p>No. Visual Genoma es una herramienta de visualización de estudios genómicos que tiene como objetivo simplificar la comprensión de la información genética, de ninguna manera debe ser tomado como herramienta de pronóstico de enfermedades.</p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-solid">
+          <div class="box-header with-border with-hover-border">
+            <h3 class="box-title"><i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>¿Qué sucede si me realizo un nuevo estudio genómico?</h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus escalar-rotar"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 18px;">
+            <p>En Visual Genoma podrá actualizar su archivo con información genómica tantas veces como lo desee. </p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-solid">
+          <div class="box-header with-border with-hover-border">
+            <h3 class="box-title"><i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>¿Qué es el ADN?</h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus escalar-rotar"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 18px;">
+            <p>El ácido desoxirribonucleico, frecuentemente abreviado como ADN, es una molécula que contiene instrucciones genéticas usadas en el desarrollo y funcionamiento de todos los organismos vivos conocidos y algunos virus. La mayoría de las moléculas de ADN se presenta como una hélice de doble cadena donde la información genética se codifica gracias a una secuencia de nucleótidos (a saber, guanina, adenina, timina y citosina), que se representan con las letras G, A, T y C, respectivamente.</p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-solid">
+          <div class="box-header with-border with-hover-border">
+            <h3 class="box-title"><i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>¿Qué es el ARN?</h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus escalar-rotar"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 18px;">
+            <p>El ácido ribonucleico o ARN es una familia omnipresente de grandes biomoléculas que desempeñan diversas funciones vitales en la codificación, descodificación, regulación y expresión de los genes. Igual que el ADN, es un ácido nucleico y, junto con las proteínas, constituyen los tres grandes tipos de macromoléculas esenciales para todas las formas de vida.</p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-solid">
+          <div class="box-header with-border with-hover-border">
+            <h3 class="box-title"><i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>¿Qué es un gen?</h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus escalar-rotar"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 18px;">
+            <p>Se conoce como gen a la cadena de ácido desoxirribonucleico (ADN), una estructura que se constituye como una unidad funcional a cargo del traspaso de rasgos hereditarios. Un gen, según los expertos, es una serie de nucleóticos que almacena la información que se requiere para sintetizar a una macromolécula que posee un rol celular específico.</p>
+            <p>El gen, como unidad que conserva datos genéticos, se encarga de transmitir la herencia a los descendientes. El conjunto de genes pertenecientes a una misma especie se define como genoma, mientras que la ciencia que lo analiza recibe el nombre de genética.</p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-solid">
+          <div class="box-header with-border with-hover-border">
+            <h3 class="box-title"><i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>¿Qué es el genoma?</h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus escalar-rotar"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 18px;">
+            <p>En la biología molecular y la genética modernas, se denomina genoma al conjunto de la información hereditaria de un organismo.</p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+
+<!-- /.row -->
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-solid">
+          <div class="box-header with-border with-hover-border">
+            <h3 class="box-title"><i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>¿Qué es la genómica?</h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus escalar-rotar"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 18px;">
+            <p>Área del conocimiento que se ocupa de descifrar la estructura y el funcionamiento de los genomas en su conjunto. Normalmente requiere métodos de alto rendimiento y hace un uso intensivo de la bioinformática.</p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-solid">
+          <div class="box-header with-border with-hover-border">
+            <h3 class="box-title"><i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>¿Qué es una variante genética?</h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus escalar-rotar"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 18px;">
+            <p>Una variante genética es un gen que es esencialmente igual que otro pero que posee diferencias debidas a mutaciones.</p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-solid">
+          <div class="box-header with-border with-hover-border">
+            <h3 class="box-title"><i class="fa fa-fw fa-info-circle" aria-hidden="true"></i>¿A qué versión de Visual Genoma estoy accediendo?</h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus escalar-rotar"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 18px;">
+            <p>Visual Genoma se encuentra actualmente en la versión 1.0.</p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+{% endblock %}

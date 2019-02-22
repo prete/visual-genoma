@@ -1,0 +1,147 @@
+{% set title = 'Menú de Inicio | Visual Genoma' %}
+{% set header = 'Menú de Inicio' %}
+{% set header_opt = 'Su viaje al conocimiento comienza aquí' %}
+{% set active_menu = 'dashboard' %}
+{% set breadcrumbs = ['Visual Genoma','Menú de Inicio',] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+
+<style>
+
+.text-vg-big {
+    font-size:130%;
+}
+
+</style>
+
+<div class="row">
+    <div class="col-md-12 col-lg-6">
+    <div class="box box-solid hand-cursor hover-shadow" onclick="location.href='/variants/clinical';">
+      <div class="box-header with-border">
+        <h3 class="box-title"><strong>Informe Clínico</strong></h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <div class="info-box">
+            <span class="info-box-icon bg-green"><i class="fa fa-fw fa-medkit" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+              <p class="text-vg-big">Conozca enfermedades asociadas a las mutaciones de su genoma</p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->
+  <div class="col-md-12 col-lg-6">
+    <div class="box box-solid hand-cursor hover-shadow"  onclick="location.href='/anatogram/body';">
+      <div class="box-header with-border">
+        <h3 class="box-title"><strong>Anatograma</strong></h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <div class="info-box">
+            <span class="info-box-icon bg-fuchsia"><i class="fa fa-fw fa-universal-access" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+              <p class="text-vg-big">Observe los tejidos del cuerpo humano y cada una de las variantes genéticas asociadas</p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->  
+  <div class="col-md-12 col-lg-6">
+    <div class="box box-solid hand-cursor hover-shadow"  onclick="location.href='/ancestry/intro';">
+      <div class="box-header with-border">
+        <h3 class="box-title"><strong>Informe de Ancestría</strong></h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <div class="info-box">
+            <span class="info-box-icon bg-navy">{#<i class="ion ion-earth"></i>#}<i class="fa fa-fw fa-globe" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+              <p class="text-vg-big">Consulte información sobre sus ancestros separados de forma geográfica</p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col --> 
+
+  <div class="col-md-12 col-lg-6">
+    <div class="box box-solid hand-cursor hover-shadow"  onclick="location.href='/variants/';">
+      <div class="box-header with-border">
+        <h3 class="box-title"><strong>Listado de Variantes</strong></h3>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <div class="info-box">
+            <span class="info-box-icon bg-orange"><i class="fa fa-fw fa-braille" aria-hidden="true"></i> </span>
+            <div class="info-box-content">
+              <p class="text-vg-big">Consulte el listado de las diferentes mutaciones de su genoma</p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->
+  <div class="col-md-12 col-lg-6">
+    <div class="box box-solid hand-cursor hover-shadow"  onclick="location.href='/genome_browser?r=1:1-6298499';">
+      <div class="box-header with-border">
+        <div class="pull-left"><h3 class="box-title"><strong>Navegador del Genoma</strong></h3></div>
+        <div class="pull-right"><h3 class="box-title"><span class="label label-danger" data-toggle="tooltip" title="Esta vista tiene un alto nivel de información técnica y se recomienda verla en compañia de un profesional."><i class="fa fa-fw fa-user-md" aria-hidden="true"></i> Vista para profesionales</span></h3></div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <div class="info-box">
+            <span class="info-box-icon bg-teal"><i class="fa fa-search" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+              <p class="text-vg-big">Explore su genoma con una herramienta de uso profesional</p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->
+  <div class="col-md-12 col-lg-6">
+    <div class="box box-solid hand-cursor hover-shadow" onclick="location.href='/vcf/summary';">
+      <div class="box-header with-border">
+        <div class="pull-left"><h3 class="box-title"><strong>Estadísticas</strong></h3></div>
+        <div class="pull-right"><h3 class="box-title"><span class="label label-danger" data-toggle="tooltip" title="Esta vista tiene un alto nivel de información técnica y se recomienda verla en compañia de un profesional."><i class="fa fa-fw fa-user-md" aria-hidden="true"></i> Vista para profesionales</span></h3></div>
+      </div>
+      <!-- /.box-header -->
+      <div class="box-body">
+         <div class="info-box">
+            <span class="info-box-icon bg-black"><i class="fa fa-fw fa-bar-chart" aria-hidden="true"></i></span>
+            <div class="info-box-content">
+              <p class="text-vg-big">Acceda a estadísticas sobre la información contenida en su estudio genómico</p>
+            </div>
+          </div>
+          <!-- /.info-box -->
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /. box -->
+  </div>
+  <!-- /. col -->
+</div>
+<!-- /. row -->
+
+{% endblock %}

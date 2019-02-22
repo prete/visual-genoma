@@ -1,0 +1,242 @@
+{% set title = 'Informe Clínico | Visual Genoma' %}
+{% set header = 'Informe Clínico' %}
+{% set header_opt = 'Información sobre las relaciones entre sus variantes y su salud'  %}
+{% set active_menu = 'clinvar' %}
+{% set breadcrumbs = ['Visual Genoma', 'Informe Clínico'] %}
+
+{% extends 'layout.html.twig' %}
+
+
+{% block content %}
+
+{#
+Clasificacion ClinVar: http://www.ncbi.nlm.nih.gov/clinvar/docs/clinsig/
+Mas sobre clasificacion de mutaciones: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4544753/
+#}
+
+{#<p>Existen múltiples formas alternativas de un gen, estas se conocen como <a href="#" class="btn btn-xs btn-default open-help-modal" data-modal-name="locus.modal">locus <i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i></a>. Cada posible forma del gen significa una diferencia en la secuencia de ADN, esta diferencia afecta su función normal. Esta variedad de expresiones es clasificada por <a href="#" class="btn btn-xs btn-default open-help-modal" data-modal-name="clinvar.modal">ClinVar <i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i></a> en 6 categorías.</p>#}
+{#<p>La mayoría de las enfermedades comunes tiene un origen multifactorial, es decir, surgen como resultado de la interacción de múltiples variantes genéticas y diversos factores ambientales, razón por la cual no siguen patrones hereditarios mendelianos y se les denomina enfermedades "complejas".</p>#}
+{#: <span class="badge bg-green">Benignas</span>, <span class="badge bg-aqua">Probablemente Benignas</span>, <span class="badge bg-yellow">Probablemente Patógenas</span>, <span class="badge bg-red">Patógenas</span>, <span class="badge bg-navy">Otras</span>, <span class="badge bg-teal">Significado Incierto</span>#}
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-primary">
+         <div class="box-header with-border">
+            <h3 class="box-title">
+              <i class="fa fa-fw fa-book" aria-hidden="true"></i> 
+              Conceptos iniciales
+            </h3>
+            <div class="box-tools">
+              <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+              </button>
+            </div>
+          </div>
+          <div class="box-body" style="font-size: 16px;">
+            <p>La ciencia genómica intenta descifrar las interacciones entre múltiples variantes que están relacionadas con un mayor riesgo de desarrollar enferemedades complejas. La atención se ha concentrado en los <a href="#" class="link-help-icon  open-help-modal" onclick="return false;" data-modal-name="snp.modal">polimorfismos de nucleótido simple</a>, que representan el tipo de variación más abundante en las poblaciones humanas.</p>
+            <p>Una variación en regiones codificantes puede representar un cambio en la secuencia de una proteína, y por lo tanto alterar su función, o bien puede no cambiar su secuencia. Casi todas las enfermedades de origen monogénico (generadas por cambios en un sólo gen) se deben a mutaciones que modifican la secuencia y la función de una proteína.</p>
+            <p>Las variantes que modifican funcionalidad son clasificadas por <a href="#" class="link-help-icon open-help-modal" onclick="return false;" data-modal-name="clinvar.modal">ClinVar</a> en 6 categorías. El resultado del análisis de sus variantes fue clasificado acorde a estas categorías.</p>
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+
+
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-primary">
+         <div class="box-header with-border">
+            <h3 class="box-title">
+              <i class="fa fa-fw fa-medkit" aria-hidden="true"></i> 
+              Resultados de clasificación clinica
+            </h3>
+          </div>
+          <div class="box-body">
+
+
+
+<div class="row">
+ <div class="col-md-6" style="height:100%">
+    <!-- small box -->
+    <div class="small-box bg-green hover-shadow">
+      <div class="inner">
+        <h3>Benignas ({{size.benign}})</h3>
+      </div>
+      <div class="icon">
+        <i class="fa fa-heart"></i>
+      </div>
+      <div class="box bg-green" style="border-top-color: rgba(0, 0, 0, .3);">
+        <div class="box-body">
+          En el caso de las <strong>Variantes Benignas</strong>, éstas no tienen efectos negativos sobre el cuerpo humano. 
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->        
+      <a href="/variants/clinical/benign" class="small-box-footer">
+        Ver variantes <i class="fa fa-arrow-circle-right"></i>
+      </a>
+    </div>
+    <!-- ./small box -->
+  </div>
+  <!-- ./col -->
+    
+  <div class="col-md-6">
+    <!-- small box -->
+    <div class="small-box bg-red hover-shadow">
+      <div class="inner">
+        <h3>Patogénicas ({{size.pathogenic}})</h3>
+      </div>
+      <div class="icon">
+        <i class="fa fa-heart"></i>
+      </div>
+      <div class="box bg-red" style="border-top-color: rgba(0, 0, 0, .3);">
+        <div class="box-body">
+          En el caso de las <strong>Variantes Patogénicas</strong>, éstas tienen efectos negativos sobre el cuerpo humano.
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->        
+      <a href="/variants/clinical/pathogenic" class="small-box-footer">
+        Ver variantes <i class="fa fa-arrow-circle-right"></i>
+      </a>
+    </div>
+    <!-- ./small box -->
+  </div>
+  <!-- ./col -->
+</div>    
+<!-- ./row -->
+  
+<div class="row">  
+ <div class="col-md-6">
+    <!-- small box -->
+    <div class="small-box bg-olive hover-shadow">
+      <div class="inner">
+        <h3>Probablemente Benignas ({{size.likely_benign}})</h3>
+      </div>
+      <div class="icon">
+        <i class="fa fa-heart"></i>
+      </div>
+      <div class="box bg-olive" style="border-top-color: rgba(0, 0, 0, .3);">
+        <div class="box-body">
+          En el caso de las <strong>Variantes Probablemente Benignas</strong>, éstas parecen no tener efectos negativos sobre el cuerpo humano, aunque no puede asegurarse con completa certeza. 
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->        
+      <a href="/variants/clinical/likely_benign" class="small-box-footer">
+        Ver variantes <i class="fa fa-arrow-circle-right"></i>
+      </a>
+    </div>
+    <!-- ./small box -->
+  </div>
+  <!-- ./col -->
+
+ <div class="col-md-6">
+    <!-- small box -->
+    <div class="small-box bg-yellow hover-shadow">
+      <div class="inner">
+        <h3>Probablemente Patogénicas ({{size.likely_pathogenic}})</h3>
+      </div>
+      <div class="icon">
+        <i class="fa fa-heart"></i>
+      </div>
+      <div class="box bg-yellow" style="border-top-color: rgba(0, 0, 0, .3);">
+        <div class="box-body">
+          En el caso de las <strong>Variantes Probablemente Patogénicas</strong>, éstas parecen tener efectos negativos sobre el cuerpo humano, aunque no puede asegurarse con completa certeza.
+        </div>
+        <!-- /.box-body -->
+      </div>
+      <!-- /.box -->        
+      <a href="/variants/clinical/likely_pathogenic" class="small-box-footer">
+        Ver variantes <i class="fa fa-arrow-circle-right"></i>
+      </a>
+    </div>
+    <!-- ./small box -->
+  </div>
+  <!-- ./col -->
+ </div>    
+<!-- ./row -->
+  
+<div class="row">  
+    
+    <div class="col-md-6">
+      <!-- small box -->
+      <div class="small-box bg-teal hover-shadow">
+        <div class="inner">
+          <h3>Otras ({{size.other}})</h3>
+        </div>
+        <div class="icon">
+          <i class="fa fa-heart"></i>
+        </div>
+        <div class="box bg-teal" style="border-top-color: rgba(0, 0, 0, .3);">
+          <div class="box-body">
+            Variantes que no tienen efectos directos sobre la salud o no se puede establecer su efecto específico.<br />&nbsp;
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->        
+        <a href="/variants/clinical/other" class="small-box-footer">
+          Ver variantes <i class="fa fa-arrow-circle-right"></i>
+        </a>
+      </div>
+      <!-- ./small box -->
+    </div>
+    <!-- ./col -->    
+    
+    <div class="col-md-6">
+      <!-- small box -->
+      <div class="small-box bg-navy hover-shadow">
+        <div class="inner">
+          <h3>Inciertas ({{size.uncertain}})</h3>
+        </div>
+        <div class="icon">
+          <i class="fa fa-heart"></i>
+        </div>
+        <div class="box bg-navy" style="border-top-color: rgba(0, 0, 0, .3);">
+          <div class="box-body">
+            Existen variantes que no han podido ser clasificadas ya que son extremadamente poco frecuentes o porque la tecnología actual no permite asignarles un significado certero.
+          </div>
+          <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+        <a href="/variants/clinical/uncertain" class="small-box-footer">
+          Ver variantes <i class="fa fa-arrow-circle-right"></i>
+        </a>
+      </div>
+      <!-- ./small box -->
+    </div>
+    <!-- ./col -->    
+  </div>
+<!-- ./row -->
+
+
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $(document).ready(function(){
+    $(".clickable-row").click(function() {
+      var url = $(this).data("href");
+      if(url){
+        window.document.location = $(this).data("href");
+      }
+    });
+  });
+</script>
+{% endblock %}

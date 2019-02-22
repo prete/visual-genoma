@@ -1,0 +1,4 @@
+"Cromosoma";"Posición";"Tipo";"Referencia";"Alteración";"RS";"Calidad";
+{% for record in records %}
+"{{ record['chrom'] }}";"{{ record['pos'] }}";"{{ record['variant_type'] }}";"{{ record['ref'] }}";"{{ record['alt'] }}";"{{record['id']}}";"{{ record['qual'] }}";
+{% endfor %}

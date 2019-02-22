@@ -1,0 +1,149 @@
+{% set title = 'Introducción | Visual Genoma' %}
+{% set header = 'Introducción a Visual Genoma' %}
+{% set header_opt = 'Conozca los conceptos iniciales' %}
+{% set active_menu = 'intro' %}
+{% set breadcrumbs = ['Visual Genoma','Introducción'] %}
+
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+<!-- ------------------------------------------------------------------------------------------------------------- -->
+<div class="row">
+  <div class="col-md-12">
+     <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">
+              <i class="fa fa-fw fa-book" aria-hidden="true"></i> 
+              Conceptos iniciales
+            </h3>
+            
+          </div>
+          <div class="box-body" style="font-size: 18px;">
+            <img style='float:right; width:325px; margin-left:10px;' class="img-thumbnail" src="/resources/images/adn.png" />
+            <p class="text-justify">
+              El genoma es el conjunto de información genética (genes), codificada en una o varias moléculas de ADN contenida en 23 pares de cromosomas. La configuración genética de los seres humanos es idéntica en un 98%, es el 2% restante lo que nos hace únicos. Y, aunque parece un porcentaje muy chico, representa muchísima información. 
+            </p>
+            <p class="text-justify">    
+              Nuestro genoma puede ser interpretado por equipos informáticos y representados por una gran secuencia de datos. Generalmente son almacenados en archivos de secuenciación que contienen miles o millones de registros. Estos archivos son analizados por equipos especializados en bioinformática, en donde se comparan contra bases de información genética y se detectan las variaciones con respecto a la estructura estándar. A cada variación se le llama “variante genética” y es la representación de una mutación genética, que pueden o no afectar el funcionamiento de nuestro organismo. Estas mutaciones son identificadas y, en algunos casos, pueden estar asocias a cierto comportamiento conocido del organismo.
+            </p>
+            <p class="text-justify">
+              Un estudio genómico contiene todas las variaciones genéticas de nuestro ADN, o al menos las más relevantes. Este puede ser representado de varias formas, pero el formato más conocido y aceptado por la comunidad científica es el estándar VCF. 
+            </p>
+            <img style='float:left; width:200px; margin-right:10px;' class="img-thumbnail" src="/resources/images/sec.jpg" />
+            <p class="text-justify">
+              Si bien el estudio de nuestro genoma puede brindarnos mucha información acerca de nosotros mismos, por lo general tiene muchos datos técnicos, lo que lo hace difícil de interpretar. Sin mencionar el tiempo de filtrado y búsqueda de información requerido. Es un proceso complejo que requiere de muchos conocimientos teóricos en la materia.  
+            </p>
+            <p class="text-justify">
+              Visual Genoma es una herramienta de análisis e interpretación de genomas humanos orientado a usuarios sin conocimientos en genética. Permite obtener informes interactivos y comprensibles que contienen una valiosa colección de datos biológicos, presentados de forma sencilla. Estos informes tienen asociados los marcadores de riesgo de enfermedades genéticas.
+            </p>
+            <p class="text-justify">
+              Además, permite consultar el listado completo de variantes genómicas identificadas en el proceso, que son usados para presentar estadísticas e información clínica adicional. 
+            </p>
+            <p class="text-justify">
+              Si bien el estudio del genoma humano es algo relativamente moderno, existen herramientas que permiten su análisis. A diferencia de otras plataformas del mercado, Visual Genoma es una solución que pone al alcance de cualquiera todo el potencial de la medicina personalizada o genómica. Centrando su eje en la prevención y concientización de enfermedades.
+            </p>
+            <img style='float:right; width:325px; margin-left:10px;' src="/resources/images/logo-big.png" />
+            <p class="text-justify">
+              El uso de Visual Genoma es muy sencillo, podemos dividirlo en tres simples pasos.
+            </p>
+
+            <ul>
+              <li>
+                <p class="text-justify">
+                <strong>Paso 1:</strong>
+                Suba su archivo de información genómica. Puede hacerlo desde <a href="/file/upload"><i class="fa fa-fw fa-cloud-upload"></i> aquí</a>. 
+                </p>
+              </li>
+              <li>
+                <p class="text-justify">
+                <strong>Paso 2:</strong>
+                Una vez cargado el archivo, nuestra plataforma lo procesa en busca de anotaciones genómicas para ofrecer información relevante acerca de ciertos aspectos extraídos del mismo. Se detectan las modificaciones en las bases y los genes, y se los comparan con diferentes bases de datos de enfermedades.
+                </p>
+              </li>
+              <li>
+                <p class="text-justify">
+                <strong>Paso 3:</strong>
+                Finalmente, Visual Genoma genera informes que reflejan la información compleja procesada en que cualquiera la pueda entender. Usamos gráficos, tablas y enlaces a bases de datos con más información genómica provista por numerosas instituciones reconocidas por la comunidad bioinformática. Estos informes le permitirán conocerse y comprenderse mejor a usted mismo.
+                </p>
+              </li>
+            </ul>
+
+            <p class="text-justify">
+              Desde Visual Genoma podrá:
+            </p>
+            <ul>
+              <li>
+                <span><a href="/variants/clinical"><i class="fa fa-fw fa-medkit" aria-hidden="true"></i> Informe Clínico</a>:</span> Conocer enfermedades asociadas a las mutaciones de su genoma
+              </li>
+              <li>
+                <span><a href="/anatogram/body"><i class="fa fa-fw fa-universal-access" aria-hidden="true"></i> Anatograma</a>:</span> Observar los tejidos del cuerpo humano y cada una de las variantes genéticas asociadas
+              </li>
+              <li>
+                <span><a href="/ancestry/intro"><i class="fa fa-fw fa-globe" aria-hidden="true"></i> Informe de Ancestría</a>:</span> Consultar información sobre sus ancestros separados de forma geográfica
+              </li>
+              <li>
+                <span><a href="/variants/"><i class="fa fa-fw fa-braille" aria-hidden="true"></i> Listado de Variantes</a>:</span> Consultar el listado de las diferentes mutaciones de su genoma
+              </li>
+              <li>
+                <span><a href="/genome_browser?r=1:1-6298499"><i class="fa fa-fw fa-search" aria-hidden="true"></i> Navegador del Genoma</a>:</span> Explorar su genoma con una herramienta de uso profesional
+              </li>
+              <li>
+                <span><a href="/vcf/summary"><i class="fa fa-fw fa-bar-chart" aria-hidden="true"></i> Estadísticas</a>:</span> Ver estadísticas sobre sus datos genéticos
+              </li>
+              <li>
+                <span><a href="/reports"><i class="fa fa-fw fa-file-text" aria-hidden="true"></i> Reportes</a>:</span> Exportar sus datos genéticos
+              </li>
+            </ul>
+            
+            <p class="text-justify">
+            Al navegar por Visual Genoma encontrará secciones como la de 
+            <strong>[<i class="fa fa-fw fa-book" aria-hidden="true"></i>Conceptos iniciales]</strong> 
+            que contienen una introducción y una explicación de la vista a la que se está accediendo. Además, 
+            podrá cliquear sobre los íconos 
+            <strong> [
+            <a href="#" onclick="return false;" class="btn btn-xs bg-purple open-help-modal" data-toggle="tooltip" data-placement="top" title="" data-original-title="Qué es esto?"><i class="fa fa-fw fa-question-circle-o" aria-hidden="true"></i></a>
+            ]</strong>
+            y 
+            <strong>[
+            <a href="#" class="link-help-icon  open-help-modal" onclick="return false;" >info</a>
+            ]</strong>
+            para obtener información adicional sobre un ítem en particular. 
+            Por otro lado, podrá acceder a enlaces externos con información adicional relacionada, 
+            estos enlaces se encuentran identificados por 
+            <strong>[
+            <i class="fa fa-fw fa-external-link" aria-hidden="true"></i>
+            ]</strong>
+            o
+            <strong> [
+            <i class="fa fa-fw fa-database" aria-hidden="true"></i>
+            ]</strong>
+              .
+            </p>
+            
+            <br />
+            
+              <div class="col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-2 col-lg-8 text-center">
+                <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fimagenoma%2Fvideos%2F152891765158851%2F&show_text=0&width=560" width="560" height="315" style="margin:auto;border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allowFullScreen="true"></iframe>
+              </div>
+            
+            {#
+            <p class="text-justify">
+            Le recordamos que los datos presentados también pueden ser evaluados en compañía de su médico de cabecera.
+            </p>
+            
+            <p class="text-justify">
+            <strong>Nota: </strong>
+            Visual Genoma es una herramienta de visualización de estudios genómicos que tiene como objetivo simplificar la comprensión de la información genética, de ninguna manera debe ser tomado como herramienta de pronóstico de enfermedades.
+            </p>
+            #}
+          </div>
+          <!-- /.box-body -->
+       </div>
+       <!-- /.box -->
+  </div>
+  <!-- /.col -->
+</div>
+<!-- /.row -->
+
+{% endblock %}
