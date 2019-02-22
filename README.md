@@ -1,6 +1,6 @@
 # Visual Genoma
-## Final project of Engineering in Information Systems 
-## Universidad Tecnologica Nacional - Facultad Regional Buenos Aires - 2016
+# Final project of Information Systems Engineering
+### Universidad Tecnologica Nacional - Facultad Regional Buenos Aires - 2016
 
 # Authors
 Fioretti, Kevicky, Lava, Prete.
