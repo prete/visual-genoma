@@ -1,9 +1,21 @@
 # Visual Genoma
-## Proyecto final Ingeniería en Sistemas de Información UTN-FRBA 2016
+## Final project of Engineering in Information Systems 
+## Universidad Tecnologica Nacional - Facultad Regional Buenos Aires - 2016
 
-# Autores
+# Authors
 Fioretti, Kevicky, Lava, Prete.
 
-# Objetivos del proyecto
-Los datos son la nueva materia prima. Sin embargo, los datos en bruto en sí mismos son de valor insignificante, necesitan ser filtrados y evaluados. Por este motivo la gestión profesional de la información y los datos será una herramienta central en las próximas décadas. Visual Genoma presenta una solución de análisis e interpretación de genomas humanos. Con los datos como materia prima y el uso de nuevas tecnologías, la solución permite obtener como resultado un informe interactivo y comprensible que contiene una valiosa colección de datos biológicos relevantes dispuesta a ser presentada de forma sencilla al usuario que no posee conocimientos en genética. Estos informes tienen asociados los marcadores de riesgo de enfermedades genéticas. Además, permite consultar el listado completo de variantes genómicas identificadas en el proceso, que son usados para presentar estadísticas e información clínica adicional.
-Visual Genoma facilita el acceso a los datos genéticos de una forma clara y entendible que se destaca del resto de las soluciones en el mercado, sin dejar de brindar información de alto contenido técnico, permitiendo que la medicina personalizada o genómica se acerque más a la cura de enfermedades (cáncer, diabetes) su prevención y concientización.
+# Project description
+The data is the new raw material. However, the raw data itself is of negligible value, needs to be filtered and evaluated. For this reason, the professional management of information and data will be a central tool in the coming decades. Visual Genome presents a solution for the analysis and interpretation of human genomes. With the data as raw material and the use of new technologies, the solution allows to obtain as result an interactive and comprehensible report that contains a valuable collection of relevant biological data ready to be presented in a simple way to the user who does not have knowledge in genetics. These reports have associated risk markers for genetic diseases. In addition, it allows to consult the complete list of genomic variants identified in the process, which are used to present statistics and additional clinical information.
+Visual Genoma facilitates access to genetic data in a clear and understandable way that stands out from the rest of the solutions in the market, while providing information of high technical content, allowing personalized or genomic medicine to be closer to the cure of diseases (cancer, diabetes) its prevention and awareness.
+
+# Screenshots
+![Landing page](https://raw.githubusercontent.com/prete/visual-genoma/master/screenshots/landing.jpg)
+![Dashboard](https://raw.githubusercontent.com/prete/visual-genoma/master/screenshots/dashboard.jpg)
+![Clinical Variants](https://raw.githubusercontent.com/prete/visual-genoma/master/screenshots/clinical.jpg)
+![Anatogram](https://raw.githubusercontent.com/prete/visual-genoma/master/screenshots/anatogram.jpg)
+![Variants view](https://raw.githubusercontent.com/prete/visual-genoma/master/screenshots/variants.jpg)
+![Variant view](https://raw.githubusercontent.com/prete/visual-genoma/master/screenshots/variant.jpg)
+![Genome Browser](https://raw.githubusercontent.com/prete/visual-genoma/master/screenshots/browser.jpg)
+![Ancestry](https://raw.githubusercontent.com/prete/visual-genoma/master/screenshots/hapmap.jpg)
+![VCF Stats](https://raw.githubusercontent.com/prete/visual-genoma/master/screenshots/stats.jpg)
