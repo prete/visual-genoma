@@ -1,5 +1,5 @@
 # Visual Genoma
-# Final project of Information Systems Engineering
+# Final project for Information Systems Engineering
 ### Universidad Tecnologica Nacional - Facultad Regional Buenos Aires - 2016
 
 # Authors
